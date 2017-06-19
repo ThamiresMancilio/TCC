@@ -151,9 +151,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Class\Animal.cs" />
+    <Compile Include="Class\Livro.cs" />
+    <Compile Include="Class\Lote.cs" />
+    <Compile Include="Class\Medicamento.cs" />
+    <Compile Include="Class\Propriedade.cs" />
+    <Compile Include="Class\Raca.cs" />
+    <Compile Include="Class\Usuario.cs" />
     <Compile Include="Controllers\FazendaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RebanhoController.cs" />
+    <Compile Include="Enum\TipoSexo.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -238,10 +246,11 @@
     <Content Include="Styles\fonts\linecons.woff" />
     <Content Include="Views\Rebanho\Add.cshtml" />
     <Content Include="Views\Rebanho\List.cshtml" />
+    <Content Include="Views\Login\Logar.cshtml" />
+    <Content Include="Views\Fazenda\Manipular.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Views\Fazenda\" />
     <Folder Include="Views\Livro\" />
     <Folder Include="Views\Lote\" />
     <Folder Include="Views\Medicamento\" />
