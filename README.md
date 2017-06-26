@@ -4,13 +4,13 @@
 
 Neste projeto está sendo utilizado as seguintes tecnologias/linguagens: 
 
-* ASP.NET MVC;
-* C#;
-* HTML5;
-* Framework Bootstrap;
-* CSS3;
-* Javascript;
-* MYSQL.
+* ASP.NET MVC: documentação disponível em https://www.asp.net/mvc;
+* C#: disponível em https://docs.microsoft.com/pt-br/dotnet/csharp/csharp;
+* HTML5: documentação disponível em https://www.w3schools.com/html/html5_intro.asp;
+* Framework Bootstrap: download e documentação disponíveis em http://getbootstrap.com/;
+* CSS3: documentação disponível em https://www.w3schools.com/css/default.asp;
+* Javascript: documentação disponível em https://www.w3schools.com/js/default.asp;
+* MYSQL: download e documentação disponíveis em https://www.mysql.com/.
 
 # Instalação
 
