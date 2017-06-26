@@ -4,7 +4,7 @@
     width: 100vw;
     height: 100vh;
     background: #6C7A89;
-    background-image: url(vacas.jpg);
+    background-image: url(../Images/vaca.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
@@ -19,7 +19,6 @@
     padding: 20px;
     box-sizing: border-box;
     background-color: transparent;
-    border: 1px solid white;
     position: absolute;
     z-index: 3;
 }
@@ -28,37 +27,39 @@
         font-size: large;
     }
 
-        #form-box input[type=button]:hover {
-            opacity: 0.8;
-        }
 
-        #form-box input[type=button]:active {
-            opacity: 0.6;
-        }
+#form-box input[type=text]:focus {
+    outline: none;
+    border: 1px solid rgba(255,255,255,0.9);
+}
 
-        #form-box input[type=text]:focus {
-            outline: none;
-            border: 1px solid rgba(255,255,255,0.9);
-        }
+#form-box input[type=password]:focus {
+    outline: none;
+    border: 1px solid rgba(255,255,255,0.9);
+}
 
-        #form-box input[type=password]:focus {
-            outline: none;
-            border: 1px solid rgba(255,255,255,0.9);
-        }
 
-        #form-box input[type=button]:focus {
-            outline: none;
-        }
+#form-box input[type=submit]:focus {
+    outline: none;
+}
 
 ::-webkit-input-placeholder {
     color: white;
 }
 
+#form-box input[type=submit]:hover {
+    opacity: 0.8;
+}
+
+#form-box input[type=submit]:active {
+    opacity: 0.6;
+}
+
+
 
 #form-box input[type=text] {
     width: 260px;
     height: 30px;
-    background-color: transparent;
     border: 1px solid rgba(255,255,255,0.6);
     border-radius: 2px;
     color: #fff;
@@ -66,12 +67,13 @@
     font-size: 16px;
     font-weight: 400;
     padding: 4px;
+    background-color: transparent;
+    color: white;
 }
 
 #form-box input[type=password] {
     width: 260px;
     height: 30px;
-    background-color: transparent;
     border: 1px solid rgba(255,255,255,0.6);
     border-radius: 2px;
     color: white;
@@ -80,19 +82,30 @@
     font-weight: 400;
     padding: 4px;
     margin-top: 10px;
+    background-color: transparent;
 }
 
-#form-box input[type=button] {
+#form-box input[type=submit] {
     width: 260px;
     height: 35px;
-    background: #fff;
+    background: white;
     border: 1px solid #fff;
     cursor: pointer;
     border-radius: 2px;
-    color: green;
+    color: rgb(144,183, 223);
     font-family: 'Exo', sans-serif;
     font-size: 16px;
     font-weight: 400;
     padding: 6px;
     margin-top: 10px;
+}
+select {
+    background: transparent;
+    color: white;
+}
+select option{
+    color:black;
+}
+#titulo {
+    color: white;
 }

@@ -1,9 +1,8 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Consulta Rebanho";
-    
+    Layout = "~/Views/Shared/Layout.cshtml";
 }
-
+@Styles.Render("~/bundles/paging")   
 <h3><i class="fa fa-angle-right"></i> Consultar animais</h3>
 <div class="row mt">
     <div class="col-lg-12">
@@ -17,7 +16,7 @@
                         <input type="text" class="form-control" id="registro" name="registro" style="width: 100px;">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword2">À:</label>
+                        <label for="exampleInputPassword2">à:</label>
                         <input type="text" class="form-control" id="registro2" name="registro2" style="width: 100px;">
                     </div>
                     <div class="form-group">
@@ -36,6 +35,20 @@
                     <div class="form-group">
                         <label class="control-label">Apelido:&nbsp;&nbsp;</label>
                         <input type="text" class="form-control" id="descricao" name="descricao" style="width: 218px;">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword2">Livro: </label>
+                        <select class="form-control">
+                            <option value="0">PO</option>
+                            <option value="1">PC</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword2">Raça: </label>
+                        <select class="form-control">
+                            <option value="0">Holandesa</option>
+                            <option value="1">Jersey</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword2">Sexo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </label>
@@ -70,117 +83,42 @@
 
             </thead>
             <tbody>
+            @for (int i = 0; i < Model.Rows.Count; i++)
+            {
                 <tr class="line">
-                    <td>AGO</td>
-                    <td>ATLAS IRON LIMITED</td>
-                    <td>$3.17</td>
-                    <td>-0.02</td>
+                    <td>@Model.Rows[i][1]</td>
+                    <td>@Model.Rows[i][2]</td>
+                    <td>@Model.Rows[i][3]</td>
+                    <td>@Model.Rows[i][5].ToString("dd/MM/yyyy")</td>
                     <td>
-                        <button class="btn btn-success btn-xs" title="Visualizar dados"><i class="fa fa-check"></i></button>
+                        <button class="btn btn-success btn-xs" title="Visualizar dados" data-toggle="modal" data-target="#myModal"><i class="fa fa-check"></i></button>
                         <button class="btn btn-primary btn-xs" title="Alterar Registro"><i class="fa fa-pencil"></i></button>
                         <button class="btn btn-danger btn-xs" title="Excluir Registro"><i class="fa fa-trash-o "></i></button>
                     </td>
-                </tr>
-                <tr class="line">
-                    <td>AGO</td>
-                    <td>ATLAS IRON LIMITED</td>
-                    <td>$3.17</td>
-                    <td>-0.02</td>
-                    <td>-0.47%</td>
-                </tr>
-                <tr class="line">
-                    <td>AGO</td>
-                    <td>ATLAS IRON LIMITED</td>
-                    <td>$3.17</td>
-                    <td>-0.02</td>
-                    <td>-0.47%</td>
-                </tr>
-                <tr class="line">
-                    <td>AGO</td>
-                    <td>ATLAS IRON LIMITED</td>
-                    <td>$3.17</td>
-                    <td>-0.02</td>
-                    <td>-0.47%</td>
-                </tr>
-                <tr class="line">
-                    <td>AGO</td>
-                    <td>ATLAS IRON LIMITED</td>
-                    <td>$3.17</td>
-                    <td>-0.02</td>
-                    <td>-0.47%</td>
-                </tr>
-                <tr class="line">
-                    <td>AGO</td>
-                    <td>ATLAS IRON LIMITED</td>
-                    <td>$3.17</td>
-                    <td>-0.02</td>
-                    <td>-0.47%</td>
-                </tr>
-                <tr class="line">
-                    <td>AGO</td>
-                    <td>ATLAS IRON LIMITED</td>
-                    <td>$3.17</td>
-                    <td>-0.02</td>
-                    <td>-0.47%</td>
-                </tr>
-                <tr class="line">
-                    <td>AGO</td>
-                    <td>ATLAS IRON LIMITED</td>
-                    <td>$3.17</td>
-                    <td>-0.02</td>
-                    <td>-0.47%</td>
-                </tr>
-                <tr class="line">
-                    <td>AGO</td>
-                    <td>ATLAS IRON LIMITED</td>
-                    <td>$3.17</td>
-                    <td>-0.02</td>
-                    <td>-0.47%</td>
-                </tr>
-                <tr class="line">
-                    <td>AGO</td>
-                    <td>ATLAS IRON LIMITED</td>
-                    <td>$3.17</td>
-                    <td>-0.02</td>
-                    <td>-0.47%</td>
-                </tr>
-                <tr class="line">
-                    <td>AGO</td>
-                    <td>ATLAS IRON LIMITED</td>
-                    <td>$3.17</td>
-                    <td>-0.02</td>
-                    <td>-0.47%</td>
-                </tr>
-                <tr class="line">
-                    <td>AGO</td>
-                    <td>ATLAS IRON LIMITED</td>
-                    <td>$3.17</td>
-                    <td>-0.02</td>
-                    <td>-0.47%</td>
-                </tr>
-                <tr class="line">
-                    <td>AGO</td>
-                    <td>ATLAS IRON LIMITED</td>
-                    <td>$3.17</td>
-                    <td>-0.02</td>
-                    <td>-0.47%</td>
-                </tr>
-                <tr class="line">
-                    <td>AGO</td>
-                    <td>ATLAS IRON LIMITED</td>
-                    <td>$3.17</td>
-                    <td>-0.02</td>
-                    <td>-0.47%</td>
-                </tr>
-                <tr class="line">
-                    <td>AGO</td>
-                    <td>ATLAS IRON LIMITED</td>
-                    <td>$3.17</td>
-                    <td>-0.02</td>
-                    <td>-0.47%</td>
-                </tr>
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Dados do animal @Model.Rows[i][1]</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><b>Pai:</b> @Model.Rows[i][12] - @Model.Rows[i][10] <b>Tat:</b>@Model.Rows[i][11] | <b>Mãe: </b>@Model.Rows[i][15] - @Model.Rows[i][13] <b>Tat:</b>@Model.Rows[i][14] </p>
+                                    <p><b>Nº brinco:</b> @Model.Rows[i][4] | <b>Morto:</b> @Model.Rows[i][6] <b>Raça:</b>@Model.Rows[i][20] | <b>Livro: </b>@Model.Rows[i][21] - @Model.Rows[i][13] <b>Cadastrado em:</b>@Model.Rows[i][23] </p>
+                                    <p><b>Em lactação:</b> @Model.Rows[i][4] | <b>Dias em lactação:</b> @Model.Rows[i][6] <b>Em lactação desde:</b>@Model.Rows[i][20]  </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </tr>}
             </tbody>
         </table>
-
     </div>
 </div>
+

@@ -45,10 +45,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.9.9\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -152,27 +166,41 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Class\Animal.cs" />
+    <Compile Include="Class\Banco.cs" />
     <Compile Include="Class\Livro.cs" />
     <Compile Include="Class\Lote.cs" />
     <Compile Include="Class\Medicamento.cs" />
     <Compile Include="Class\Propriedade.cs" />
     <Compile Include="Class\Raca.cs" />
     <Compile Include="Class\Usuario.cs" />
+    <Compile Include="Controllers\Aplicacao_MedicamentoController.cs" />
     <Compile Include="Controllers\FazendaController.cs" />
+    <Compile Include="Controllers\GraficoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LivroController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LoteController.cs" />
+    <Compile Include="Controllers\MedicamentoController.cs" />
+    <Compile Include="Controllers\RacaController.cs" />
     <Compile Include="Controllers\RebanhoController.cs" />
+    <Compile Include="Controllers\RelatorioController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Enum\TipoSexo.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\RebanhoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\font-awesome\css\font-awesome.css" />
     <Content Include="assets\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Images\vaca.jpg" />
     <Content Include="Images\vacaicone.png" />
     <Content Include="Scripts\common-scripts.js" />
+    <Content Include="Scripts\fileinput.js" />
+    <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\gritter-conf.js" />
     <Content Include="Scripts\gritter\css\jquery.gritter.css" />
     <Content Include="Scripts\gritter\css\jquery.gritter0.css" />
@@ -181,11 +209,61 @@
     <Content Include="Scripts\gritter\images\gritter.png" />
     <Content Include="Scripts\gritter\images\ie-spacer.gif" />
     <Content Include="Scripts\gritter\js\jquery.gritter.js" />
+    <Content Include="Scripts\img\loading-sm.gif" />
+    <Content Include="Scripts\img\loading.gif" />
+    <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.dcjqaccordion.2.7.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.nicescroll.js" />
     <Content Include="Scripts\jquery.scrollTo.min.js" />
     <Content Include="Scripts\jquery.sparkline.js" />
+    <Content Include="Scripts\locales\ar.js" />
+    <Content Include="Scripts\locales\bg.js" />
+    <Content Include="Scripts\locales\ca.js" />
+    <Content Include="Scripts\locales\cr.js" />
+    <Content Include="Scripts\locales\cz.js" />
+    <Content Include="Scripts\locales\da.js" />
+    <Content Include="Scripts\locales\de.js" />
+    <Content Include="Scripts\locales\el.js" />
+    <Content Include="Scripts\locales\es.js" />
+    <Content Include="Scripts\locales\fa.js" />
+    <Content Include="Scripts\locales\fi.js" />
+    <Content Include="Scripts\locales\fr.js" />
+    <Content Include="Scripts\locales\hu.js" />
+    <Content Include="Scripts\locales\id.js" />
+    <Content Include="Scripts\locales\it.js" />
+    <Content Include="Scripts\locales\ja.js" />
+    <Content Include="Scripts\locales\kr.js" />
+    <Content Include="Scripts\locales\kz.js" />
+    <Content Include="Scripts\locales\LANG.js" />
+    <Content Include="Scripts\locales\nl.js" />
+    <Content Include="Scripts\locales\pl.js" />
+    <Content Include="Scripts\locales\pt-BR.js" />
+    <Content Include="Scripts\locales\pt.js" />
+    <Content Include="Scripts\locales\ro.js" />
+    <Content Include="Scripts\locales\ru.js" />
+    <Content Include="Scripts\locales\sk.js" />
+    <Content Include="Scripts\locales\sl.js" />
+    <Content Include="Scripts\locales\sv.js" />
+    <Content Include="Scripts\locales\th.js" />
+    <Content Include="Scripts\locales\tr.js" />
+    <Content Include="Scripts\locales\uk.js" />
+    <Content Include="Scripts\locales\vi.js" />
+    <Content Include="Scripts\locales\zh-TW.js" />
+    <Content Include="Scripts\locales\zh.js" />
+    <Content Include="Scripts\paging.js" />
+    <Content Include="Scripts\plugins\canvas-to-blob.js" />
+    <Content Include="Scripts\plugins\canvas-to-blob.min.js" />
+    <Content Include="Scripts\plugins\purify.js" />
+    <Content Include="Scripts\plugins\purify.min.js" />
+    <Content Include="Scripts\plugins\sortable.js" />
+    <Content Include="Scripts\plugins\sortable.min.js" />
+    <Content Include="Scripts\pt-BR.js" />
+    <Content Include="Styles\paging.css" />
+    <Content Include="Styles\theme.css" />
+    <Content Include="Scripts\themes\explorer\theme.js" />
+    <Content Include="Scripts\themes\fa\theme.js" />
+    <Content Include="Scripts\themes\gly\theme.js" />
     <Content Include="Styles\bootstrap.css" />
     <Content Include="Styles\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -222,6 +300,8 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Styles\fileinput.css" />
+    <Content Include="Styles\fileinput.min.css" />
     <Content Include="Styles\fonts\linecons.svg" />
     <Content Include="Styles\lineicons_style.css" />
     <Content Include="Styles\style-login.css" />
@@ -248,14 +328,23 @@
     <Content Include="Views\Rebanho\List.cshtml" />
     <Content Include="Views\Login\Logar.cshtml" />
     <Content Include="Views\Fazenda\Manipular.cshtml" />
+    <Content Include="Views\Shared\LayoutClean.cshtml" />
+    <Content Include="Views\Livro\Add.cshtml" />
+    <Content Include="Views\Livro\List.cshtml" />
+    <Content Include="Views\Fazenda\Add.cshtml" />
+    <Content Include="Views\Fazenda\List.cshtml" />
+    <Content Include="Views\Lote\Add.cshtml" />
+    <Content Include="Views\Medicamento\Add.cshtml" />
+    <Content Include="Views\Raca\Add.cshtml" />
+    <Content Include="Views\Usuario\Add.cshtml" />
+    <Content Include="Views\Usuario\List.cshtml" />
+    <Content Include="Views\Raca\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Views\Livro\" />
-    <Folder Include="Views\Lote\" />
-    <Folder Include="Views\Medicamento\" />
-    <Folder Include="Views\Raca\" />
-    <Folder Include="Views\Usuario\" />
+    <Folder Include="Views\Aplicacao_Medicamento\" />
+    <Folder Include="Views\Grafico\" />
+    <Folder Include="Views\Producao\" />
+    <Folder Include="Views\Relatorio\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
