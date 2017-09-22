@@ -1,44 +1,45 @@
-﻿
+﻿@model SysAgropec.Models.FazendaViewModel
 @{
-    ViewBag.Title = "Add";
+    ViewBag.Title = "Adicionar Fazendas";
     Layout = "~/Views/Shared/Layout.cshtml";
+    
 }
-<script type="text/javascript">
 
-    $(".file").fileinput({
-        language: "pt-BR"
-    });
-</script>
+
 @Styles.Render("~/bundles/fileinput")
 @Scripts.Render("~/bundles/jquery-fileinput")
+@Scripts.Render("~/bundles/Fazenda")
+
+
+
 <h3><i class="fa fa-angle-right"></i> Cadastro de Fazendas</h3>
 <div class="row mt">
     <div class="col-lg-12">
         <div class="form-panel">
             <h4 class="mb"><i class="fa fa-angle-right"></i> Preencha os campos para efetuar o cadastro.</h4>
-            <form class="form-inline" role="form" enctype="multipart/form-data">
-                <fieldset class="form-group">s
+            @using (Html.BeginForm("Insert", "Fazenda", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-inline" }))
+            {    <fieldset class="form-group">
                     <legend>Dados da Fazenda</legend>
                     <div class="form-group">
                         <label class="control-label">CNPJ:</label>
-                        <input type="text" class="form-control" id="cnpj" name="cnpj" style="width: 170px;">
+                        @Html.TextBoxFor(model => model.Cnpj, new { @class = "form-control", required = "required" })
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword2">Razão Social:</label>
-                        <input type="text" class="form-control" id="razaosocial" name="razaosocial" style="width: 170px;">
+                        @Html.TextBoxFor(model => model.Razaosocial, new { @class = "form-control", required = "required" })
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail2">Nome Fantasia:</label>
-                        <input type="text" class="form-control" id="nomefantasia" name="nomefantasia" style="width: 170px;">
+                        @Html.TextBoxFor(model => model.Nomefantasia, new { @class = "form-control", required = "required" })
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword2">Inscrição Municipal:</label>
-                        <input type="text" class="form-control" id="inscricaomunicipal" name="inscricaomunicipal" style="width: 170px;">
+                        @Html.TextBoxFor(model => model.Inscricaomunicipal, new { @class = "form-control" })
                     </div>
                     <br /><br />
                     <div class="form-group">
                         <label for="exampleInputEmail2">Inscrição Estadual:</label>
-                        <input type="text" class="form-control" id="inscricaoestadual" name="inscricaoestadual" style="width: 170px;">
+                        @Html.TextBoxFor(model => model.Inscricaoestadual, new { @class = "form-control" })
                     </div>
 
                 </fieldset>
@@ -47,48 +48,81 @@
                     <legend>Endereço</legend>
                     <div class="form-group">
                         <label for="exampleInputPassword2">CEP: </label>
-                        <input type="text" class="form-control" id="cep" name="cep" onblur="pesquisacep(this.value);">
+                        @Html.TextBoxFor(model => model.Cep, new { @class = "form-control", required = "required" })
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword2">Logradouro: </label>
-                        <input type="text" class="form-control" id="logradouro" name="logradouro">
+                        @Html.TextBoxFor(model => model.Logradouro, new { @class = "form-control", required = "required" })
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword2">Nº: </label>
-                        <input type="text" class="form-control" id="numero" name="numero">
+                        @Html.TextBoxFor(model => model.Numero, new { @class = "form-control" })
                     </div>
 
 
                     <div class="form-group">
                         <label for="exampleInputPassword2">Complemento: </label>
-                        <input type="text" class="form-control" id="complemento" name="complemento">
+                        @Html.TextBoxFor(model => model.Complemento, new { @class = "form-control"})
                     </div>
                     <br><br>
                     <div class="form-group">
                         <label for="exampleInputPassword2">Bairro: </label>
-                        <input type="text" class="form-control" id="bairro" name="bairro">
+                       @Html.TextBoxFor(model => model.Bairro, new { @class = "form-control" })
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword2">Cidade: </label>
-                        <input type="text" class="form-control" id="cidade" name="cidade">
+                        @Html.TextBoxFor(model => model.Cidade, new { @class = "form-control", required = "required" })
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword2">Estado: </label>
-                        <input type="text" class="form-control" id="estado" name="estado">
+                        @Html.TextBoxFor(model => model.Estado, new { @class = "form-control", required = "required" })
                     </div>
                 </fieldset>
                 <br><br>
 
                 <label for="exampleInputPassword2">Logo: (Arquivos permitidos: JPG, GIF, PNG)</label>
-                <input id="file-0a" name="logo" class="file" type="file" multiple data-min-file-count="1" accept=".jpg,.gif,.png" style="width: 190px;">
+
+                //@Html.TextBoxFor(model => model.Logo, new { @class="file", type="file", accept=".jpg,.gif,.png"})
+                
+                <input type="file" accept=".jpg,.gif,.png" class="file" id="Logo" name="Logo" />
 
                 <br><br>
                 <div class="form-group">
                     <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Incluir</button>
                 </div>
-            </form>
+            }
 
         </div>
     </div>
 </div>
 
+<script type="text/javascript">
+
+    $(".file").fileinput({
+        language: "pt-BR",
+        uploadUrl: "UploadImage",
+        allowedFileExtensions: ['jpg', 'png', 'gif'],
+        overwriteInitial: false,
+        maxFileSize: 1000,
+        showUpload: false,
+        browseClass: "btn btn-primary btn-lg",
+        fileType: "any",
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+        showCaption: false,
+        maxFilesNum: 1,
+        showPreview: true,
+        allowedFileTypes: ['image'],
+        slugCallback: function (filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        }
+
+
+    }).on("filebatchselected", function (event, files) {
+
+        $(".file").fileinput("upload");
+
+    });
+
+
+
+</script>

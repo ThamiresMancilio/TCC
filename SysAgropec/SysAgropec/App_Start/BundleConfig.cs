@@ -39,6 +39,55 @@ namespace SysAgropec
 
                 ));
 
+            bundles.Add(new ScriptBundle("~/bundles/Livro").Include(
+
+                "~/Scripts/Dados/Livro.js"
+
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/Animal").Include(
+
+                "~/Scripts/Dados/Animal.js"
+
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/Fazenda").Include(
+
+                "~/Scripts/Dados/Fazenda.js"
+
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/Lote").Include(
+
+                "~/Scripts/Dados/Lote.js"
+
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/Medicamento").Include(
+
+                "~/Scripts/Dados/Medicamento.js"
+
+                ));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/Usuario").Include(
+
+              "~/Scripts/Dados/Usuario.js"
+
+              ));
+
+            bundles.Add(new ScriptBundle("~/bundles/Raca").Include(
+
+              "~/Scripts/Dados/Raca.js"
+
+              ));
+
+            bundles.Add(new ScriptBundle("~/bundles/Producao").Include(
+
+              "~/Scripts/Dados/Producao.js"
+
+              ));
+
             bundles.Add(new StyleBundle("~/bundles/bootstrap2").Include(
                       "~/Styles/bootstrap.css",
                       "~/Styles/lineicons_style.css",

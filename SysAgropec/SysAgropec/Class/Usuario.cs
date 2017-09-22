@@ -7,5 +7,7 @@ namespace SysAgropec.Class
 {
     public class Usuario
     {
+
+
     }
 }

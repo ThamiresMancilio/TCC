@@ -3,11 +3,12 @@ using SysAgropec.Class;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using System.Web.Routing;
 
 namespace SysAgropec.Controllers
 {
@@ -31,52 +32,88 @@ namespace SysAgropec.Controllers
         public ActionResult Valida()
         {
        
-            string coonn = "server=localhost;user id=root; password=thamires;persistsecurityinfo=True;database=sysagropec";
+            //string coonn = "server=localhost;user id=root; password=thamires;persistsecurityinfo=True;database=sysagropec";
 
 
             string name = Request.Form["usuario"];
             string password = Request.Form["senha"];
 
-            string query = "Select * from usuario where usuarios = '" + name + "' and senha = " + password;
+            //string query = "Select * from usuarios where login = @login and senha = @senha";
 
-            MySqlConnection Conexao = new MySqlConnection(coonn);
+            //MySqlConnection Conexao = new MySqlConnection(Banco.getConexao());
             
-            MySqlCommand command = Conexao.CreateCommand();
-            command.CommandText = query;
-            
-            try
-            {
-                Conexao.Open();
-            }
-            catch (Exception msg )
-            {
-                Console.WriteLine(msg.Message);
-            }
+            //MySqlCommand command = Conexao.CreateCommand();
+            //command.CommandText = query;
+            //command.Parameters.AddWithValue("@login", name);
+            //command.Parameters.AddWithValue("@senha", password);
 
-            MySqlDataReader reader = command.ExecuteReader();
-            if (reader.HasRows)
-            {
+            //try
+            //{
+            //    Conexao.Open();
+            //}
+            //catch (Exception msg )
+            //{
+            //    Console.WriteLine(msg.Message);
+            //}
 
-                query = "Select * from propriedades inner join usuarios_propriedades on propriedades.id =  ";
-                query = query + " usuarios_propriedades.propriedades.id where usuarios_propriedades.usuarios_id = " + reader["id"];
+            //MySqlDataReader reader = command.ExecuteReader();
+            //if (reader.HasRows)
+            //{
+         
+            //    while (reader.Read())
 
-                command = Conexao.CreateCommand();
-                command.CommandText = query;
+            //    {
+            //        Session.Add("iduser", reader["id"]);
+            //        Session.Add("loginuser", reader["login"]);
+            //        Session.Add("administrador", Convert.ToBoolean(reader["admin"]));
+            //        if (Convert.ToBoolean(reader["admin"])) {
+            //            DataTable dtPropriedades = new DataTable();
+            //            reader.Dispose();
+            //            Conexao.Close();
+            //            query = "Select * from propriedades ";
+            //            MySqlConnection Conexao2 = new MySqlConnection(Banco.getConexao());
+            //            MySqlCommand command2 = Conexao2.CreateCommand();
+            //            command2.CommandText = query;
+            //            Conexao2.Open();
+            //            //MySqlDataReader reader2 = command2.ExecuteReader();
 
-                MySqlDataReader reader2 = command.ExecuteReader();
+            //            MySqlDataAdapter sqlDa = new MySqlDataAdapter(query, Conexao2);
+            //            sqlDa.Fill(dtPropriedades);
+                        
+            //            if (dtPropriedades.Rows.Count> 0)
+            //            {
+                            
+            //                return RedirectToAction("Manipular", new RouteValueDictionary(
+            //                new { controller = "Fazenda", action = "Manipular", dtPropriedades }));
+            //            }
+            //        }
+            //        else
+            //        {
+            //            query = "Select * from propriedades inner join usuarios_propriedades on propriedades.id =  ";
+            //            query = query + " usuarios_propriedades.propriedades.id where usuarios_propriedades.usuarios_id = " + Session["iduser"];
 
-                if (reader2.HasRows)
-                {
+            //            command = Conexao.CreateCommand();
+            //            command.CommandText = query;
 
-                    return View("", reader2);
-                }
-            }
-            else //usuario não localizado
-            {
+            //            MySqlDataReader reader2 = command.ExecuteReader();
 
-            }
+            //            if (reader2.HasRows)
+            //            {
+
+            //                return View("", reader2);
+            //            }
+
+            //        }
+                
+            //    }
+            //}
+            //else //usuario não localizado
+            //{
+
+            //}
 
             return View();
+           
         }
     }
 }

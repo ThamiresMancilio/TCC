@@ -3,21 +3,22 @@
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
-@{
-    ViewBag.Title = "Consulta Rebanho";
-    Layout = "~/Views/Shared/Layout.cshtml";
-}
 @Styles.Render("~/bundles/paging")
+
+@Scripts.Render("~/bundles/Livro")
+
 <h3><i class="fa fa-angle-right"></i> Consultar livros</h3>
 <div class="row mt">
     <div class="col-lg-12">
         <div class="form-panel">
             <h4 class="mb"><i class="fa fa-angle-right"></i> Filtros</h4>
-            <form class="form-inline" role="form">
+    @using (Html.BeginForm("ListWithParameters", "Livro", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-inline" }))
+        {
+           
                 <fieldset class="form-group">
                     <legend>Filtros de pesquisa</legend>
                     <div class="form-group">
-                        <label for="exampleInputPassword2">Descrição:</label>
+                        <label for="descri">Descrição:</label>
                         <input type="text" class="form-control" id="descricao" name="descricao" style="width: 100px;">
                     </div>
                     
@@ -26,7 +27,7 @@
                     </div>
                     <br /><br />
                 </fieldset>
-            </form>
+            }
 
         </div><!-- /form-panel -->
 
@@ -38,18 +39,93 @@
 
             </thead>
             <tbody>
-                @for (int i = 0; i < Model.Rows.Count; i++)
+            @if (Model != null)
             {
-                    <tr class="line">
-                        <td>@Model.Rows[i][1]</td>
+                foreach (var livro in Model)
+                {
+                    <tr class="line" id="row_@livro.ID">
+                        <td>@livro.Descricao</td>
                         <td>
-                            <button class="btn btn-primary btn-xs" title="Alterar Registro"><i class="fa fa-pencil"></i></button>
-                            <button class="btn btn-danger btn-xs" title="Excluir Registro"><i class="fa fa-trash-o "></i></button>
+                            <a href="#" class="btn btn-primary btn-xs" onclick="Alterar(@livro.ID)" title="Alterar Registro"><i class="fa fa-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-xs" onclick="ConfirmaExclusao(@livro.ID, '@livro.Descricao')" title="Excluir Registro"><i class="fa fa-trash-o "></i></a>
                         </td>
                         
                     </tr>}
-            </tbody>
+            }
+            else
+            {
+                <tr class="line">
+                    <td colspan="2">
+                        Nenhum registro localizado.
+                    </td>
+                </tr>
+                    }
+        </tbody>
         </table>
+        <input type="hidden" id="idLivro"/>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Alerta de Exclusão</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="msg"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <a href="#" onclick="DeleteLivro()" class="btn btn-primary">Excluir</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal2" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Mensagem</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Registro excluído com sucesso.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModalEditLivro" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Alterando</h4>
+                    </div>
+                    <div class="modal-body" id="myModalBodyLivro">
+                        
+
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 </div>
 

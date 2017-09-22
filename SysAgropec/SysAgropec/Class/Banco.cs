@@ -22,11 +22,11 @@ namespace SysAgropec.Class
 
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                return ConfigurationManager.ConnectionStrings["dbConnectionLocal"].ConnectionString;
+                return ConfigurationManager.ConnectionStrings["sysagropecConnection"].ConnectionString;
             }
             else
             {
-                return ConfigurationManager.ConnectionStrings["dbConnectionAzure"].ConnectionString;
+                return ConfigurationManager.ConnectionStrings["sysagropecConnectionAzure"].ConnectionString;
             }
         }
     }

@@ -164,3 +164,5 @@ C:\Users\Acer\Documents\SysAgropec\SysAgropec\SysAgropec\bin\MySql.Data.Entity.E
 C:\Users\Acer\Documents\SysAgropec\SysAgropec\SysAgropec\bin\EntityFramework.xml
 C:\Users\Acer\Documents\SysAgropec\SysAgropec\SysAgropec\bin\EntityFramework.SqlServer.xml
 C:\Users\Acer\Documents\SysAgropec\SysAgropec\SysAgropec\obj\Debug\SysAgropec.csprojResolveAssemblyReference.cache
+C:\Users\Acer\Documents\SysAgropec\SysAgropec\SysAgropec\bin\Json.dll
+C:\Users\Acer\Documents\SysAgropec\SysAgropec\SysAgropec\bin\Json.pdb

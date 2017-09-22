@@ -1,0 +1,63 @@
+﻿@model SysAgropec.Models.Medicamento
+
+<div>
+
+    <form id="myForm" class="form-inline">
+        @Html.HiddenFor(m => m.ID)
+
+        <div class="form-group">
+            <label class="control-label">Nome:</label>
+            @Html.TextBoxFor(model => model.Nome, new { @class = "form-control", required = "required" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Descrição:</label>
+            @Html.TextBoxFor(model => model.Descricao, new { @class = "form-control", required = "required" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Dias de carência:</label>
+            @Html.TextBoxFor(model => model.Carencialeite, new { @class = "form-control", required = "required", type="number" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Lote:</label>
+            @Html.DropDownListFor(model => model.Lote_ID, ViewBag.LoteList as SelectList, "Escolha uma opção", new { @class = "form-control", required="required" })
+        </div>
+
+        <a href="#" id="btnSubmit" class="btn btn-primary">Salvar </a>
+
+    </form>
+
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        $("#btnSubmit").click(function () {
+
+            var myformdata = $("#myForm").serialize();
+
+            $.ajax({
+
+                type: "POST",
+                url: "Update",
+                data: myformdata,
+                success: function () {
+
+                    $("#myModalEditMedicamento").modal("hide");
+                    window.location.href = "/Medicamento/List";
+
+                }
+
+            })
+        })
+
+    })
+
+
+</script>
+
+

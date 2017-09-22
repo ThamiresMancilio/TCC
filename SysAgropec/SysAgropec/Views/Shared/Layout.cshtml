@@ -7,7 +7,7 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>Home - SysAgropec</title>
+    <title>@ViewBag.Title</title>
 
     @Styles.Render("~/bundles/bootstrap2")
 
@@ -23,10 +23,11 @@
                 <div class="fa fa-bars tooltips" style="color: white;" data-placement="right" data-original-title="Esconder / Mostrar menu"></div>
             </div>
             <div class="top-menu">
-                <ul class="nav pull-right top-menus" style="margin-top: 12px;">
+                
+                <ul class="nav pull-right top-menus" style="margin-top: 12px;float: right;">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: white;background-color:rgb(0,166,90);margin-right:35px; width:125px;">
-                            <i class="fa fa-user fa-fw"></i> Usuário <b class="caret"></b>
+                            <i class="fa fa-user fa-fw"></i> @Session["loginuser"]<b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user" style="color: white;background-color: rgb(0,166,90);">
                             <li>
@@ -43,6 +44,7 @@
                         </ul>
                     </li>
                 </ul>
+                <h4 style="float: right;color: white; margin-right: 5px;">Fazenda: Beira mar</h4>
             </div>
      </header>
    
@@ -54,8 +56,8 @@
                     <p class="centered">@Html.ActionLink(" ","Index","Home")<img src="~/Images/vacaicone.png" class="img-circle" width="60"></p>
                     <h5 class="centered">SysAgropec</h5>
 
-                    <li class="mt">
-                        <a class="active">
+                    <li class="sub-menu">
+                        <a href="javascript:;">
                             <i class="fa fa-dashboard"></i>
                             <span>Fazendas</span>
                         </a>

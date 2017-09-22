@@ -1,0 +1,46 @@
+﻿@model SysAgropec.Models.Livro
+
+<div>
+
+    <form id="myForm" class="form-inline">
+        @Html.HiddenFor(m => m.ID)
+
+        <div class="form-group">
+            <label class="control-label">Descrição:</label>
+            @Html.TextBoxFor(model => model.Descricao, new { @class = "form-control", required = "required" })
+        </div>
+            <a href="#" id="btnSubmit" class="btn btn-primary">Salvar </a>
+
+</form>
+
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        $("#btnSubmit").click(function () {
+            
+            var myformdata = $("#myForm").serialize();
+
+            $.ajax({
+
+                type: "POST",
+                url: "Update",
+                data: myformdata,
+                success: function () {
+
+                    $("#myModalEditLivro").modal("hide");
+                    window.location.href = "/Livro/List";
+
+                }
+
+            })
+        })
+
+    })
+
+
+</script>
+

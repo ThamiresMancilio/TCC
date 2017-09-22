@@ -1,20 +1,21 @@
-﻿
-@{
-    ViewBag.Title = "Manipular";
+﻿@{
+    ViewBag.Title = "Escolha uma fazenda";
+    Layout = "~/Views/Shared/LayoutClean.cshtml";
 }
 
 <div id="form-container">
     <div class="panel" id="form-box">
-        <form action="login.php" method="post">
-
+        @using (Html.BeginForm("Index", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+        {
             <h2 class="text-center" id="titulo"> Escolha uma das fazendas para administrar</h2>
 
             <div class="form-group">
                 <select class="form-control" style="">
-                    <option>Fazenda Bom Fim</option>
-                    <option>Estância Velha</option>
-                    <option>Estância do Pampa</option>
+                    @for (int i = 0; i < Model.Rows.Count; i++)
+                    {
+                        <option value="@Model.Rows[i][0]">@Model.Rows[i][3]</option>
 
+                    }
                 </select>
             </div>
 
@@ -22,6 +23,6 @@
                 <input type="submit" value="Entrar">
 
             </div>
-        </form>
+        }
     </div>
 </div>

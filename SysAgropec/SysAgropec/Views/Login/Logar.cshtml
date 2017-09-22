@@ -1,4 +1,12 @@
-﻿<div id="form-container">
+﻿
+@{
+    ViewBag.Title = "Logar";
+    Layout = "~/Views/Shared/LayoutClean.cshtml";
+
+}
+
+
+<div id="form-container">
     <div class="panel" id="form-box">
 
         @using (Html.BeginForm("Valida", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
