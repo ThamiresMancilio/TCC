@@ -1,0 +1,87 @@
+﻿@model IEnumerable<SysAgropec.Models.Estoque_MedicamentoViewModel>
+@{
+    ViewBag.Title = "Listar Estoque";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+@Styles.Render("~/bundles/paging")
+
+@Scripts.Render("~/bundles/Estoque")
+
+<h3><i class="fa fa-angle-right"></i> Estoque de Medicamentos</h3>
+<div class="row mt">
+    <div class="col-lg-12">
+
+
+        <table id="easyPaginate" class="table table-bordered table-striped table-condensed">
+            <thead>
+            <th>Medicamento</th>
+            <th>Qtd atual</th>
+            <th>Opções</th>
+
+            </thead>
+            <tbody>
+                @if (Model != null)
+            {
+                foreach (var estoque in Model)
+                {
+                        <tr class="line" id="row_@estoque.ID">
+                            <td>@estoque.nomeMedicamento</td>
+                            <td>@estoque.Quantidadeatual</td>
+                            <td>
+                                <a href="#" class="btn btn-danger btn-xs" onclick="ConfirmaExclusao(@estoque.ID, '@estoque.Medicamento_ID')" title="Excluir Registro"><i class="fa fa-trash-o "></i></a>
+                            </td>
+
+                        </tr>}
+            }
+            else
+            {
+                    <tr class="line">
+                        <td colspan="2">
+                            Nenhum registro localizado.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Alerta de Exclusão</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="msg"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <a href="#" onclick="DeleteMedicamento()" class="btn btn-primary">Excluir</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        
+
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
+
+
+
+
+

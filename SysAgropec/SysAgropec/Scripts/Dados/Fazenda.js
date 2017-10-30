@@ -75,3 +75,19 @@ $(document).ready(function () {
         }
     });
 });
+
+//$(".file").fileinput({
+//    uploadUrl:"UploadImage",
+//    showUpload: false,
+//    showCaption: false,
+//    fileType: "any",
+//    previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+//    overwriteInitial: false
+
+
+//}).on("filebatchselected", function (event, files) {
+
+//    $(".file").fileinput("upload");
+
+//});
+

@@ -92,6 +92,7 @@
     <EntitySetMapping Name="Medicamento">
       <EntityTypeMapping TypeName="sysagropecModel.Medicamento">
         <MappingFragment StoreEntitySet="Medicamento">
+          <ScalarProperty Name="Estocado" ColumnName="Estocado" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Nome" ColumnName="Nome" />
           <ScalarProperty Name="Descricao" ColumnName="Descricao" />

@@ -1,0 +1,67 @@
+﻿<div>
+    <form id="myForm" class="form-inline">
+        <table id="easyPaginate" class="table table-bordered table-striped table-condensed">
+            <thead>
+
+            
+            <th>Animal</th>
+
+            </thead>
+            <tbody>
+            
+                @foreach (var item in ViewData["animais"] as List<SysAgropec.Models.AnimalViewModel>)
+                {
+
+                    <tr>
+                        <td>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="@item.ID" value="@item.ID">
+                                    @item.Descricao - @item.Registro
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+
+                }
+            
+            </tbody>
+        </table>
+
+        <a href="#" id="btnSubmit" class="btn btn-primary">Adicionar Animal </a>
+    </form>
+
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        $("#btnSubmit").click(function () {
+
+            var myformdata = $("#myForm").serialize();
+
+            $.ajax({
+
+                type: "POST",
+                url: "Update",
+                data: myformdata,
+                success: function () {
+
+                    $("#myModalEditLivro").modal("hide");
+
+
+                    window.location.href = "/Producao/Add";
+
+                }
+
+            })
+        })
+
+    })
+
+
+</script>
+
+

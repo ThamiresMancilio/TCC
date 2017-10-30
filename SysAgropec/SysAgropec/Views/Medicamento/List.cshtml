@@ -51,6 +51,9 @@
                             <td>
                                 <a href="#" class="btn btn-primary btn-xs" onclick="Alterar(@medicamento.ID)" title="Alterar Registro"><i class="fa fa-pencil"></i></a>
                                 <a href="#" class="btn btn-danger btn-xs" onclick="ConfirmaExclusao(@medicamento.ID, '@medicamento.Nome')" title="Excluir Registro"><i class="fa fa-trash-o "></i></a>
+                                @if(medicamento.Estocado == 0) { 
+                                <a href="#" class="btn btn-primary btn-xs" onclick="AddToEstoque(@medicamento.ID, '@medicamento.Nome')" title="Enviar ao Estoque"><i class="fa fa-send"></i></a>
+                                }
                             </td>
 
                         </tr>}
@@ -124,6 +127,59 @@
                     <div class="modal-footer">
 
                     </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalMsgEstoque" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Mensagem</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="medicamentoMsg"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalAddEstoque" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Estocando <label id="medicamentoDescri"></label></h4>
+                    </div>
+                    <div class="modal-body" id="myModalBodyMedicamento">
+                        @using (Html.BeginForm("AddDadosEstoque", "Medicamento", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-inline" }))
+                        {
+
+                            <div class="form-group">
+                                <label for="descri">Quantidade:</label>
+                                <input type="number" class="form-control" id="Quantidadeatual" name="Quantidadeatual">
+                            </div>
+                            <div class="form-group">
+                                <label for="descri">Quantidade mínima</label>
+                                <input type="number" class="form-control" id="Quantidademinima" name="Quantidademinima">
+                            </div>
+                            
+                            <input type="hidden" id="Medicamento_ID" name="Medicamento_ID" />
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        }
+
+                    </div>
+
                 </div>
 
             </div>

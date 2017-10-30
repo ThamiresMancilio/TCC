@@ -28,14 +28,19 @@ namespace SysAgropec
                 "~/Scripts/jquery-ui.min.js"
                 ));
 
+            bundles.Add(new ScriptBundle("~/bundles/jquery-mask").Include(
+                "~/Scripts/JqueryMask.js"
+                ));
+
 
             bundles.Add(new ScriptBundle("~/bundles/jquery-fileinput").Include(
-                "~/Scripts/pt-BR.js",
+                
                 "~/Scripts/fileinput.js",
                 "~/Scripts/themes/explorer/theme.js",
                 "~/Scripts/plugins/sortable.js",
                 "~/Scripts/jquery-1.10.2.min.js",
-                "~/Scripts/bootstrap.min.js"
+                "~/Scripts/bootstrap.min.js",
+                "~/Scripts/pt-BR.js"
 
                 ));
 
@@ -66,6 +71,12 @@ namespace SysAgropec
             bundles.Add(new ScriptBundle("~/bundles/Medicamento").Include(
 
                 "~/Scripts/Dados/Medicamento.js"
+
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/Aplicacao").Include(
+
+                "~/Scripts/Dados/Aplicacao.js"
 
                 ));
 

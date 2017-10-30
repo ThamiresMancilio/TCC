@@ -60,6 +60,30 @@ namespace SysAgropec.Models
 
         }
 
+        public List<FazendaViewModel> CarregaFazendas()
+        {
+
+            sysagropecConnection db = new sysagropecConnection();
+
+            List<Propriedade> fazendas = db.Propriedade.ToList();
+
+            AnimalViewModel a = new AnimalViewModel();
+
+            List<FazendaViewModel> f = fazendas.Select(
+                x => new FazendaViewModel
+                {
+                    ID = x.ID,
+                    Razaosocial = x.Razaosocial
+
+
+                }
+
+                ).ToList();
+
+
+            return f;
+        }
+
         public int AdicionaFazenda(FazendaViewModel fazenda)
         {
 

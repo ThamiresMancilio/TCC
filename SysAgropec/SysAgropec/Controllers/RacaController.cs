@@ -7,74 +7,126 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace SysAgropec.Controllers
 {
     public class RacaController : Controller
     {
-        // GET: Raca
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult Add()
         {
-            return View();
+            if (Session["loginuser"] != null)
+            {
+
+                return View();
+
+            }else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
         }
 
         public ActionResult Edit(int ID)
         {
 
-            RacaViewModel r = new RacaViewModel();
+            if (Session["loginuser"] != null)
+            {
+                RacaViewModel r = new RacaViewModel();
 
-            return PartialView("PartialView", r.BuscaRaca(ID));
+                return PartialView("PartialView", r.BuscaRaca(ID));
+
+            } else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
         }
 
         public ActionResult Update(Models.Raca r)
         {
+            if (Session["loginuser"] != null)
+            {
 
-            RacaViewModel raca = new RacaViewModel();
+                RacaViewModel raca = new RacaViewModel();
 
-            r.Usuario_IDAlteracao = 1;  //Session["iduser"];
-            r.Datalteracao = DateTime.Now;
+                r.Usuario_IDAlteracao = 1; Convert.ToInt16(Session["iduser"]);
+                r.Datalteracao = DateTime.Now;
 
-            raca.AtualizaRaca(r);
+                raca.AtualizaRaca(r);
 
-            return RedirectToAction("List");
+                return RedirectToAction("List");
+
+            }else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
         }
 
         [HttpPost]
         public ActionResult Insert()
         {
 
-            RacaViewModel r = new RacaViewModel();
+            if (Session["iduser"] != null)
+            {
+                RacaViewModel r = new RacaViewModel();
 
-            r.Datacadastro = DateTime.Now;
-            r.Datalteracao = null;
-            r.Descricao = Request.Form["descricao"];
-            r.Excluido = 0;
-            r.Usuario_IDCcadastro = 1;
-            r.Usuario_IDAlteracao = null;
-            r.AdicionaRaca(r);
+                r.Datacadastro = DateTime.Now;
+                r.Datalteracao = null;
+                r.Descricao = Request.Form["descricao"];
+                r.Excluido = 0;
+                r.Usuario_IDCcadastro = Convert.ToInt16(Session["iduser"]);
+                r.Usuario_IDAlteracao = null;
+                r.AdicionaRaca(r);
 
-            return RedirectToAction("List");
+                return RedirectToAction("List");
+
+            }else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
         }
         [HttpGet]
         public ActionResult List()
         {
-            {
+            if(Session["loginuser"]!=null){
 
                 RacaViewModel r = new RacaViewModel();
 
                 return View(r.CarregaRaca());
+            }else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
             }
         }
 
         [HttpPost]
         public ActionResult ListWithParameters()
         {
-            {
+            if(Session["loginuser"]!=null){
                 string descricao = Request.Form["descricao"];
 
                 if (!descricao.Equals(""))
@@ -88,6 +140,15 @@ namespace SysAgropec.Controllers
 
 
                 return View("List");
+
+            } else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
             }
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace SysAgropec.Controllers
 {
@@ -10,22 +11,21 @@ namespace SysAgropec.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-            
-        }
+            if (Session["loginuser"] !=null)
+            {
+                int id = Convert.ToInt16(Request.Form["fazenda"]);
+                Session["idfazenda"] = id;
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+                return View();
+            }else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
         }
     }
 }

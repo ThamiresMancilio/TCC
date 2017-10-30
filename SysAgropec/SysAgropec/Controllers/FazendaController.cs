@@ -4,173 +4,162 @@ using SysAgropec.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Mvc;
-
+using System.Web.Routing;
 
 namespace SysAgropec.Controllers
 {
     public class FazendaController : Controller
     {
-        //// GET: Login
-        //[System.Web.Mvc.HttpGet]
-        //public ActionResult Manipular()
-        //{
-        //    string query = "Select * from propriedades ";
 
-        //    DataTable dtPropriedades = new DataTable();
 
-        //    try
-        //    {
-        //        MySqlConnection connection = new MySqlConnection(Banco.getConexao());
-        //        connection.Open();
-        //        MySqlDataAdapter sqlDa = new MySqlDataAdapter(query, connection);
-        //        sqlDa.Fill(dtPropriedades);
+        [System.Web.Mvc.HttpGet]
+        public ActionResult Manipular()
+        {
+            if (Session["loginuser"] != null)
+            {
+                FazendaViewModel f = new FazendaViewModel();
 
-        //        return View(dtPropriedades);
+                ViewData["fazendas"] = f.CarregaFazendas();
 
-        //    }
-        //    catch (MySqlException msg)
-        //    {
-        //        Console.WriteLine(msg.Message);
-        //    }
-        //    return View();
-        //}
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
+        }
 
         public ActionResult Add()
         {
-            return View();
+            if (Session["loginuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
         }
+
 
         public ActionResult Edit(int ID)
         {
+            if (Session["loginuser"] != null)
+            {
+                FazendaViewModel f = new FazendaViewModel();
 
-            FazendaViewModel f = new FazendaViewModel();
-
-            return PartialView("PartialView", f.CarregaFazenda());
+                return PartialView("PartialView", f.CarregaFazenda());
+            } else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
         }
 
         public ActionResult Update(Models.Propriedade p)
         {
-            FazendaViewModel f = new FazendaViewModel();
-            
-            p.Usuario_IDAlteracao = 1;  //Session["iduser"];
-            p.Dataalteracao = DateTime.Now;
+            if (Session["loginuser"] != null)
+            {
 
-            f.AtualizaFazenda(p);
+                FazendaViewModel f = new FazendaViewModel();
 
-            return RedirectToAction("List");
+                p.Usuario_IDAlteracao = Convert.ToInt16(Session["iduser"]);
+                p.Dataalteracao = DateTime.Now;
+
+                f.AtualizaFazenda(p);
+
+                return RedirectToAction("List");
+
+            }else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
         }
 
         [HttpPost]
-        public ActionResult Insert()
+        public ActionResult Insert(FazendaViewModel f)
         {
+            if (Session["loginuser"] != null) { 
 
-            FazendaViewModel fazenda = new FazendaViewModel();
-
-            
-            fazenda.Datacadastro = DateTime.Now;
-            fazenda.Dataalteracao = null;
-            fazenda.Usuario_IDCadastro = 1;
-            fazenda.Usuario_IDAlteracao = null;
-            fazenda.Bairro = Request.Form["Bairro"];
-            fazenda.Cep = Request.Form["Cep"];
-            fazenda.Cidade = Request.Form["Cidade"];
-            fazenda.Cnpj = Request.Form["Cnpj"];
-            fazenda.Complemento = Request.Form["Complemento"];
-            fazenda.Estado = Request.Form["Estado"];
-            fazenda.Inscricaoestadual = Request.Form["Inscricaoestadual"];
-            fazenda.Inscricaomunicipal = Request.Form["Inscricaomunicipal"];
-            fazenda.Logradouro = Request.Form["Logradouro"];
-            fazenda.Nomefantasia = Request.Form["Nomefantasia"];
-            fazenda.Numero = Request.Form["Numero"];
-            fazenda.Razaosocial = Request.Form["Razaosocial"];
-            fazenda.Logo = Request.Form["Logo"];
+                FazendaViewModel fazenda = new FazendaViewModel();
 
             
+                fazenda.Datacadastro = DateTime.Now;
+                fazenda.Dataalteracao = null;
+                fazenda.Usuario_IDCadastro = Convert.ToInt16(Session["iduser"]);
+                fazenda.Usuario_IDAlteracao = null;
+                fazenda.Bairro = f.Bairro; 
+                fazenda.Cep = String.Join("", System.Text.RegularExpressions.Regex.Split(f.Cep, @"[^\d]")); 
+                fazenda.Cidade = f.Cidade;  
+                fazenda.Cnpj = f.Cnpj;  
+                fazenda.Complemento = f.Complemento; 
+                fazenda.Estado = f.Estado;
+                fazenda.Inscricaoestadual = f.Inscricaoestadual; 
+                fazenda.Inscricaomunicipal = f.Inscricaomunicipal; 
+                fazenda.Logradouro = f.Logradouro;  
+                fazenda.Nomefantasia = f.Nomefantasia; 
+                fazenda.Numero = f.Numero; 
+                fazenda.Razaosocial = f.Razaosocial; 
+                fazenda.Logo = f.Logo;
+            
 
-            fazenda.AdicionaFazenda(fazenda);
+                fazenda.AdicionaFazenda(fazenda);
 
-            return RedirectToAction("List");
+                return RedirectToAction("List");
+
+            }else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
         }
         [HttpGet]
         public ActionResult List()
         {
+            if(Session["loginuser"] != null){
+
+                FazendaViewModel f = new FazendaViewModel();
+
+                return View(f.CarregaFazenda());
+            }else
             {
-
-                LivroViewModel l = new LivroViewModel();
-
-                return View(l.CarregaLivro());
-            }
-        }
-
-        [HttpPost]
-        public ActionResult ListWithParameters()
-        {
-            {
-                string descricao = Request.Form["descricao"];
-
-                if (!descricao.Equals(""))
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
                 {
-
-                    LivroViewModel l = new LivroViewModel();
-
-
-                    return View("List", l.CarregaLivro(descricao));
-                }
-
-
-                return View("List");
+                    controller = "Login",
+                    action = "Logar"
+                }));
             }
         }
-
-        public JsonResult UploadImage() {
-
-            String filepath = "";
-            String caminhoTMP = "C:\\Users\\Acer\\Documents\\SysAgropec\\SysAgropec\\SysAgropec\\upload_images\\";
-            String pasta = "upload_images";
-            String imagem ="";
-            String imagemEnviada = "";
-            String content = "";
-            for (int i = 0; i <= Request.Files.Count - 1; i++)
-            {
-
-                if (!Request.Files[i].FileName.Equals(""))
-                {
-                    Request.Files[i].SaveAs(caminhoTMP + Request.Files[i].FileName);
-
-                    imagem = "caption:" + Request.Files[i].FileName + " height:120px url:deleteimage.aspx key:" + Request.Files[i].FileName;
-
-                    imagemEnviada = "<img  height='120px' , src='" + pasta + Request.Files[i].FileName + "' class='file-preview-image'>";
-                    content = "{file_id:0 , overwriteInitial:" + true + ", initialPreviewConfig" + imagem + " , initialPreview:" + imagemEnviada;
-                }
-                return Json(filepath, JsonRequestBehavior.AllowGet);
-
-            }
-            return null;
-
-        }
-
-
-        public JsonResult Delete(int idLivro)
-        {
-            bool result = false;
-
-            if (idLivro > 0)
-            {
-
-                LivroViewModel l = new LivroViewModel();
-                l.ExcluiLivro(idLivro);
-
-                return Json(result, JsonRequestBehavior.AllowGet);
-            }
-            return null;
-        }
-
-
-
 
     }
 }

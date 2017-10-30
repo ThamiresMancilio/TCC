@@ -23,28 +23,26 @@
                 <div class="fa fa-bars tooltips" style="color: white;" data-placement="right" data-original-title="Esconder / Mostrar menu"></div>
             </div>
             <div class="top-menu">
-                
                 <ul class="nav pull-right top-menus" style="margin-top: 12px;float: right;">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: white;background-color:rgb(0,166,90);margin-right:35px; width:125px;">
-                            <i class="fa fa-user fa-fw"></i> @Session["loginuser"]<b class="caret"></b>
+                            <i class="fa fa-user fa-fw"></i> admin<b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user" style="color: white;background-color: rgb(0,166,90);">
                             <li>
-                                <a href="#" style="color: white;background-color: rgb(0,166,90);"><i class="fa fa-user fa-fw"></i> Meus Dados</a>
+                                <a href="@Url.Action("Manipular","Fazenda")" style="color: white;background-color: rgb(0,166,90);"><i class="fa fa-user fa-fw"></i> Meus Dados</a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="#" style="color: white;background-color: rgb(0,166,90);"><i class="fa fa-sign-out fa-fw"></i> Trocar de Fazenda</a>
+                                <a href="@Url.Action("Manipular","Fazenda")" style="color: white;background-color: rgb(0,166,90);"><i class="fa fa-sign-out fa-fw"></i> Trocar de Fazenda</a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="#" style="color: white;background-color: rgb(0,166,90);"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
+                                <a href="@Url.Action("Logout","Login")" style="color: white;background-color: rgb(0,166,90);"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
-                <h4 style="float: right;color: white; margin-right: 5px;">Fazenda: Beira mar</h4>
             </div>
      </header>
    
@@ -122,7 +120,7 @@
                             <span>Estoque</span>
                         </a>
                         <ul class="sub">
-                            <li>@Html.ActionLink("Consultar", "List", "Estoque")</li>
+                            <li>@Html.ActionLink("Consultar", "Stock", "Estoque")</li>
                         </ul>
                     </li>
                     <li class="sub-menu">
@@ -160,11 +158,11 @@
                             <span>Relatórios</span>
                         </a>
                         <ul class="sub">
-                            <li>@Html.ActionLink("TOP Produção", "Top", "Relatorio")</li>
                             <li>@Html.ActionLink("Animais por raça", "Animais", "Relatorio")</li>
+                            <li>@Html.ActionLink("Estoque de Medicamentos", "Estoque", "Relatorio")</li>
+                            <li>@Html.ActionLink("TOP Produção", "Top", "Relatorio")</li>
                         </ul>
                     </li>
-
                 </ul>
                 <!-- sidebar menu end-->
             </div>
@@ -173,7 +171,14 @@
             <section class="wrapper site-min-height">
                 @RenderBody()
         </section><!-- /MAIN CONTENT -->
-
+            <footer class="site-footer">
+                <div class="text-center">
+                    Fazenda: Hildo Goncalves - ME | Usuário: @Session["loginuser"] | Último acesso em: @Session["ultimoAcesso"]
+                    <a href="#" class="go-top">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+            </footer>
     </section>
 
     <script src="~/Scripts/jquery.js"></script>
@@ -190,21 +195,18 @@
 
     <script type="text/javascript" src="~/Scripts/gritter/js/jquery.gritter.js"></script>
     <script type="text/javascript" src="~/Scripts/gritter-conf.js"></script>
-
-    <!--script for this page-->
-    @*<script src="assets/js/sparkline-chart.js"></script>*@
-    @*<script src="assets/js/zabuto_calendar.js"></script>*@
-
-    @*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>*@
-
     
-        @Scripts.Render("~/bundles/jquery-paginator")
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#easyPaginate').paging({ limit: 4 });
-            });
-        </script>
+    @Scripts.Render("~/bundles/jquery-paginator")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#easyPaginate').paging({ limit: 4 });
+        });
+
+
+        $(function () {
+            $('select.styled').customSelect();
+        });
+    </script>
     
 </body>
 </html>

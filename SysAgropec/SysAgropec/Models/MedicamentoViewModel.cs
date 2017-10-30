@@ -19,6 +19,7 @@ namespace SysAgropec.Models
         public int? Usuario_IDAlteracao { get; set; }
         public string Numerolote { get; set; }
 
+        public Nullable<sbyte> Estocado { get; set; }
 
         public List<MedicamentoViewModel> CarregaMedicamento(string desc = "")
         {
@@ -39,7 +40,9 @@ namespace SysAgropec.Models
                     Descricao = x.Descricao,
                     Carencialeite  = x.Carencialeite,
                     Lote_ID = x.Lote_ID,
-                    Numerolote = x.Lote.Numerolote
+                    Numerolote = x.Lote.Numerolote,
+                    Estocado = x.Estocado
+                    
 
                 }
 
@@ -67,7 +70,8 @@ namespace SysAgropec.Models
                 m.Nome = medicamento.Nome;
                 m.Usuario_IDAlteracao = medicamento.Usuario_IDAlteracao;
                 m.Usuario_IDCadastro = medicamento.Usuario_IDCadastro;
-                
+                m.Lote_ID = medicamento.Lote_ID;
+                m.Estocado = 0;
                 db.Medicamento.Add(m);
                 db.SaveChanges();
 

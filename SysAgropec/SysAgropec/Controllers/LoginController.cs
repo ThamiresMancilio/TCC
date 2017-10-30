@@ -1,5 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using SysAgropec.Class;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,111 +8,78 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using SysAgropec.Models;
 
 namespace SysAgropec.Controllers
 {
     public class LoginController : Controller
     {
-        // GET: Login
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: Login
         public ActionResult Logar()
         {
+          return View();
 
-            return View();
+        }
 
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Logar", new RouteValueDictionary(
+                            new
+                            {
+                                controller = "Login",
+                                action = "Logar"
+                            }));
         }
 
         [HttpPost]
         public ActionResult Valida()
         {
-       
-            //string coonn = "server=localhost;user id=root; password=thamires;persistsecurityinfo=True;database=sysagropec";
 
 
             string name = Request.Form["usuario"];
             string password = Request.Form["senha"];
 
-            //string query = "Select * from usuarios where login = @login and senha = @senha";
+            if (!name.Equals("") && !password.Equals(""))
+            {
+                UsuarioViewModel u = new UsuarioViewModel();
 
-            //MySqlConnection Conexao = new MySqlConnection(Banco.getConexao());
-            
-            //MySqlCommand command = Conexao.CreateCommand();
-            //command.CommandText = query;
-            //command.Parameters.AddWithValue("@login", name);
-            //command.Parameters.AddWithValue("@senha", password);
+                if (u.ValidaUsuario(name, password) != null)
+                {
 
-            //try
-            //{
-            //    Conexao.Open();
-            //}
-            //catch (Exception msg )
-            //{
-            //    Console.WriteLine(msg.Message);
-            //}
+                    Session["iduser"] = u.ID;
+                    Session["loginuser"] = u.Login;
+                    Session["nome"] = u.Nome;
+                    Session["sobrenome"] = u.Sobrenome;
+                    Session["admin"] = u.Admin;
+                    Session["ultimoAcesso"] = Convert.ToDateTime(u.Dataultimoacesso).ToString("dd/MM/yyyy");
+                    
+                    u.AtualizaDataUltimoAcesso(u.ID, DateTime.Now);
+                    
+                    return RedirectToAction("Manipular", new RouteValueDictionary(
+                            new
+                            {
+                                controller = "Fazenda",
+                                action = "Manipular"
+                            }));
 
-            //MySqlDataReader reader = command.ExecuteReader();
-            //if (reader.HasRows)
-            //{
-         
-            //    while (reader.Read())
+                }
+                else
+                {
 
-            //    {
-            //        Session.Add("iduser", reader["id"]);
-            //        Session.Add("loginuser", reader["login"]);
-            //        Session.Add("administrador", Convert.ToBoolean(reader["admin"]));
-            //        if (Convert.ToBoolean(reader["admin"])) {
-            //            DataTable dtPropriedades = new DataTable();
-            //            reader.Dispose();
-            //            Conexao.Close();
-            //            query = "Select * from propriedades ";
-            //            MySqlConnection Conexao2 = new MySqlConnection(Banco.getConexao());
-            //            MySqlCommand command2 = Conexao2.CreateCommand();
-            //            command2.CommandText = query;
-            //            Conexao2.Open();
-            //            //MySqlDataReader reader2 = command2.ExecuteReader();
+                    ViewData["msg"] = "Usuário não cadastrado";
+                    return View("Logar");
+                }
 
-            //            MySqlDataAdapter sqlDa = new MySqlDataAdapter(query, Conexao2);
-            //            sqlDa.Fill(dtPropriedades);
-                        
-            //            if (dtPropriedades.Rows.Count> 0)
-            //            {
-                            
-            //                return RedirectToAction("Manipular", new RouteValueDictionary(
-            //                new { controller = "Fazenda", action = "Manipular", dtPropriedades }));
-            //            }
-            //        }
-            //        else
-            //        {
-            //            query = "Select * from propriedades inner join usuarios_propriedades on propriedades.id =  ";
-            //            query = query + " usuarios_propriedades.propriedades.id where usuarios_propriedades.usuarios_id = " + Session["iduser"];
-
-            //            command = Conexao.CreateCommand();
-            //            command.CommandText = query;
-
-            //            MySqlDataReader reader2 = command.ExecuteReader();
-
-            //            if (reader2.HasRows)
-            //            {
-
-            //                return View("", reader2);
-            //            }
-
-            //        }
+            }
+            else
+            {
                 
-            //    }
-            //}
-            //else //usuario não localizado
-            //{
+                ViewData["msg"] = "Preencha os campos";
+                return View("Logar");
+            }
 
-            //}
-
-            return View();
-           
         }
+            
     }
 }

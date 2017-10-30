@@ -121,6 +121,7 @@
     <NavigationProperty Name="Lote" Relationship="Self.fk_medicamento_lote_medicamentos1" FromRole="Medicamento" ToRole="Lote" />
     <NavigationProperty Name="Usuario" Relationship="Self.fk_medicamento_usuarios1" FromRole="Medicamento" ToRole="Usuario" />
     <NavigationProperty Name="Usuario1" Relationship="Self.fk_medicamento_usuarios2" FromRole="Medicamento" ToRole="Usuario" />
+    <Property Name="Estocado" Type="SByte" />
   </EntityType>
   <EntityType Name="Producao">
     <Key>

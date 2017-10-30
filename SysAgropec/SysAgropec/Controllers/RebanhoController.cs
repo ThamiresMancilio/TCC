@@ -1,5 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using SysAgropec.Class;
 using SysAgropec.Models;
 using System;
 using System.Collections.Generic;
@@ -7,121 +6,206 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace SysAgropec.Controllers
 {
     public class RebanhoController : Controller
     {
+
+        
         [HttpGet]
         public ActionResult Add()
         {
-            return View();
-        }
 
-        [HttpPost]
-        public ActionResult Insert()
-        {
-
-            string descricao = Request.Form["descricao"];
-            string registro = Request.Form["registro"];
-            string tatuagem = Request.Form["tatuagem"];
-            int numerobrinco =Convert.ToInt16(Request.Form["numerobrinco"]);
-            DateTime datanascimento = Convert.ToDateTime( Request.Form["datanascimento"]);
-            int sexo = Convert.ToInt16(Request.Form["sexo"]);
-            int livro = Convert.ToInt16(Request.Form["livro"]);
-            int raca = Convert.ToInt16(Request.Form["raca"]);
-            bool morto = Convert.ToBoolean(Request.Form["morto"]);
-            //bool lactacao = Convert.ToBoolean(Request.Form["lactacao"]);
-            int lactacao = 1;
-            string observacao = Request.Form["observacao"];
-            string descricaopai = Request.Form["descricaopai"];
-            string registropai = Request.Form["registropai"];
-            string tatuagempai = Request.Form["tatuagempai"];
-            string descricaomae = Request.Form["descricaomae"];
-            string registromae = Request.Form["registromaes"];
-            string tatuagemae = Request.Form["tatuagemae"];
-
-
-            //RebanhoModel m = new RebanhoModel();
-
-            //m.datacadastro = DateTime.Now;
-            //m.datanascimento = datanascimento;
-            //m.descricao = descricao;
-            //m.descricaomae = descricaomae;
-            //m.descricaopai = descricaopai;
-            //m.dias_lactacao = 0;
-            //m.lactacao = lactacao;
-            //m.livro_id = livro;
-            //m.morto = morto;
-            //m.numerobrinco = numerobrinco;
-            //m.observacao = observacao;
-            //m.propriedades_id = 1;
-            //m.raca_id = 1;
-            //m.registro = registro;
-            //m.registromae = registromae;
-            //m.registropai = registropai;
-            //m.sexo = sexo;
-            //m.tatuagem = tatuagem;
-            //m.tatuagemae = tatuagemae;
-            //m.tatuagempai = tatuagempai;
-            //m.usuario_idcadastro = 1;
-            
-
-
-            
-            //m.insert();
-            return RedirectToAction("List");
-
-        }
-
-        [HttpPost]
-        public ActionResult ListFiltros()
-
-        {
-            string query = "Select * from animais ";
-
-            DataTable dtAnimais = new DataTable();
-
-            try
+            if (Session["loginuser"] != null)
             {
-                MySqlConnection connection = new MySqlConnection(Banco.getConexao());
-                connection.Open();
-                MySqlDataAdapter sqlDa = new MySqlDataAdapter(query, connection);
-                sqlDa.Fill(dtAnimais);
 
-                return View(dtAnimais);
+                sysagropecConnection db = new sysagropecConnection();
 
-            }
-            catch (MySqlException msg)
+                List<Livro> listlivro = db.Livro.ToList();
+                ViewBag.LivroLista = new SelectList(listlivro, "ID", "Descricao");
+
+
+                List<Raca> listraca = db.Raca.ToList();
+                ViewBag.RacaLista = new SelectList(listraca, "ID", "Descricao");
+
+
+                return View();
+
+            }else
             {
-                Console.WriteLine(msg.Message);
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
             }
-            return View();
         }
+
         [HttpGet]
         public ActionResult List()
-            
         {
-            string query = "Select * from animais ";
+            if(Session["loginuser"]!=null){
 
-            DataTable dtAnimais = new DataTable();
+                AnimalViewModel a = new AnimalViewModel();
 
-            try
+                return View(a.CarregaAnimal());
+
+            } else
             {
-                MySqlConnection connection = new MySqlConnection(Banco.getConexao());
-                connection.Open();
-                MySqlDataAdapter sqlDa = new MySqlDataAdapter(query, connection);
-                sqlDa.Fill(dtAnimais);
-
-                return View(dtAnimais);
-
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
             }
-            catch (MySqlException msg)
-            {
-                Console.WriteLine(msg.Message);
-            }
-            return View();
         }
-        
+
+        [HttpPost]
+        public ActionResult Insert(AnimalViewModel model)
+        {
+
+            if (Session["loginuser"] != null)
+            {
+
+                try
+                {
+                    sysagropecConnection db = new sysagropecConnection();
+
+                    List<Raca> listraca = db.Raca.ToList();
+
+                    ViewBag.RacaList = new SelectList(listraca, "ID", "Descricao");
+
+                    List<Livro> listlivro = db.Livro.ToList();
+
+                    ViewBag.LivroList = new SelectList(listlivro, "ID", "Descricao");
+
+                    Animal a = new Animal();
+
+                    a.Datacadastro = DateTime.Now;
+
+                    a.Datalactacao = DateTime.Now;
+                    a.Dias_lactacao = 1;
+                    a.Lactacao = 1;
+
+                    a.Datanascimento = model.Datanascimento;
+                    a.Descricao = model.Descricao;
+                    a.Descricaomae = model.Descricaomae;
+                    a.Descricaopai = model.Descricaopai;
+                    a.Livro_ID = model.Livro_ID;
+                    a.Morto = model.Morto;
+                    a.Numerobrinco = model.Numerobrinco;
+                    a.Observacao = model.Observacao;
+                    a.Propriedade_ID = Convert.ToInt16(Session["idfazenda"]);
+                    a.Raca_ID = model.Raca_ID;
+                    a.Registro = model.Registro;
+                    a.Registromae = model.Registromae;
+                    a.Registropai = model.Registropai;
+                    a.Sexo = model.Sexo;
+                    a.Tatuagem = model.Tatuagem;
+                    a.Tatuagemae = model.Tatuagemae;
+                    a.Tatuagempai = model.Tatuagempai;
+                    a.Usuario_IDCadastro = Convert.ToInt16(Session["iduser"]);
+                    
+
+                    db.Animal.Add(a);
+                    db.SaveChanges();
+
+                    int latestEmpId = a.ID;
+
+
+                    return RedirectToAction("List");
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
+
+        }
+
+        public ActionResult Edit(int ID)
+        {
+
+            if (Session["loginuser"] != null)
+            {
+
+                sysagropecConnection db = new sysagropecConnection();
+
+                List<Raca> listraca = db.Raca.ToList();
+                ViewBag.RacaList = new SelectList(listraca, "ID", "Descricao");
+
+                List<Livro> listlivro = db.Livro.ToList();
+                ViewBag.LivroList = new SelectList(listlivro, "ID", "Descricao");
+
+                AnimalViewModel a = new AnimalViewModel();
+
+                return PartialView("PartialView", a.BuscaAnimal(ID));
+
+            }else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
+        }
+
+        public ActionResult Update(Animal a)
+        {
+            if (Session["loginuser"] != null)
+            {
+
+                AnimalViewModel animal = new AnimalViewModel();
+
+                a.Usuario_IDAlteracao = Convert.ToInt16(Session["iduser"]);
+                a.Datalteracao = DateTime.Now;
+
+                animal.AtualizaAnimal(a);
+
+                return RedirectToAction("List");
+
+            } else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
+        }
+
+
+        public JsonResult Delete(int idAnimal)
+        {
+            bool result = false;
+
+            if (idAnimal > 0)
+            {
+
+                AnimalViewModel m = new AnimalViewModel();
+
+                m.ExcluiAnimal(idAnimal);
+
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            return null;
+        }
+
     }
 }

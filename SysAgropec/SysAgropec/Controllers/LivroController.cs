@@ -7,102 +7,168 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace SysAgropec.Controllers
 {
     public class LivroController : Controller
     {
-        // GET: Livro
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult Add()
         {
-            return View();
+            if (Session["loginuser"] != null)
+            {
+                return View();
+            }else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
         }
 
         public ActionResult Edit(int ID)
         {
+            if (Session["loginuser"] != null)
+            {
+                LivroViewModel l = new LivroViewModel();
 
-            LivroViewModel l = new LivroViewModel();
-       
-            return PartialView("PartialView", l.BuscaLivro(ID));
+                return PartialView("PartialView", l.BuscaLivro(ID));
+
+            } else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
         }
 
         public ActionResult Update(Models.Livro l)
         {
+            if (Session["loginuser"] !=null)
+            {
+                LivroViewModel livro = new LivroViewModel();
 
-            LivroViewModel livro = new LivroViewModel();
+                l.Usuario_IDAlteracao = Convert.ToInt16(Session["iduser"]);
+                l.Datalteracao = DateTime.Now;
 
-            l.Usuario_IDAlteracao = 1;  //Session["iduser"];
-            l.Datalteracao = DateTime.Now;
+                livro.AtualizaLivro(l);
 
-            livro.AtualizaLivro(l);
-
-            return RedirectToAction("List");
+                return RedirectToAction("List");
+            }else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
         }
+
 
         [HttpPost]
         public ActionResult Insert()
         {
-            
-            LivroViewModel l = new LivroViewModel();
 
-            l.Datacadastro = DateTime.Now;
-            l.Datalteracao = null;
-            l.Descricao = Request.Form["descricao"];
-            l.Excluido = 0;
-            l.Usuario_IDCadastro = 1;
-            l.Usuario_IDAlteracao = null;
-            l.AdicionaLivro(l);
+            if (Session["loginuser"] != null)
+            {
+                LivroViewModel l = new LivroViewModel();
 
-            return RedirectToAction("List");
+                l.Datacadastro = DateTime.Now;
+                l.Datalteracao = null;
+                l.Descricao = Request.Form["descricao"];
+                l.Excluido = 0;
+                l.Usuario_IDCadastro = Convert.ToInt16(Session["loginuser"]);
+                l.Usuario_IDAlteracao = null;
+                l.AdicionaLivro(l);
+
+                return RedirectToAction("List");
+            }else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
         }
         [HttpGet]
         public ActionResult List()
         {
-            {
+            if (Session["loginuser"] != null){
                
                 LivroViewModel l = new LivroViewModel();
 
                 return View(l.CarregaLivro());
+            }else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
             }
         }
+
+
 
         [HttpPost]
         public ActionResult ListWithParameters()
         {
-            {
+           if(Session["loginuser"]!=null) {
+
                 string descricao = Request.Form["descricao"];
 
                 if (!descricao.Equals("")) {
 
                     LivroViewModel l = new LivroViewModel();
                     
-
                     return View("List", l.CarregaLivro(descricao));
                 }
-
-
+                
                 return View("List");
+
+            }else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
             }
         }
 
 
         public JsonResult Delete(int idLivro)
         {
-            bool result = false;
+            if (Session["loginuser"] != null)
+            {
+                bool result = false;
 
-            if (idLivro > 0) {
+                if (idLivro > 0)
+                {
 
-               LivroViewModel l = new LivroViewModel();
-               l.ExcluiLivro(idLivro);
+                    LivroViewModel l = new LivroViewModel();
+                    l.ExcluiLivro(idLivro);
 
-                return Json(result, JsonRequestBehavior.AllowGet);
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                }
+                return null;
             }
-            return null;
+            else
+            {
+                return null;
+            }
+            
         }
 
     }

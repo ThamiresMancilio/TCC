@@ -101,6 +101,7 @@
           <Property Name="Lote_ID" Type="int" Nullable="false" />
           <Property Name="Usuario_IDCadastro" Type="int" Nullable="false" />
           <Property Name="Usuario_IDAlteracao" Type="int" />
+          <Property Name="Estocado" Type="tinyint" />
         </EntityType>
         <EntityType Name="Producao">
           <Key>
@@ -778,6 +779,7 @@
           <NavigationProperty Name="Lote" Relationship="Self.fk_medicamento_lote_medicamentos1" FromRole="Medicamento" ToRole="Lote" />
           <NavigationProperty Name="Usuario" Relationship="Self.fk_medicamento_usuarios1" FromRole="Medicamento" ToRole="Usuario" />
           <NavigationProperty Name="Usuario1" Relationship="Self.fk_medicamento_usuarios2" FromRole="Medicamento" ToRole="Usuario" />
+          <Property Name="Estocado" Type="SByte" />
         </EntityType>
         <EntityType Name="Producao">
           <Key>
@@ -1425,6 +1427,7 @@
           <EntitySetMapping Name="Medicamento">
             <EntityTypeMapping TypeName="sysagropecModel.Medicamento">
               <MappingFragment StoreEntitySet="Medicamento">
+                <ScalarProperty Name="Estocado" ColumnName="Estocado" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />

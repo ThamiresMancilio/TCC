@@ -96,6 +96,7 @@
     <Property Name="Lote_ID" Type="int" Nullable="false" />
     <Property Name="Usuario_IDCadastro" Type="int" Nullable="false" />
     <Property Name="Usuario_IDAlteracao" Type="int" />
+    <Property Name="Estocado" Type="tinyint" />
   </EntityType>
   <EntityType Name="Producao">
     <Key>

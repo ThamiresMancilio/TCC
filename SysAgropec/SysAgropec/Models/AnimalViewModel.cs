@@ -33,6 +33,177 @@ namespace SysAgropec.Models
         public int Usuario_IDCadastro { get; set; }
         public Nullable<int> Usuario_IDAlteracao { get; set; }
 
+        public string nomelivro { get; set; }
+        public string nomeraca { get; set; }
+
+        public List<AnimalViewModel> animaisList;
+
+        public List<AnimalViewModel> CarregaAnimal(string desc = "")
+        {
+
+            sysagropecConnection db = new sysagropecConnection();
+
+            List<Animal> animais = db.Animal.ToList();
+
+            AnimalViewModel a = new AnimalViewModel();
+
+            List<AnimalViewModel> animalVMList = animais.Select(
+                x => new AnimalViewModel
+                {
+                    ID = x.ID,
+                    Descricao = x.Descricao,
+                    Registro = x.Registro,
+                    Datacadastro = x.Datacadastro,
+                    Datalteracao = x.Datalteracao,
+                    Datalactacao = x.Datalactacao,
+                    Datanascimento = x.Datanascimento,
+                    Descricaomae = x.Descricaomae,
+                    Descricaopai = x.Descricaopai,
+                    Dias_lactacao = x.Dias_lactacao,
+                    Lactacao = x.Lactacao,
+                    Morto = x.Morto,
+                    Numerobrinco = x.Numerobrinco,
+                    Observacao = x.Observacao,
+                    Sexo = x.Sexo,
+                    Tatuagem = x.Tatuagem,
+                    Registromae = x.Registromae,
+                    Registropai = x.Registropai,
+                    Tatuagemae = x.Tatuagemae,
+                    Tatuagempai = x.Tatuagempai,
+                    Livro_ID = x.Livro_ID,
+                    Raca_ID = x.Raca_ID,
+                    Usuario_IDAlteracao = x.Usuario_IDAlteracao,
+                    Usuario_IDCadastro = x.Usuario_IDCadastro,
+                    nomelivro = x.Livro.Descricao,
+                    nomeraca = x.Raca.Descricao
+
+                }
+
+                ).ToList();
+
+
+            return animalVMList;
+        }
+
+        public List<AnimalViewModel> CarregaMatrizes()
+        {
+
+            sysagropecConnection db = new sysagropecConnection();
+
+            List<Animal> animais = db.Animal.ToList();
+
+            AnimalViewModel a = new AnimalViewModel();
+
+            List<AnimalViewModel> animalVMList = animais.Select(
+                x => new AnimalViewModel
+                {
+                    ID = x.ID,
+                    Descricao = x.Descricao,
+                    Registro = x.Registro
+
+
+                }
+
+                ).ToList();
+
+
+            return animalVMList;
+        }
+        public void AtualizaAnimal(Animal animal)
+        {
+
+            if (animal.ID > 0)
+            {
+
+                try
+                {
+
+                    sysagropecConnection db = new sysagropecConnection();
+
+                    Animal animalOLD = db.Animal.SingleOrDefault(l => l.ID == animal.ID);
+
+                    animalOLD.Datalteracao = animal.Datalteracao;
+                    animalOLD.Usuario_IDAlteracao = animal.Usuario_IDAlteracao;
+                    animalOLD.Datanascimento = animal.Datanascimento;
+                    animalOLD.Descricao = animal.Descricao;
+                    animalOLD.Descricaomae = animal.Descricaomae;
+                    animalOLD.Descricaopai = animal.Descricaopai;
+                    animalOLD.Dias_lactacao = animal.Dias_lactacao;
+                    animalOLD.Lactacao = animal.Lactacao;
+                    animalOLD.Livro_ID = animal.Livro_ID;
+                    animalOLD.Morto = animal.Morto;
+                    animalOLD.Numerobrinco = animal.Numerobrinco;
+                    animalOLD.Observacao = animal.Observacao;
+                    animalOLD.Raca_ID = animal.Raca_ID;
+                    animalOLD.Registro = animal.Registro;
+                    animalOLD.Registromae = animal.Registromae;
+                    animalOLD.Registropai = animal.Registropai;
+                    animalOLD.Sexo = animal.Sexo;
+                    animalOLD.Tatuagem = animal.Tatuagem;
+                    animalOLD.Tatuagemae = animal.Tatuagemae;
+                    animalOLD.Tatuagempai = animal.Tatuagempai;
+                    animalOLD.Usuario_IDAlteracao = animal.Usuario_IDAlteracao;
+                    
+                    db.SaveChanges();
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+
+            }
+        }
+
+
+        public Animal BuscaAnimal(int ID)
+        {
+
+            sysagropecConnection db = new sysagropecConnection();
+
+            Animal a = db.Animal.SingleOrDefault(x => x.ID == ID);
+
+            if (a.ID > 0)
+            {
+                return a;
+
+            }
+            return null;
+
+        }
+
+        public void ExcluiAnimal(int idAnimal)
+        {
+
+            if (idAnimal > 0)
+            {
+
+                try
+                {
+
+                    sysagropecConnection db = new sysagropecConnection();
+
+                    Animal animal = db.Animal.SingleOrDefault(l => l.ID == idAnimal);
+
+                    if (animal != null)
+                    {
+                        db.Animal.Remove(animal);
+                        db.SaveChanges();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+
+
+            }
+        }
+
 
     }
 }

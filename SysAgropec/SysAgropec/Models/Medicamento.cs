@@ -30,6 +30,7 @@ namespace SysAgropec.Models
         public int Lote_ID { get; set; }
         public int Usuario_IDCadastro { get; set; }
         public Nullable<int> Usuario_IDAlteracao { get; set; }
+        public Nullable<sbyte> Estocado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Aplicacao_Medicamento> Aplicacao_Medicamento { get; set; }

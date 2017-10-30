@@ -39,3 +39,12 @@ var Alterar = function (id) {
     })
 
 }
+
+function AddToEstoque(id, medicamento) {
+
+    document.getElementById('medicamentoDescri').innerHTML = medicamento + " ...";
+    document.getElementById('Medicamento_ID').value = id;
+    $("#modalAddEstoque").modal('show');
+
+    
+}

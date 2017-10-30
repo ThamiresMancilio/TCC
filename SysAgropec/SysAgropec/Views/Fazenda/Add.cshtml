@@ -6,8 +6,7 @@
 }
 
 
-@Styles.Render("~/bundles/fileinput")
-@Scripts.Render("~/bundles/jquery-fileinput")
+@Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/Fazenda")
 
 
@@ -84,8 +83,8 @@
 
                 //@Html.TextBoxFor(model => model.Logo, new { @class="file", type="file", accept=".jpg,.gif,.png"})
                 
-                <input type="file" accept=".jpg,.gif,.png" class="file" id="Logo" name="Logo" />
 
+                <input type="file" id="imagem" class="form-control" accept=".jpg,.gif,.png">
                 <br><br>
                 <div class="form-group">
                     <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Incluir</button>
@@ -96,33 +95,3 @@
     </div>
 </div>
 
-<script type="text/javascript">
-
-    $(".file").fileinput({
-        language: "pt-BR",
-        uploadUrl: "UploadImage",
-        allowedFileExtensions: ['jpg', 'png', 'gif'],
-        overwriteInitial: false,
-        maxFileSize: 1000,
-        showUpload: false,
-        browseClass: "btn btn-primary btn-lg",
-        fileType: "any",
-        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-        showCaption: false,
-        maxFilesNum: 1,
-        showPreview: true,
-        allowedFileTypes: ['image'],
-        slugCallback: function (filename) {
-            return filename.replace('(', '_').replace(']', '_');
-        }
-
-
-    }).on("filebatchselected", function (event, files) {
-
-        $(".file").fileinput("upload");
-
-    });
-
-
-
-</script>

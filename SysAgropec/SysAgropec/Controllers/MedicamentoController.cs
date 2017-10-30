@@ -4,104 +4,205 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SysAgropec.Models;
+using System.Web.Routing;
 
 namespace SysAgropec.Controllers
 {
     public class MedicamentoController : Controller
     {
-        // GET: Medicamento
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult Add()
         {
-            sysagropecConnection db = new sysagropecConnection();
-            List<Lote> list = db.Lote.ToList();
-            ViewBag.LoteList = new SelectList(list, "ID", "Numerolote");
-            
-            return View();
+            if (Session["iduser"] != null)
+            {
+                sysagropecConnection db = new sysagropecConnection();
+
+                List<Lote> list = db.Lote.ToList();
+                ViewBag.LoteList = new SelectList(list, "ID", "Numerolote");
+
+                return View();
+            }else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
         }
 
         public ActionResult Edit(int ID)
         {
-            sysagropecConnection db = new sysagropecConnection();
-            List<Lote> list = db.Lote.ToList();
-            ViewBag.LoteList = new SelectList(list, "ID", "Numerolote");
 
-            MedicamentoViewModel l = new MedicamentoViewModel();
+            if (Session["loginuser"] != null)
+            {
+                sysagropecConnection db = new sysagropecConnection();
 
-            return PartialView("PartialView", l.BuscaMedicamento(ID));
+                List<Lote> list = db.Lote.ToList();
+                ViewBag.LoteList = new SelectList(list, "ID", "Numerolote");
+
+                MedicamentoViewModel l = new MedicamentoViewModel();
+
+                return PartialView("PartialView", l.BuscaMedicamento(ID));
+
+            }else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
         }
 
         public ActionResult Update(Models.Medicamento m)
         {
+            if (Session["loginuser"] != null)
+            {
 
-            MedicamentoViewModel medicamento = new MedicamentoViewModel();
+                MedicamentoViewModel medicamento = new MedicamentoViewModel();
 
-            m.Usuario_IDAlteracao = 1;  //Session["iduser"];
-            m.Datalteracao = DateTime.Now;
-            
-            medicamento.AtualizaMedicamento(m);
+                m.Usuario_IDAlteracao = Convert.ToInt16(Session["iduser"]);
+                m.Datalteracao = DateTime.Now;
 
-            return RedirectToAction("List");
+                medicamento.AtualizaMedicamento(m);
+
+                return RedirectToAction("List");
+
+            }else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
+        }
+
+
+
+        public ActionResult AddDadosEstoque(Estoque_MedicamentoViewModel e) {
+
+            if (Session["loginuser"] != null)
+            {
+
+                try
+                {
+                    sysagropecConnection db = new sysagropecConnection();
+
+                    Estoque_Medicamento eM = new Estoque_Medicamento();
+
+
+                    eM.Usuario_IDAlteracao = null;
+                    eM.Medicamento_ID = e.Medicamento_ID;
+                    eM.Quantidadeatual = e.Quantidadeatual;
+                    eM.Quantidademinima = e.Quantidademinima;
+                    eM.Quantidademaxima = e.Quantidademaxima;
+
+
+                    db.Estoque_Medicamento.Add(eM);
+                    db.SaveChanges();
+
+                    int latestEmpId = eM.ID;
+
+                    return RedirectToAction("List");
+                }
+
+                catch (Exception ex)
+                {
+                    throw ex;
+
+                }
+
+            }else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
         }
 
         [HttpPost]
         public ActionResult Insert(MedicamentoViewModel model)
         {
 
-            try
+            if (Session["loginuser"] != null)
             {
-                sysagropecConnection db = new sysagropecConnection();
 
-                List<Lote> list = db.Lote.ToList();
+                try
+                {
+                    sysagropecConnection db = new sysagropecConnection();
 
-                ViewBag.LoteList = new SelectList(list, "ID", "Numerolote");
+                    List<Lote> list = db.Lote.ToList();
 
-                Medicamento emp = new Medicamento();
+                    ViewBag.LoteList = new SelectList(list, "ID", "Numerolote");
+
+                    Medicamento emp = new Medicamento();
 
 
-                emp.Usuario_IDAlteracao = null;
-                emp.Datalteracao = null;
-                emp.Carencialeite = model.Carencialeite;
-                emp.Datacadastro = DateTime.Now;
-                emp.Descricao = model.Descricao;
-                emp.Lote_ID = model.Lote_ID;
-                emp.Nome = model.Nome;
-                emp.Usuario_IDCadastro = 1;
+                    emp.Usuario_IDAlteracao = null;
+                    emp.Datalteracao = null;
+                    emp.Carencialeite = model.Carencialeite;
+                    emp.Datacadastro = DateTime.Now;
+                    emp.Descricao = model.Descricao;
+                    emp.Lote_ID = model.Lote_ID;
+                    emp.Nome = model.Nome;
+                    emp.Usuario_IDCadastro = Convert.ToInt16(Session["iduser"]);
+                    
+                    db.Medicamento.Add(emp);
+                    db.SaveChanges();
 
-                db.Medicamento.Add(emp);
-                db.SaveChanges();
+                    int latestEmpId = emp.ID;
 
-                int latestEmpId = emp.ID;
+                    return RedirectToAction("List");
+                }
 
-                return RedirectToAction("List");
-            }
+                catch (Exception ex)
+                {
+                    throw ex;
 
-            catch (Exception ex)
+                }
+
+            }else
             {
-                throw ex;
-
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
             }
-            
         }
         [HttpGet]
         public ActionResult List()
         {
-            {
+            if(Session["loginuser"]!=null){
 
                 MedicamentoViewModel m = new MedicamentoViewModel();
 
                 return View(m.CarregaMedicamento());
+
+            } else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
             }
         }
 
         [HttpPost]
         public ActionResult ListWithParameters()
         {
-            {
+            if(Session["loginuser"]!=null){
+
                 string descricao = Request.Form["descricao"];
 
                 
@@ -116,6 +217,15 @@ namespace SysAgropec.Controllers
 
                 
                 return View("List");
+
+            } else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
             }
         }
 

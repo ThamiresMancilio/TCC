@@ -51,6 +51,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.12\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Json, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c6752e45808247c2, processorArchitecture=MSIL">
       <HintPath>..\packages\JSON.1.0.1\lib\net40\Json.dll</HintPath>
     </Reference>
@@ -177,9 +180,12 @@
     <Compile Include="Class\Medicamento.cs" />
     <Compile Include="Class\Propriedade.cs" />
     <Compile Include="Class\Raca.cs" />
+    <Compile Include="Class\Relatorio.cs" />
+    <Compile Include="Class\RelatorioHelper.cs" />
     <Compile Include="Class\Upload_Image.cs" />
     <Compile Include="Class\Usuario.cs" />
     <Compile Include="Controllers\Aplicacao_MedicamentoController.cs" />
+    <Compile Include="Controllers\EstoqueController.cs" />
     <Compile Include="Controllers\FazendaController.cs" />
     <Compile Include="Controllers\GraficoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -187,6 +193,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LoteController.cs" />
     <Compile Include="Controllers\MedicamentoController.cs" />
+    <Compile Include="Controllers\ProducaoController.cs" />
     <Compile Include="Controllers\RacaController.cs" />
     <Compile Include="Controllers\RebanhoController.cs" />
     <Compile Include="Controllers\RelatorioController.cs" />
@@ -195,16 +202,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AnimaisProducao.cs" />
     <Compile Include="Models\Animal.cs">
       <DependentUpon>Sysagropec.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AnimalViewModel.cs" />
+    <Compile Include="Models\AplicacaoMedicamentoViewModel.cs" />
     <Compile Include="Models\Aplicacao_Medicamento.cs">
       <DependentUpon>Sysagropec.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Estoque_Medicamento.cs">
       <DependentUpon>Sysagropec.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Estoque_MedicamentoViewModel.cs" />
+    <Compile Include="Models\FazendasAdmin.cs" />
     <Compile Include="Models\FazendaViewModel.cs" />
     <Compile Include="Models\Livro.cs">
       <DependentUpon>Sysagropec.tt</DependentUpon>
@@ -221,6 +232,7 @@
     <Compile Include="Models\Producao.cs">
       <DependentUpon>Sysagropec.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProducaoViewModel.cs" />
     <Compile Include="Models\Propriedade.cs">
       <DependentUpon>Sysagropec.tt</DependentUpon>
     </Compile>
@@ -246,6 +258,7 @@
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>Sysagropec.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UsuarioViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -254,6 +267,8 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Images\vaca.jpg" />
     <Content Include="Images\vacaicone.png" />
+    <Content Include="img\loading-sm.gif" />
+    <Content Include="img\loading.gif" />
     <Content Include="Models\Sysagropec.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Sysagropec.edmx</DependentUpon>
@@ -266,6 +281,8 @@
     </Content>
     <Content Include="Scripts\common-scripts.js" />
     <Content Include="Scripts\Dados\Animal.js" />
+    <Content Include="Scripts\Dados\Aplicacao.js" />
+    <Content Include="Scripts\Dados\Estoque.js" />
     <Content Include="Scripts\Dados\Fazenda.js" />
     <Content Include="Scripts\Dados\Livro.js" />
     <Content Include="Scripts\Dados\Lote.js" />
@@ -291,6 +308,7 @@
     <Content Include="Scripts\jquery.nicescroll.js" />
     <Content Include="Scripts\jquery.scrollTo.min.js" />
     <Content Include="Scripts\jquery.sparkline.js" />
+    <Content Include="Scripts\JqueryMask.js" />
     <Content Include="Scripts\locales\ar.js" />
     <Content Include="Scripts\locales\bg.js" />
     <Content Include="Scripts\locales\ca.js" />
@@ -388,6 +406,8 @@
     <Content Include="Styles\style-login.css" />
     <Content Include="Styles\style-responsive.css" />
     <Content Include="Styles\style.css" />
+    <Content Include="upload_images\jersey-logo.jpg" />
+    <Content Include="upload_images\logo-fazenda.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -429,14 +449,20 @@
     <Content Include="Views\Raca\PartialView.cshtml" />
     <Content Include="Views\Lote\PartialView.cshtml" />
     <Content Include="Views\Medicamento\PartialView.cshtml" />
+    <Content Include="Views\Rebanho\PartialView.cshtml" />
+    <Content Include="Views\Producao\Add.cshtml" />
+    <Content Include="Views\Producao\PartialView.cshtml" />
+    <Content Include="Views\Estoque\Stock.cshtml" />
+    <Content Include="Views\Aplicacao_Medicamento\Add.cshtml" />
+    <Content Include="Views\Aplicacao_Medicamento\List.cshtml" />
+    <Content Include="Views\Producao\List.cshtml" />
+    <Content Include="Views\Grafico\Show.cshtml" />
+    <Content Include="Views\Relatorio\ProducaoTOP.cshtml" />
+    <Content Include="Views\Relatorio\Animais.cshtml" />
+    <Content Include="Views\Relatorio\Estoque.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="tmp_images\" />
-    <Folder Include="upload_images\" />
-    <Folder Include="Views\Aplicacao_Medicamento\" />
-    <Folder Include="Views\Grafico\" />
-    <Folder Include="Views\Producao\" />
-    <Folder Include="Views\Relatorio\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

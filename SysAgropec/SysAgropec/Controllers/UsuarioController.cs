@@ -12,12 +12,6 @@ namespace SysAgropec.Controllers
 {
     public class UsuarioController : Controller
     {
-        // GET: Usuario
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         // GET: Rebanho
         public ActionResult Add()
         {
@@ -37,32 +31,12 @@ namespace SysAgropec.Controllers
         [HttpGet]
         public ActionResult List()
         {
-            {
-                string query = "Select * from livro order by descricao ";
-
-                DataTable dtLivro = new DataTable();
-
-                try
-                {
-                    MySqlConnection connection = new MySqlConnection(Banco.getConexao());
-                    connection.Open();
-                    MySqlDataAdapter sqlDa = new MySqlDataAdapter(query, connection);
-                    sqlDa.Fill(dtLivro);
-
-                    return View(dtLivro);
-
-                }
-                catch (MySqlException msg)
-                {
-                    Console.WriteLine(msg.Message);
-                }
-                return View();
-            }
+            return View();
         }
 
     
 
-        public ActionResult My_USer()
+        public ActionResult My_User()
         {
             return View();
         }

@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "Lista de Livros";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 @Styles.Render("~/bundles/paging")
@@ -14,8 +14,7 @@
             <h4 class="mb"><i class="fa fa-angle-right"></i> Filtros</h4>
     @using (Html.BeginForm("ListWithParameters", "Livro", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-inline" }))
         {
-           
-                <fieldset class="form-group">
+               <fieldset class="form-group">
                     <legend>Filtros de pesquisa</legend>
                     <div class="form-group">
                         <label for="descri">Descrição:</label>

@@ -331,7 +331,8 @@ ul.sidebar-menu li ul.sub li {
         }
 
     ul.sidebar-menu li ul.sub li.active a {
-        color: #68dff0;
+        color: white;
+        background: transparent;
         -webkit-transition: all 0.3s ease;
         -moz-transition: all 0.3s ease;
         -o-transition: all 0.3s ease;
