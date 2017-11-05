@@ -41,9 +41,42 @@ namespace SysAgropec.Controllers
 
                 ProducaoViewModel p = new ProducaoViewModel();
 
-                return View(p.CarregaProducoes());
+                return View(p.CarregaProducoes(null, null));
 
             }else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
+        }
+
+
+        [HttpPost]
+        public ActionResult ListWithParameters()
+        {
+            if (Session["loginuser"] != null)
+            {
+                ProducaoViewModel p = new ProducaoViewModel();
+
+                if (Request.Form["datIni"] != "" && Request.Form["datFin"] != "")
+                {
+
+                    DateTime dataInicial = Convert.ToDateTime(Request.Form["datIni"]);
+                    DateTime dataFinal = Convert.ToDateTime(Request.Form["datFin"]);
+                    
+                    return View("List", p.CarregaProducoes(dataInicial, dataFinal));
+                }
+                else
+                {
+                    return View("List", p.CarregaProducoes(null,null));
+                }
+                
+            }
+            else
             {
                 return RedirectToAction("Logar", new RouteValueDictionary(
                 new
@@ -60,7 +93,7 @@ namespace SysAgropec.Controllers
             {
                 try
                 {
-                    sysagropecConnection db = new sysagropecConnection();
+                    sysagropecEntities db = new sysagropecEntities();
 
                     Producao prod = new Producao();
                     

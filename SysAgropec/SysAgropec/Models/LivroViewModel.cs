@@ -24,7 +24,7 @@ namespace SysAgropec.Models
         public List<Livro> CarregaLivro(string desc ="")
         {
 
-            sysagropecConnection db = new sysagropecConnection();
+            sysagropecEntities db = new sysagropecEntities();
 
             
 
@@ -51,7 +51,7 @@ namespace SysAgropec.Models
             try
             {
 
-                sysagropecConnection db = new sysagropecConnection();
+                sysagropecEntities db = new sysagropecEntities();
 
                 Livro l = new Livro();
 
@@ -87,7 +87,7 @@ namespace SysAgropec.Models
                 try
                 {
 
-                    sysagropecConnection db = new sysagropecConnection();
+                    sysagropecEntities db = new sysagropecEntities();
 
                     Livro livroOLD = db.Livro.SingleOrDefault(l => l.ID == livro.ID);
 
@@ -113,7 +113,7 @@ namespace SysAgropec.Models
         public Livro BuscaLivro(int ID)
         {
 
-            sysagropecConnection db = new sysagropecConnection();
+            sysagropecEntities db = new sysagropecEntities();
 
             //Livro l = db.Livro.SingleOrDefault(x => (ID > 0) ? x.ID == ID : x.Descricao == livro);
 
@@ -136,8 +136,8 @@ namespace SysAgropec.Models
 
                 try
                 {
-                 
-                    sysagropecConnection db = new sysagropecConnection();
+
+                    sysagropecEntities db = new sysagropecEntities();
 
                     Livro livro = db.Livro.SingleOrDefault(l => l.ID == idLivro);
 

@@ -51,7 +51,7 @@
                             <td>
                                 <a href="#" class="btn btn-primary btn-xs" onclick="Alterar(@medicamento.ID)" title="Alterar Registro"><i class="fa fa-pencil"></i></a>
                                 <a href="#" class="btn btn-danger btn-xs" onclick="ConfirmaExclusao(@medicamento.ID, '@medicamento.Nome')" title="Excluir Registro"><i class="fa fa-trash-o "></i></a>
-                                @if(medicamento.Estocado == 0) { 
+                                @if(medicamento.Estocado == 0 || medicamento.Estocado == null) { 
                                 <a href="#" class="btn btn-primary btn-xs" onclick="AddToEstoque(@medicamento.ID, '@medicamento.Nome')" title="Enviar ao Estoque"><i class="fa fa-send"></i></a>
                                 }
                             </td>
@@ -166,12 +166,12 @@
                         {
 
                             <div class="form-group">
-                                <label for="descri">Quantidade:</label>
-                                <input type="number" class="form-control" id="Quantidadeatual" name="Quantidadeatual">
+                                <label for="descri">Quantidade atual:</label>
+                                <input type="number" class="form-control" style="width:75px" id="Quantidadeatual" name="Quantidadeatual">
                             </div>
                             <div class="form-group">
                                 <label for="descri">Quantidade mínima</label>
-                                <input type="number" class="form-control" id="Quantidademinima" name="Quantidademinima">
+                                <input type="number" class="form-control" style="width:75px" id="Quantidademinima" name="Quantidademinima">
                             </div>
                             
                             <input type="hidden" id="Medicamento_ID" name="Medicamento_ID" />

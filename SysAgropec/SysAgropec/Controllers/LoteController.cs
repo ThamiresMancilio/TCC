@@ -128,19 +128,13 @@ namespace SysAgropec.Controllers
         public ActionResult ListWithParameters()
         {
             if(Session["loginuser"]!=null){
+
                 string descricao = Request.Form["numerolote"];
 
-                if (!descricao.Equals(""))
-                {
-
                     LoteViewModel l = new LoteViewModel();
-
-
+                
                     return View("List", l.CarregaLote(descricao));
-                }
-
-
-                return View("List");
+                
             }else
             {
                 return RedirectToAction("Logar", new RouteValueDictionary(

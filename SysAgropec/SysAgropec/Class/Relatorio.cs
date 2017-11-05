@@ -5,6 +5,7 @@ using System.Web;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using SysAgropec.Class;
+using SysAgropec.Models;
 
 namespace SysAgropec.Class
 {
@@ -14,8 +15,7 @@ namespace SysAgropec.Class
         public override void MontaCorpoDados()
         {
             base.MontaCorpoDados();
-
-            #region Cabeçalho do Relatório
+            
             PdfPTable table = new PdfPTable(5);
             BaseColor preto = new BaseColor(0, 0, 0);
             BaseColor fundo = new BaseColor(200, 200, 200);
@@ -32,32 +32,136 @@ namespace SysAgropec.Class
             table.DefaultCell.BorderColorBottom = new BaseColor(255, 255, 255);
             table.DefaultCell.Padding = 10;
 
-            table.AddCell(getNewCell("Número", titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER, preto, fundo));
-            table.AddCell(getNewCell("Emissão", titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER, preto, fundo));
-            table.AddCell(getNewCell("Vencimento", titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER, preto, fundo));
-            table.AddCell(getNewCell("Valor", titulo, Element.ALIGN_RIGHT, 10, PdfPCell.BOTTOM_BORDER, preto, fundo));
-            table.AddCell(getNewCell("Saldo", titulo, Element.ALIGN_RIGHT, 10, PdfPCell.BOTTOM_BORDER, preto, fundo));
-            #endregion
+            
+            if (TipoRelatorio == 0) {
 
-            //var duplicatas = new DadosRelatorio().duplicatas;
-            //var clienteOld = string.Empty;
+                table.AddCell(getNewCell("Animal", titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER, preto, fundo));
+                table.AddCell(getNewCell("Registro", titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER, preto, fundo));
+                table.AddCell(getNewCell("Tatuagem", titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER, preto, fundo));
+                table.AddCell(getNewCell("Sexo", titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER, preto, fundo));
+                table.AddCell(getNewCell("Cadastrado Em:", titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER, preto, fundo));
 
-            //foreach (var d in duplicatas)
-            //{
-            //    if (d.cliente.RazaoSocial != clienteOld)
-            //    {
-            //        var cell = getNewCell(d.cliente.RazaoSocial, titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER);
-            //        cell.Colspan = 5;
-            //        table.AddCell(cell);
-            //        clienteOld = d.cliente.RazaoSocial;
-            //    }
 
-            //    table.AddCell(getNewCell(d.Numero, font, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER));
-            //    table.AddCell(getNewCell(d.Emissao.ToString("dd/MM/yyyy"), font, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER));
-            //    table.AddCell(getNewCell(d.Vencimento.ToString("dd/MM/yyyy"), font, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER));
-            //    table.AddCell(getNewCell(string.Format("{0:0.00}", d.Valor), font, Element.ALIGN_RIGHT, 5, PdfPCell.BOTTOM_BORDER));
-            //    table.AddCell(getNewCell(string.Format("{0:0.00}", d.Saldo), font, Element.ALIGN_RIGHT, 5, PdfPCell.BOTTOM_BORDER));
-            //}
+                AnimalViewModel a = new AnimalViewModel();
+
+                var animais = a.RelatorioAnimais(datIni, datFin);
+
+                var animalOLD = 0;
+
+                foreach(var an in animais)
+                {
+
+                    if (an.Raca_ID != animalOLD)
+                    {
+                        var cell = getNewCell("Raça: " + an.nomeraca, titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER);
+                        cell.Colspan = 5;
+                        table.AddCell(cell);
+                        animalOLD = an.Raca_ID;
+                    }
+
+                    table.AddCell(getNewCell(an.Descricao, font, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER));
+                    table.AddCell(getNewCell(an.Registro, font, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER));
+                    table.AddCell(getNewCell(an.Tatuagem, font, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER));
+                    table.AddCell(getNewCell(an.descriSexo, font, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER));
+                    table.AddCell(getNewCell(an.Datacadastro.ToString("dd/MM/yyyy"), font, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER));
+
+                }
+
+                var cell2 = getNewCell("Filtros de Pesquisa " + Filtros, titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER);
+                cell2.Colspan = 5;
+                table.AddCell(cell2);
+
+
+            }
+            else if(TipoRelatorio == 1)
+            {
+                table.AddCell(getNewCell("Medicamento", titulo, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER, preto, fundo));
+                table.AddCell(getNewCell("Qtd Mínima", titulo, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER, preto, fundo));
+                table.AddCell(getNewCell("Qtd Atual", titulo, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER, preto, fundo));
+                table.AddCell(getNewCell("Estocado Em:", titulo, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER, preto, fundo));
+                table.AddCell(getNewCell("", titulo, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER, preto, fundo));
+
+                Estoque_MedicamentoViewModel a = new Estoque_MedicamentoViewModel();
+
+                var es = a.RelatorioEstoque(datIni, datFin);
+                
+                foreach (var an in es)
+                {
+  
+                    table.AddCell(getNewCell(an.nomeMedicamento, font, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER));
+                    table.AddCell(getNewCell(Convert.ToString(an.Quantidademinima), font, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER));
+                    table.AddCell(getNewCell(Convert.ToString(an.Quantidadeatual), font, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER));
+                    table.AddCell(getNewCell(an.Data_Estocado.ToString("dd/MM/yyyy"), font, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER));
+                    table.AddCell(getNewCell("", font, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER));
+                    
+                }
+
+                var cell2 = getNewCell("Filtros de Pesquisa " + Filtros, titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER);
+                cell2.Colspan = 5;
+                table.AddCell(cell2);
+            }
+            else
+            {
+                table.AddCell(getNewCell("Data de Produção", titulo, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER, preto, fundo));
+                table.AddCell(getNewCell("Qtd (L)", titulo, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER, preto, fundo));
+                table.AddCell(getNewCell("Observação", titulo, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER, preto, fundo));
+                table.AddCell(getNewCell("", titulo, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER, preto, fundo));
+                table.AddCell(getNewCell("", titulo, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER, preto, fundo));
+
+                ProducaoViewModel prod = new ProducaoViewModel();
+
+                var prods = prod.RelatorioAnimais(datIni, datFin);
+
+                var prodOLD = 0;
+
+                double totalProduzido = 0;
+                int contador = 0;
+                foreach (var pr in prods)
+                {
+                    int quantidadeRegistros = prods.Count;
+                    contador++;
+
+                    if (pr.Animail_ID != prodOLD)
+                    {
+                        if (totalProduzido > 0)
+                        {
+                            var cell1 = getNewCell("Total produzido: " + totalProduzido, titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER);
+                            cell1.Colspan = 5;
+                            table.AddCell(cell1);
+
+                        }
+
+                        var cell = getNewCell("Animal: " + pr.nomeAnimal, titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER);
+                        cell.Colspan = 5;
+                        table.AddCell(cell);
+                        prodOLD = pr.Animail_ID;
+
+                        totalProduzido = 0;
+                    }
+
+                    table.AddCell(getNewCell(pr.Datarealizada.ToShortDateString(), font, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER));
+                    table.AddCell(getNewCell(Convert.ToString(pr.Quantidade), font, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER));
+                    table.AddCell(getNewCell(pr.Observacao, font, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER));
+                    table.AddCell(getNewCell("", font, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER));
+                    table.AddCell(getNewCell("", font, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER));
+                    totalProduzido = totalProduzido + pr.Quantidade;
+
+                    if (contador == quantidadeRegistros)
+                    {
+                        var cell1 = getNewCell("Total produzido: " + totalProduzido, titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER);
+                        cell1.Colspan = 5;
+                        table.AddCell(cell1);
+                    }
+
+                }
+
+                var cell2 = getNewCell("Filtros de Pesquisa " + Filtros, titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER);
+                cell2.Colspan = 5;
+                table.AddCell(cell2);
+                
+
+            }
+
 
             doc.Add(table);
         }

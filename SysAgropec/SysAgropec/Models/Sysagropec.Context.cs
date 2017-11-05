@@ -13,10 +13,10 @@ namespace SysAgropec.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class sysagropecConnection : DbContext
+    public partial class sysagropecEntities : DbContext
     {
-        public sysagropecConnection()
-            : base("name=sysagropecConnection")
+        public sysagropecEntities()
+            : base("name=sysagropecEntities")
         {
         }
     

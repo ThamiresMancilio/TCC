@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using SysAgropec.Class;
+using MySql.Data.MySqlClient;
 using SysAgropec.Models;
 using System;
 using System.Collections.Generic;
@@ -127,15 +126,11 @@ namespace SysAgropec.Controllers
 
                 string descricao = Request.Form["descricao"];
 
-                if (!descricao.Equals("")) {
-
-                    LivroViewModel l = new LivroViewModel();
-                    
-                    return View("List", l.CarregaLivro(descricao));
-                }
                 
-                return View("List");
+                LivroViewModel l = new LivroViewModel();
 
+                return View("List", l.CarregaLivro(descricao));
+               
             }else
             {
                 return RedirectToAction("Logar", new RouteValueDictionary(
@@ -172,4 +167,4 @@ namespace SysAgropec.Controllers
         }
 
     }
-}
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            

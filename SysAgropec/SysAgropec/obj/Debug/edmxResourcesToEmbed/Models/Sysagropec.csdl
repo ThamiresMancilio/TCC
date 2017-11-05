@@ -66,6 +66,7 @@
     <Property Name="Quantidadeatual" Type="Int32" />
     <Property Name="Medicamento_ID" Type="Int32" Nullable="false" />
     <Property Name="Usuario_IDAlteracao" Type="Int32" />
+    <Property Name="Data_Estocado" Type="DateTime" Nullable="false" />
     <NavigationProperty Name="Medicamento" Relationship="Self.fk_estoque_medicamentos_medicamento1" FromRole="Estoque_Medicamento" ToRole="Medicamento" />
     <NavigationProperty Name="Usuario" Relationship="Self.fk_estoque_medicamentos_usuarios1" FromRole="Estoque_Medicamento" ToRole="Usuario" />
   </EntityType>
@@ -116,12 +117,12 @@
     <Property Name="Lote_ID" Type="Int32" Nullable="false" />
     <Property Name="Usuario_IDCadastro" Type="Int32" Nullable="false" />
     <Property Name="Usuario_IDAlteracao" Type="Int32" />
+    <Property Name="Estocado" Type="SByte" />
     <NavigationProperty Name="Aplicacao_Medicamento" Relationship="Self.fk_aplicacao_medicamentos_medicamento1" FromRole="Medicamento" ToRole="Aplicacao_Medicamento" />
     <NavigationProperty Name="Estoque_Medicamento" Relationship="Self.fk_estoque_medicamentos_medicamento1" FromRole="Medicamento" ToRole="Estoque_Medicamento" />
     <NavigationProperty Name="Lote" Relationship="Self.fk_medicamento_lote_medicamentos1" FromRole="Medicamento" ToRole="Lote" />
     <NavigationProperty Name="Usuario" Relationship="Self.fk_medicamento_usuarios1" FromRole="Medicamento" ToRole="Usuario" />
     <NavigationProperty Name="Usuario1" Relationship="Self.fk_medicamento_usuarios2" FromRole="Medicamento" ToRole="Usuario" />
-    <Property Name="Estocado" Type="SByte" />
   </EntityType>
   <EntityType Name="Producao">
     <Key>
@@ -165,11 +166,14 @@
     <Property Name="Dataalteracao" Type="DateTime" />
     <Property Name="Usuario_IDCadastro" Type="Int32" Nullable="false" />
     <Property Name="Usuario_IDAlteracao" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Email2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Telefone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telefone2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Animal" Relationship="Self.fk_animais_propriedades1" FromRole="Propriedade" ToRole="Animal" />
     <NavigationProperty Name="Lote" Relationship="Self.fk_lote_medicamentos_propriedades1" FromRole="Propriedade" ToRole="Lote" />
     <NavigationProperty Name="Usuario" Relationship="Self.fk_propriedades_usuarios1" FromRole="Propriedade" ToRole="Usuario" />
     <NavigationProperty Name="Usuario1" Relationship="Self.fk_propriedades_usuarios2" FromRole="Propriedade" ToRole="Usuario" />
-    <NavigationProperty Name="Usuario2" Relationship="Self.Usuario_Propriedade" FromRole="Propriedade" ToRole="Usuario" />
   </EntityType>
   <EntityType Name="Raca">
     <Key>
@@ -181,10 +185,10 @@
     <Property Name="Datalteracao" Type="DateTime" />
     <Property Name="Usuario_IDCcadastro" Type="Int32" Nullable="false" />
     <Property Name="Usuario_IDAlteracao" Type="Int32" />
+    <Property Name="Excluido" Type="SByte" />
     <NavigationProperty Name="Animal" Relationship="Self.fk_animais_racas1" FromRole="Raca" ToRole="Animal" />
     <NavigationProperty Name="Usuario" Relationship="Self.fk_racas_usuarios1" FromRole="Raca" ToRole="Usuario" />
     <NavigationProperty Name="Usuario1" Relationship="Self.fk_racas_usuarios2" FromRole="Raca" ToRole="Usuario" />
-    <Property Name="Excluido" Type="SByte" />
   </EntityType>
   <EntityType Name="Usuario">
     <Key>
@@ -218,7 +222,6 @@
     <NavigationProperty Name="Propriedade1" Relationship="Self.fk_propriedades_usuarios2" FromRole="Usuario" ToRole="Propriedade" />
     <NavigationProperty Name="Raca" Relationship="Self.fk_racas_usuarios1" FromRole="Usuario" ToRole="Raca" />
     <NavigationProperty Name="Raca1" Relationship="Self.fk_racas_usuarios2" FromRole="Usuario" ToRole="Raca" />
-    <NavigationProperty Name="Propriedade2" Relationship="Self.Usuario_Propriedade" FromRole="Usuario" ToRole="Propriedade" />
   </EntityType>
   <Association Name="fk_animais_livro1">
     <End Role="Livro" Type="Self.Livro" Multiplicity="1" />
@@ -544,11 +547,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="Usuario_Propriedade">
-    <End Role="Propriedade" Type="Self.Propriedade" Multiplicity="*" />
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
-  </Association>
-  <EntityContainer Name="sysagropecConnection" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="sysagropecEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Animal" EntityType="Self.Animal" />
     <EntitySet Name="Aplicacao_Medicamento" EntityType="Self.Aplicacao_Medicamento" />
     <EntitySet Name="Estoque_Medicamento" EntityType="Self.Estoque_Medicamento" />
@@ -666,10 +665,6 @@
     <AssociationSet Name="fk_racas_usuarios2" Association="Self.fk_racas_usuarios2">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Raca" EntitySet="Raca" />
-    </AssociationSet>
-    <AssociationSet Name="Usuario_Propriedade" Association="Self.Usuario_Propriedade">
-      <End Role="Propriedade" EntitySet="Propriedade" />
-      <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

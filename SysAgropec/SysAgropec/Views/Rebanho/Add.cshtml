@@ -37,9 +37,10 @@
                         @Html.TextBoxFor(model => model.Datanascimento, new { @class = "form-control", type = "date" })
                        
                     </div>
+
                     <div class="form-group">
                         <label for="exampleInputPassword2">Sexo: </label>
-                        <select class="form-control" name="Sexo" id="Sexo" onchange="onSexoChange()">
+                        <select class="form-control" name="Sexo" id="Sexo">
                             <option value="0">Macho</option>
                             <option value="1">Fêmea</option>
                         </select>
@@ -55,13 +56,14 @@
                     </div>
                     <div class="form-group">
                         <label class="checkbox-inline">
-                            <input type="checkbox" id="morto" name="morto"> Morto
+                            
+                            <input type="checkbox" id="Morto" name="Morto"> Morto
                         </label>
                     </div>
                     <div class="form-group">
                         <label class="checkbox-inline">
                            
-                            <input type="checkbox" id="lactacao" name="lactacao"> Lactação
+                            <input type="checkbox" id="Lactacao" name="Lactacao"> Lactação
                         </label>
                     </div>
                     <br /><br />

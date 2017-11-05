@@ -19,7 +19,6 @@ namespace SysAgropec.Models
         {
             this.Animal = new HashSet<Animal>();
             this.Lote = new HashSet<Lote>();
-            this.Usuario2 = new HashSet<Usuario>();
         }
     
         public int ID { get; set; }
@@ -40,6 +39,10 @@ namespace SysAgropec.Models
         public Nullable<System.DateTime> Dataalteracao { get; set; }
         public int Usuario_IDCadastro { get; set; }
         public Nullable<int> Usuario_IDAlteracao { get; set; }
+        public string Email { get; set; }
+        public string Email2 { get; set; }
+        public string Telefone { get; set; }
+        public string Telefone2 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Animal> Animal { get; set; }
@@ -47,7 +50,5 @@ namespace SysAgropec.Models
         public virtual ICollection<Lote> Lote { get; set; }
         public virtual Usuario Usuario { get; set; }
         public virtual Usuario Usuario1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario> Usuario2 { get; set; }
     }
 }

@@ -24,6 +24,11 @@ namespace SysAgropec.Models
         public string Logo { get; set; }
         public System.DateTime Datacadastro { get; set; }
         public Nullable<System.DateTime> Dataalteracao { get; set; }
+        public string email { get; set; }
+        public string email2 { get; set; }
+        public string telefone { get; set; }
+        public string telefone2 { get; set; }
+
         public int Usuario_IDCadastro { get; set; }
         public Nullable<int> Usuario_IDAlteracao { get; set; }
 
@@ -31,7 +36,7 @@ namespace SysAgropec.Models
         public List<Propriedade> CarregaFazenda()
         {
 
-            sysagropecConnection db = new sysagropecConnection();
+            sysagropecEntities db = new sysagropecEntities();
 
 
 
@@ -45,7 +50,7 @@ namespace SysAgropec.Models
         public Propriedade BuscaFazenda(int ID)
         {
 
-            sysagropecConnection db = new sysagropecConnection();
+            sysagropecEntities db = new sysagropecEntities();
 
            
 
@@ -63,7 +68,7 @@ namespace SysAgropec.Models
         public List<FazendaViewModel> CarregaFazendas()
         {
 
-            sysagropecConnection db = new sysagropecConnection();
+            sysagropecEntities db = new sysagropecEntities();
 
             List<Propriedade> fazendas = db.Propriedade.ToList();
 
@@ -90,7 +95,7 @@ namespace SysAgropec.Models
             try
             {
 
-                sysagropecConnection db = new sysagropecConnection();
+                sysagropecEntities db = new sysagropecEntities();
 
                 Propriedade f = new Propriedade();
 
@@ -111,9 +116,11 @@ namespace SysAgropec.Models
                 f.Razaosocial = fazenda.Razaosocial;
                 f.Usuario_IDAlteracao = fazenda.Usuario_IDAlteracao;
                 f.Usuario_IDCadastro = fazenda.Usuario_IDCadastro;
-
-
-
+                f.Email = fazenda.email;
+                f.Email2 = fazenda.email2;
+                f.Telefone = fazenda.telefone;
+                f.Telefone2 = fazenda.telefone2;
+                
                 db.Propriedade.Add(f);
                 db.SaveChanges();
 
@@ -139,7 +146,7 @@ namespace SysAgropec.Models
                 try
                 {
 
-                    sysagropecConnection db = new sysagropecConnection();
+                    sysagropecEntities db = new sysagropecEntities();
 
                     Propriedade f = db.Propriedade.SingleOrDefault(l => l.ID == fazenda.ID);
 
@@ -159,7 +166,10 @@ namespace SysAgropec.Models
                     f.Numero = fazenda.Numero;
                     f.Razaosocial = fazenda.Razaosocial;
                     f.Usuario_IDAlteracao = fazenda.Usuario_IDAlteracao;
-                    
+                    f.Email = fazenda.Email;
+                    f.Email2 = fazenda.Email2;
+                    f.Telefone = fazenda.Telefone;
+                    f.Telefone2 = fazenda.Telefone2;
 
                     db.SaveChanges();
 

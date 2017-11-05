@@ -22,10 +22,8 @@ namespace SysAgropec.Models
         public List<Lote> CarregaLote(string desc = "")
         {
 
-            sysagropecConnection db = new sysagropecConnection();
-
-
-
+            sysagropecEntities db = new sysagropecEntities();
+            
             List<Lote> lotes = new List<Lote>();
 
             if (!desc.Equals(""))
@@ -37,9 +35,7 @@ namespace SysAgropec.Models
 
                 lotes = db.Lote.ToList();
             }
-
-
-
+            
             return lotes;
         }
 
@@ -50,7 +46,7 @@ namespace SysAgropec.Models
             try
             {
 
-                sysagropecConnection db = new sysagropecConnection();
+                sysagropecEntities db = new sysagropecEntities();
 
                 Lote l = new Lote();
 
@@ -94,7 +90,7 @@ namespace SysAgropec.Models
                 try
                 {
 
-                    sysagropecConnection db = new sysagropecConnection();
+                    sysagropecEntities db = new sysagropecEntities();
 
                     Lote loteOLD = db.Lote.SingleOrDefault(l => l.ID == lote.ID);
 
@@ -124,7 +120,7 @@ namespace SysAgropec.Models
         public Lote BuscaLote(int ID)
         {
 
-            sysagropecConnection db = new sysagropecConnection();
+            sysagropecEntities db = new sysagropecEntities();
 
             Lote l = db.Lote.SingleOrDefault(x => x.ID == ID);
 
@@ -147,7 +143,7 @@ namespace SysAgropec.Models
                 try
                 {
 
-                    sysagropecConnection db = new sysagropecConnection();
+                    sysagropecEntities db = new sysagropecEntities();
 
                     Lote lote = db.Lote.SingleOrDefault(l => l.ID == idLote);
 

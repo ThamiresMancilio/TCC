@@ -24,12 +24,22 @@ namespace SysAgropec.Models
         public List<MedicamentoViewModel> CarregaMedicamento(string desc = "")
         {
 
-            sysagropecConnection db = new sysagropecConnection();
+            sysagropecEntities db = new sysagropecEntities();
 
 
 
-            List<Medicamento> medicamentos = db.Medicamento.ToList();
+            List<Medicamento> medicamentos;
 
+
+            if (!desc.Equals("")) {
+
+                medicamentos = db.Medicamento.Where(x => x.Nome == desc).ToList();
+
+            } else {
+
+                medicamentos = db.Medicamento.ToList();
+            }
+            
             MedicamentoViewModel m = new MedicamentoViewModel();
 
             List<MedicamentoViewModel> medicamentoVMList = medicamentos.Select(
@@ -59,7 +69,7 @@ namespace SysAgropec.Models
             try
             {
 
-                sysagropecConnection db = new sysagropecConnection();
+                sysagropecEntities db = new sysagropecEntities();
 
                 Medicamento m = new Medicamento();
 
@@ -97,7 +107,7 @@ namespace SysAgropec.Models
                 try
                 {
 
-                    sysagropecConnection db = new sysagropecConnection();
+                    sysagropecEntities db = new sysagropecEntities();
 
                     Medicamento medicamentoOLD = db.Medicamento.SingleOrDefault(l => l.ID == medicamento.ID);
 
@@ -121,11 +131,39 @@ namespace SysAgropec.Models
             }
         }
 
+        public void EstocaMedicamento(int id)
+        {
+
+            if (id > 0)
+            {
+
+                try
+                {
+
+                    sysagropecEntities db = new sysagropecEntities();
+
+                    Medicamento medicamentoOLD = db.Medicamento.SingleOrDefault(l => l.ID == id);
+
+                    medicamentoOLD.Estocado = 1;
+
+                    db.SaveChanges();
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+
+            }
+        }
+
 
         public Medicamento BuscaMedicamento(int ID)
         {
 
-            sysagropecConnection db = new sysagropecConnection();
+            sysagropecEntities db = new sysagropecEntities();
             
             Medicamento m = db.Medicamento.SingleOrDefault(x => x.ID == ID);
 
@@ -147,7 +185,7 @@ namespace SysAgropec.Models
                 try
                 {
 
-                    sysagropecConnection db = new sysagropecConnection();
+                    sysagropecEntities db = new sysagropecEntities();
 
                     Medicamento medicamento = db.Medicamento.SingleOrDefault(l => l.ID == idMedicamento);
 

@@ -18,7 +18,7 @@
             <thead>
             <th>Medicamento</th>
             <th>Qtd atual</th>
-            <th>Opções</th>
+            @*<th>Opções</th>*@
 
             </thead>
             <tbody>
@@ -29,9 +29,9 @@
                         <tr class="line" id="row_@estoque.ID">
                             <td>@estoque.nomeMedicamento</td>
                             <td>@estoque.Quantidadeatual</td>
-                            <td>
+                            @*<td>
                                 <a href="#" class="btn btn-danger btn-xs" onclick="ConfirmaExclusao(@estoque.ID, '@estoque.Medicamento_ID')" title="Excluir Registro"><i class="fa fa-trash-o "></i></a>
-                            </td>
+                            </td>*@
 
                         </tr>}
             }

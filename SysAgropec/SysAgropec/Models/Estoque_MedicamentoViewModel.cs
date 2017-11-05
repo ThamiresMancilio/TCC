@@ -18,10 +18,12 @@ namespace SysAgropec.Models
         public virtual Medicamento Medicamento { get; set; }
         public virtual Usuario Usuario { get; set; }
 
+        public DateTime Data_Estocado { get; set; }
+
         public List<Estoque_MedicamentoViewModel> CarregaEstoque(string desc = "")
         {
 
-            sysagropecConnection db = new sysagropecConnection();
+            sysagropecEntities db = new sysagropecEntities();
 
 
 
@@ -48,6 +50,41 @@ namespace SysAgropec.Models
             return estoqueVMList;
         }
 
+        public List<Estoque_MedicamentoViewModel> RelatorioEstoque(DateTime dataEstI, DateTime dataEstF)
+        {
+
+            sysagropecEntities db = new sysagropecEntities();
+
+
+
+            List<Estoque_Medicamento> listaEstoque = db.Estoque_Medicamento.Where(
+                es => es.Data_Estocado >= dataEstI && es.Data_Estocado <= dataEstF).ToList();
+
+            //List<Estoque_Medicamento> listaEstoque = db.Estoque_Medicamento.ToList();
+
+
+            Estoque_MedicamentoViewModel e = new Estoque_MedicamentoViewModel();
+
+            List<Estoque_MedicamentoViewModel> estoqueVMList = listaEstoque.Select(
+                x => new Estoque_MedicamentoViewModel
+                {
+                    ID = x.ID,
+                    Quantidadeatual = x.Quantidadeatual,
+                    Usuario = x.Usuario,
+                    nomeMedicamento = x.Medicamento.Nome,
+                    Quantidademaxima = x.Quantidademaxima,
+                    Quantidademinima = x.Quantidademinima,
+                    Medicamento_ID = x.Medicamento_ID,
+                    Data_Estocado = x.Data_Estocado
+
+                }
+
+                ).ToList();
+
+
+            return estoqueVMList;
+        }
+
 
         public void AtualizaQuantidadeEstoque(int idMedicamento, int? quantidadeUtilizada = 0)
         {
@@ -58,7 +95,7 @@ namespace SysAgropec.Models
                 try
                 {
 
-                    sysagropecConnection db = new sysagropecConnection();
+                    sysagropecEntities db = new sysagropecEntities();
 
                     Estoque_Medicamento e = db.Estoque_Medicamento.SingleOrDefault(es => es.Medicamento_ID == idMedicamento);
 

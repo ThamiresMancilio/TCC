@@ -23,6 +23,13 @@ namespace SysAgropec.Class
         public bool ImprimirRodapePadrao { get; set; }
         public bool Paisagem { get; set; }
 
+        public int TipoRelatorio { get; set; }
+
+        public string Filtros { get; set; }
+        
+        public DateTime datIni { get; set; }
+        public DateTime datFin { get; set; }
+
         public RelatorioHelper()
         {
             InicializaVariaveis();
@@ -81,7 +88,7 @@ namespace SysAgropec.Class
             output = new MemoryStream();
             writer = PdfWriter.GetInstance(doc, output);
 
-            doc.AddAuthor("TNE - Treta Never Ends");
+            doc.AddAuthor("Teste");
             doc.AddTitle(PageTitle);
             doc.AddSubject(PageTitle);
 
@@ -131,6 +138,7 @@ namespace SysAgropec.Class
         public bool ImprimirCabecalhoPadrao { get; set; }
         public bool ImprimirRodapePadrao { get; set; }
 
+        
         public override void OnOpenDocument(PdfWriter writer, Document doc)
         {
             base.OnOpenDocument(writer, doc);
@@ -164,8 +172,8 @@ namespace SysAgropec.Class
                 table.TotalWidth = doc.PageSize.Width - (doc.LeftMargin + doc.RightMargin);
                 table.SetWidths(sizes);
 
-                #region Coluna TNE
-                Image foot = Image.GetInstance(BasePath + @"\Content\tne_mascote.png");
+                #region Coluna Logo
+                Image foot = Image.GetInstance(BasePath + @"\upload_images\logo-fazendarel.jpg");
                 foot.ScalePercent(60);
 
                 PdfPCell cell = new PdfPCell(foot);
@@ -176,17 +184,25 @@ namespace SysAgropec.Class
                 cell.PaddingTop = 10f;
                 table.AddCell(cell);
 
-                PdfPTable micros = new PdfPTable(1);
-                cell = new PdfPCell(new Phrase("TNE", negrito));
-                cell.Border = 0;
-                micros.AddCell(cell);
-                cell = new PdfPCell(new Phrase("Treta never ends", font));
-                cell.Border = 0;
-                micros.AddCell(cell);
-                cell = new PdfPCell(new Phrase("www.tretaneverends.com.br", font));
-                cell.Border = 0;
-                micros.AddCell(cell);
 
+                HttpContext httpContext = HttpContext.Current;
+                
+                string login = httpContext.ApplicationInstance.Session["loginuser"].ToString();
+                string fazenda = httpContext.ApplicationInstance.Session["fazenda"].ToString();
+                string email = httpContext.ApplicationInstance.Session["email"].ToString();
+
+
+                PdfPTable micros = new PdfPTable(1);
+                cell = new PdfPCell(new Phrase("Fazenda: " + fazenda, negrito));
+                cell.Border = 0;
+                micros.AddCell(cell);
+                cell = new PdfPCell(new Phrase(email , font));
+                cell.Border = 0;
+                micros.AddCell(cell);
+                cell = new PdfPCell(new Phrase("Usuário: " + login, font));
+                cell.Border = 0;
+                micros.AddCell(cell);
+                
                 cell = new PdfPCell(micros);
                 cell.HorizontalAlignment = Element.ALIGN_LEFT;
                 cell.Border = 0;
@@ -218,7 +234,7 @@ namespace SysAgropec.Class
             }
             #endregion 
         }
-
+        
         private void ImprimeCabecalho(PdfWriter writer, Document doc)
         {
             #region Dados do Cabeçalho
@@ -241,7 +257,7 @@ namespace SysAgropec.Class
                 }
                 else
                 {
-                    foot = Image.GetInstance(BasePath + @"\Content\tne_mascote.png");
+                    foot = Image.GetInstance(BasePath + @"\upload_images\logo-fazendarel.jpg");
                 }
                 foot.ScalePercent(60);
 

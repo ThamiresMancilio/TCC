@@ -20,6 +20,7 @@ namespace SysAgropec.Models
         public Nullable<int> Quantidadeatual { get; set; }
         public int Medicamento_ID { get; set; }
         public Nullable<int> Usuario_IDAlteracao { get; set; }
+        public System.DateTime Data_Estocado { get; set; }
     
         public virtual Medicamento Medicamento { get; set; }
         public virtual Usuario Usuario { get; set; }

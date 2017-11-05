@@ -14,7 +14,7 @@ namespace SysAgropec.Controllers
         {
             if (Session["iduser"] != null)
             {
-                sysagropecConnection db = new sysagropecConnection();
+                sysagropecEntities db = new sysagropecEntities();
 
                 List<Lote> list = db.Lote.ToList();
                 ViewBag.LoteList = new SelectList(list, "ID", "Numerolote");
@@ -36,7 +36,7 @@ namespace SysAgropec.Controllers
 
             if (Session["loginuser"] != null)
             {
-                sysagropecConnection db = new sysagropecConnection();
+                sysagropecEntities db = new sysagropecEntities();
 
                 List<Lote> list = db.Lote.ToList();
                 ViewBag.LoteList = new SelectList(list, "ID", "Numerolote");
@@ -90,7 +90,7 @@ namespace SysAgropec.Controllers
 
                 try
                 {
-                    sysagropecConnection db = new sysagropecConnection();
+                    sysagropecEntities db = new sysagropecEntities();
 
                     Estoque_Medicamento eM = new Estoque_Medicamento();
 
@@ -100,14 +100,29 @@ namespace SysAgropec.Controllers
                     eM.Quantidadeatual = e.Quantidadeatual;
                     eM.Quantidademinima = e.Quantidademinima;
                     eM.Quantidademaxima = e.Quantidademaxima;
-
+                    eM.Data_Estocado = DateTime.Now;
 
                     db.Estoque_Medicamento.Add(eM);
                     db.SaveChanges();
 
-                    int latestEmpId = eM.ID;
 
-                    return RedirectToAction("List");
+                    MedicamentoViewModel est = new MedicamentoViewModel();
+
+                    est.EstocaMedicamento(e.Medicamento_ID);
+
+                    List<Estoque_MedicamentoViewModel> lista;
+
+                    Estoque_MedicamentoViewModel es = new Estoque_MedicamentoViewModel();
+
+                    lista = es.CarregaEstoque();
+
+                    return RedirectToAction("Stock", new RouteValueDictionary(
+                new
+                {
+                    controller = "Estoque",
+                    action = "Stock",
+                    lista
+                }));
                 }
 
                 catch (Exception ex)
@@ -136,7 +151,7 @@ namespace SysAgropec.Controllers
 
                 try
                 {
-                    sysagropecConnection db = new sysagropecConnection();
+                    sysagropecEntities db = new sysagropecEntities();
 
                     List<Lote> list = db.Lote.ToList();
 
@@ -204,20 +219,11 @@ namespace SysAgropec.Controllers
             if(Session["loginuser"]!=null){
 
                 string descricao = Request.Form["descricao"];
+   
+                MedicamentoViewModel l = new MedicamentoViewModel();
 
+                return View("List", l.CarregaMedicamento(descricao));
                 
-                    if (!descricao.Equals(""))
-                    {
-
-                        MedicamentoViewModel l = new MedicamentoViewModel();
-
-
-                        return View("List", l.CarregaMedicamento(descricao));
-                    }
-
-                
-                return View("List");
-
             } else
             {
                 return RedirectToAction("Logar", new RouteValueDictionary(

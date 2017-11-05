@@ -32,7 +32,7 @@ namespace SysAgropec.Models
             try
             {
 
-                sysagropecConnection db = new sysagropecConnection();
+                sysagropecEntities db = new sysagropecEntities();
 
                 Aplicacao_Medicamento a = new Aplicacao_Medicamento();
                 
@@ -63,14 +63,22 @@ namespace SysAgropec.Models
         }
 
 
-        public List<AplicacaoMedicamentoViewModel> CarregaAplicacoes(string desc = "")
+        public List<AplicacaoMedicamentoViewModel> CarregaAplicacoes(DateTime? datIni, DateTime? datFin)
         {
 
-            sysagropecConnection db = new sysagropecConnection();
+            sysagropecEntities db = new sysagropecEntities();
+
+            List<Aplicacao_Medicamento> aplicacoes;
 
 
-
-            List<Aplicacao_Medicamento> aplicacoes = db.Aplicacao_Medicamento.ToList();
+            if(datIni != null && datFin != null)
+            {
+                aplicacoes = db.Aplicacao_Medicamento.Where(x => x.Dataplicacao <= datIni && x.Dataplicacao >= datFin).ToList();
+            }
+            else
+            {
+                aplicacoes = db.Aplicacao_Medicamento.ToList();
+            }
 
             AplicacaoMedicamentoViewModel m = new AplicacaoMedicamentoViewModel();
 

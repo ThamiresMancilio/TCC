@@ -21,7 +21,7 @@ namespace SysAgropec.Models
         public Usuario ValidaUsuario(string login, string senha)
         {
 
-            sysagropecConnection db = new sysagropecConnection();
+            sysagropecEntities db = new sysagropecEntities();
 
             
             
@@ -48,7 +48,7 @@ namespace SysAgropec.Models
             try
             {
 
-                sysagropecConnection db = new sysagropecConnection();
+                sysagropecEntities db = new sysagropecEntities();
 
                 Usuario m = new Usuario();
 
@@ -86,7 +86,7 @@ namespace SysAgropec.Models
                 try
                 {
 
-                    sysagropecConnection db = new sysagropecConnection();
+                    sysagropecEntities db = new sysagropecEntities();
 
                     Usuario usuario = db.Usuario.SingleOrDefault(u => u.ID ==id);
                     
@@ -117,7 +117,7 @@ namespace SysAgropec.Models
                 try
                 {
 
-                    sysagropecConnection db = new sysagropecConnection();
+                    sysagropecEntities db = new sysagropecEntities();
 
                     Usuario usuarioOLD = db.Usuario.SingleOrDefault(u => u.ID == usuario.ID);
 

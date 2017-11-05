@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-
+using SysAgropec.Models;
 namespace SysAgropec.Controllers
 {
     public class HomeController : Controller
@@ -15,6 +15,13 @@ namespace SysAgropec.Controllers
             {
                 int id = Convert.ToInt16(Request.Form["fazenda"]);
                 Session["idfazenda"] = id;
+
+                FazendaViewModel f = new FazendaViewModel();
+
+                Propriedade p = f.BuscaFazenda(id);
+
+                Session["fazenda"] = p.Razaosocial;
+                Session["email"] = p.Email;
 
                 return View();
             }else

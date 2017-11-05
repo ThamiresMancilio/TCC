@@ -21,12 +21,11 @@ namespace SysAgropec.Controllers
             if (Session["loginuser"] != null)
             {
 
-                sysagropecConnection db = new sysagropecConnection();
+                sysagropecEntities db = new sysagropecEntities();
 
                 List<Livro> listlivro = db.Livro.ToList();
                 ViewBag.LivroLista = new SelectList(listlivro, "ID", "Descricao");
-
-
+                
                 List<Raca> listraca = db.Raca.ToList();
                 ViewBag.RacaLista = new SelectList(listraca, "ID", "Descricao");
 
@@ -51,7 +50,7 @@ namespace SysAgropec.Controllers
 
                 AnimalViewModel a = new AnimalViewModel();
 
-                return View(a.CarregaAnimal());
+                return View(a.CarregaAnimal(-1, "", "",""));
 
             } else
             {
@@ -73,7 +72,7 @@ namespace SysAgropec.Controllers
 
                 try
                 {
-                    sysagropecConnection db = new sysagropecConnection();
+                    sysagropecEntities db = new sysagropecEntities();
 
                     List<Raca> listraca = db.Raca.ToList();
 
@@ -87,10 +86,39 @@ namespace SysAgropec.Controllers
 
                     a.Datacadastro = DateTime.Now;
 
+                    var m = Request.Form["Morto"];
+                    var l = Request.Form["lactacao"];
+                    var s = Request.Form["Sexo"];
+
+
                     a.Datalactacao = DateTime.Now;
-                    a.Dias_lactacao = 1;
+                    
+
+
                     a.Lactacao = 1;
 
+                    if (l == null)
+                    {
+                        a.Lactacao = 0;
+                        a.Dias_lactacao = 0;
+                    }
+                    else
+                    {
+                        a.Lactacao = 1;
+                        a.Dias_lactacao = 1;
+                    }
+
+
+                    if (m == null)
+                    {
+                        a.Morto = 0;
+                    }
+                    else
+                    {
+                        a.Morto = 1;
+                    }
+                     
+                    
                     a.Datanascimento = model.Datanascimento;
                     a.Descricao = model.Descricao;
                     a.Descricaomae = model.Descricaomae;
@@ -142,7 +170,7 @@ namespace SysAgropec.Controllers
             if (Session["loginuser"] != null)
             {
 
-                sysagropecConnection db = new sysagropecConnection();
+                sysagropecEntities db = new sysagropecEntities();
 
                 List<Raca> listraca = db.Raca.ToList();
                 ViewBag.RacaList = new SelectList(listraca, "ID", "Descricao");
@@ -180,6 +208,33 @@ namespace SysAgropec.Controllers
                 return RedirectToAction("List");
 
             } else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ListWithParameters()
+        {
+            if (Session["loginuser"] != null)
+            {
+                string registro = Request.Form["registro"];
+                string registro2 = Request.Form["registro2"];
+                string tatuagem = Request.Form["tatuagem"];
+                int sexo = Convert.ToInt16(Request.Form["Sexo"]);
+           
+
+                AnimalViewModel a = new AnimalViewModel();
+
+                return View("List", a.CarregaAnimal(sexo, registro, registro2, tatuagem));
+
+            }
+            else
             {
                 return RedirectToAction("Logar", new RouteValueDictionary(
                 new

@@ -55,6 +55,7 @@
     <Property Name="Quantidadeatual" Type="int" />
     <Property Name="Medicamento_ID" Type="int" Nullable="false" />
     <Property Name="Usuario_IDAlteracao" Type="int" />
+    <Property Name="Data_Estocado" Type="datetime" Precision="0" Nullable="false" />
   </EntityType>
   <EntityType Name="Livro">
     <Key>
@@ -136,6 +137,10 @@
     <Property Name="Dataalteracao" Type="datetime" Precision="0" />
     <Property Name="Usuario_IDCadastro" Type="int" Nullable="false" />
     <Property Name="Usuario_IDAlteracao" Type="int" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="Email2" Type="varchar" MaxLength="100" />
+    <Property Name="Telefone" Type="varchar" MaxLength="50" />
+    <Property Name="Telefone2" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Raca">
     <Key>
@@ -163,14 +168,6 @@
     <Property Name="Datalteracao" Type="datetime" Precision="0" />
     <Property Name="Dataultimoacesso" Type="datetime" Precision="0" />
     <Property Name="Excluido" Type="tinyint" />
-  </EntityType>
-  <EntityType Name="Usuario_Propriedade">
-    <Key>
-      <PropertyRef Name="Usuario_id" />
-      <PropertyRef Name="Propriedade_id" />
-    </Key>
-    <Property Name="Usuario_id" Type="int" Nullable="false" />
-    <Property Name="Propriedade_id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="fk_animais_livro1">
     <End Role="Livro" Type="Self.Livro" Multiplicity="1" />
@@ -496,30 +493,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="fk_usuarios_has_propriedades_propriedades1">
-    <End Role="Propriedade" Type="Self.Propriedade" Multiplicity="1" />
-    <End Role="Usuario_Propriedade" Type="Self.Usuario_Propriedade" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Propriedade">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Usuario_Propriedade">
-        <PropertyRef Name="Propriedade_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="fk_usuarios_has_propriedades_usuarios1">
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-    <End Role="Usuario_Propriedade" Type="Self.Usuario_Propriedade" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuario">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Usuario_Propriedade">
-        <PropertyRef Name="Usuario_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="sysagropecModelStoreContainer">
     <EntitySet Name="Animal" EntityType="Self.Animal" Schema="sysagropec" store:Type="Tables" />
     <EntitySet Name="Aplicacao_Medicamento" EntityType="Self.Aplicacao_Medicamento" Schema="sysagropec" store:Type="Tables" />
@@ -531,7 +504,6 @@
     <EntitySet Name="Propriedade" EntityType="Self.Propriedade" Schema="sysagropec" store:Type="Tables" />
     <EntitySet Name="Raca" EntityType="Self.Raca" Schema="sysagropec" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="sysagropec" store:Type="Tables" />
-    <EntitySet Name="Usuario_Propriedade" EntityType="Self.Usuario_Propriedade" Schema="sysagropec" store:Type="Tables" />
     <AssociationSet Name="fk_animais_livro1" Association="Self.fk_animais_livro1">
       <End Role="Livro" EntitySet="Livro" />
       <End Role="Animal" EntitySet="Animal" />
@@ -639,14 +611,6 @@
     <AssociationSet Name="fk_racas_usuarios2" Association="Self.fk_racas_usuarios2">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Raca" EntitySet="Raca" />
-    </AssociationSet>
-    <AssociationSet Name="fk_usuarios_has_propriedades_propriedades1" Association="Self.fk_usuarios_has_propriedades_propriedades1">
-      <End Role="Propriedade" EntitySet="Propriedade" />
-      <End Role="Usuario_Propriedade" EntitySet="Usuario_Propriedade" />
-    </AssociationSet>
-    <AssociationSet Name="fk_usuarios_has_propriedades_usuarios1" Association="Self.fk_usuarios_has_propriedades_usuarios1">
-      <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="Usuario_Propriedade" EntitySet="Usuario_Propriedade" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

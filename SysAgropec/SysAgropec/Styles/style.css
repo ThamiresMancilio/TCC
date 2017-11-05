@@ -1370,7 +1370,7 @@ PANELS CONFIGURATIONS
 
 /* Soptify Panel */
 #spotify {
-    background: url(../img/lorde.jpg) no-repeat center top;
+    /*background: url(../img/lorde.jpg) no-repeat center top;*/
     margin-top: -15px;
     background-attachment: relative;
     background-position: center center;
@@ -1397,7 +1397,8 @@ PANELS CONFIGURATIONS
         bottom: 15%;
         left: 25px;
         position: absolute;
-        color: #efefef;
+        /*color: #efefef;*/
+        color: #c2c2c2;
     }
 
         #spotify .sp-title h3 {

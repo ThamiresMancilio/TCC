@@ -21,13 +21,15 @@ namespace SysAgropec.Models
 
         public string nomeAnimal { get; set; }
 
+        public double totalQuantidade { get; set; }
+
         public int AdicionaProducao(ProducaoViewModel producao)
         {
 
             try
             {
 
-                sysagropecConnection db = new sysagropecConnection();
+                sysagropecEntities db = new sysagropecEntities();
 
                 Producao m = new Producao();
 
@@ -56,16 +58,56 @@ namespace SysAgropec.Models
 
 
         }
+        
+        public List<ProducaoViewModel> RelatorioAnimais(DateTime dataProdI, DateTime dataProdF)
+        {
+            sysagropecEntities db = new sysagropecEntities();
 
-        public List<ProducaoViewModel> CarregaProducoes(string desc = "")
+            List<Producao> prod = db.Producao.Where(x => x.Datarealizada >= dataProdI &&
+            x.Datarealizada <= dataProdF
+            ).OrderBy(x => x.Animail_ID).ToList();
+
+            //List<Producao> prod = db.Producao.OrderBy(x => x.Animail_ID).ThenBy(x => x.Datarealizada).ToList();
+
+            List<ProducaoViewModel> animalVMList = prod.Select(
+                x => new ProducaoViewModel
+                {
+                    ID = x.ID,
+                    Datarealizada = x.Datarealizada,
+                    nomeAnimal = x.Animal.Descricao,
+                    Animail_ID = x.Animail_ID,
+                    Usuario_IDProducao = x.Usuario_IDProducao,
+                    Quantidade = x.Quantidade,
+                    Observacao = x.Observacao
+                    
+
+                }
+
+                ).ToList();
+
+
+            return animalVMList;
+
+
+        }
+        public List<ProducaoViewModel> CarregaProducoes(DateTime? datIni, DateTime? datFin)
         {
 
-            sysagropecConnection db = new sysagropecConnection();
+            sysagropecEntities db = new sysagropecEntities();
 
+            List<Producao> producoes;
 
+            if (datFin != null && datIni != null)
+            {
 
-            List<Producao> producoes = db.Producao.ToList();
+               producoes = db.Producao.Where(x => x.Datarealizada <= datIni && x.Datarealizada >= datFin).ToList();
+            }
+            else
+            {
 
+                producoes = db.Producao.ToList();
+            }
+            
             MedicamentoViewModel m = new MedicamentoViewModel();
 
             List<ProducaoViewModel> producaoVMList = producoes.Select(

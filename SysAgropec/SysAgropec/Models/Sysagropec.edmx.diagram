@@ -4,17 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="82b3b3ff4846485ca3a280cdda094d8b" Name="Diagram1" ZoomLevel="54">
-        <EntityTypeShape EntityType="sysagropecModel.Animal" Width="1.5" PointX="5.25" PointY="22.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="sysagropecModel.Aplicacao_Medicamento" Width="1.5" PointX="12.75" PointY="20" IsExpanded="true" />
-        <EntityTypeShape EntityType="sysagropecModel.Estoque_Medicamento" Width="1.5" PointX="3" PointY="15.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="sysagropecModel.Livro" Width="1.5" PointX="3" PointY="22" IsExpanded="true" />
-        <EntityTypeShape EntityType="sysagropecModel.Lote" Width="1.5" PointX="8.25" PointY="22.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="sysagropecModel.Medicamento" Width="1.5" PointX="10.5" PointY="18.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="sysagropecModel.Producao" Width="1.5" PointX="7.5" PointY="17.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="sysagropecModel.Propriedade" Width="1.5" PointX="13.5" PointY="30.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="sysagropecModel.Raca" Width="1.5" PointX="3" PointY="36.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="sysagropecModel.Usuario" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
+      <Diagram DiagramId="2e0d15ff1f0745e4a9d5ec64b4820b29" Name="Diagram1" ZoomLevel="89">
+        <EntityTypeShape EntityType="sysagropecModel.Animal" Width="1.5" PointX="5.25" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sysagropecModel.Aplicacao_Medicamento" Width="1.5" PointX="7.5" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="sysagropecModel.Estoque_Medicamento" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="sysagropecModel.Livro" Width="1.5" PointX="3" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="sysagropecModel.Lote" Width="1.5" PointX="8.25" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="sysagropecModel.Medicamento" Width="1.5" PointX="13.5" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="sysagropecModel.Producao" Width="1.5" PointX="10.5" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sysagropecModel.Propriedade" Width="1.5" PointX="3" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="sysagropecModel.Raca" Width="1.5" PointX="3" PointY="30.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sysagropecModel.Usuario" Width="1.5" PointX="0.75" PointY="14.5" IsExpanded="true" />
         <AssociationConnector Association="sysagropecModel.fk_animais_livro1" ManuallyRouted="false" />
         <AssociationConnector Association="sysagropecModel.fk_animais_propriedades1" ManuallyRouted="false" />
         <AssociationConnector Association="sysagropecModel.fk_animais_racas1" ManuallyRouted="false" />
@@ -42,7 +42,6 @@
         <AssociationConnector Association="sysagropecModel.fk_propriedades_usuarios2" ManuallyRouted="false" />
         <AssociationConnector Association="sysagropecModel.fk_racas_usuarios1" ManuallyRouted="false" />
         <AssociationConnector Association="sysagropecModel.fk_racas_usuarios2" ManuallyRouted="false" />
-        <AssociationConnector Association="sysagropecModel.Usuario_Propriedade" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

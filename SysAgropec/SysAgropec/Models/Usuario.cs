@@ -35,7 +35,6 @@ namespace SysAgropec.Models
             this.Propriedade1 = new HashSet<Propriedade>();
             this.Raca = new HashSet<Raca>();
             this.Raca1 = new HashSet<Raca>();
-            this.Propriedade2 = new HashSet<Propriedade>();
         }
     
         public int ID { get; set; }
@@ -85,7 +84,5 @@ namespace SysAgropec.Models
         public virtual ICollection<Raca> Raca { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Raca> Raca1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Propriedade> Propriedade2 { get; set; }
     }
 }

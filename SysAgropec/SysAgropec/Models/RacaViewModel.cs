@@ -18,7 +18,7 @@ namespace SysAgropec.Models
         public List<Raca> CarregaRaca(string desc = "")
         {
 
-            sysagropecConnection db = new sysagropecConnection();
+            sysagropecEntities db = new sysagropecEntities();
 
 
 
@@ -46,7 +46,7 @@ namespace SysAgropec.Models
             try
             {
 
-                sysagropecConnection db = new sysagropecConnection();
+                sysagropecEntities db = new sysagropecEntities();
 
                 Raca r = new Raca();
 
@@ -82,7 +82,7 @@ namespace SysAgropec.Models
                 try
                 {
 
-                    sysagropecConnection db = new sysagropecConnection();
+                    sysagropecEntities db = new sysagropecEntities();
 
                     Raca racaOLD = db.Raca.SingleOrDefault(l => l.ID == raca.ID);
 
@@ -108,7 +108,7 @@ namespace SysAgropec.Models
         public Raca BuscaRaca(int ID)
         {
 
-            sysagropecConnection db = new sysagropecConnection();
+            sysagropecEntities db = new sysagropecEntities();
 
             Raca r = db.Raca.SingleOrDefault(x => x.ID == ID);
 
@@ -130,7 +130,7 @@ namespace SysAgropec.Models
                 try
                 {
 
-                    sysagropecConnection db = new sysagropecConnection();
+                    sysagropecEntities db = new sysagropecEntities();
 
                     Raca raca = db.Raca.SingleOrDefault(l => l.ID == idRaca);
 

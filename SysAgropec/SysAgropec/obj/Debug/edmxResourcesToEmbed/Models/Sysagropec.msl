@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="sysagropecModelStoreContainer" CdmEntityContainer="sysagropecConnection">
+  <EntityContainerMapping StorageEntityContainer="sysagropecModelStoreContainer" CdmEntityContainer="sysagropecEntities">
     <EntitySetMapping Name="Animal">
       <EntityTypeMapping TypeName="sysagropecModel.Animal">
         <MappingFragment StoreEntitySet="Animal">
@@ -57,6 +57,7 @@
           <ScalarProperty Name="Quantidadeatual" ColumnName="Quantidadeatual" />
           <ScalarProperty Name="Medicamento_ID" ColumnName="Medicamento_ID" />
           <ScalarProperty Name="Usuario_IDAlteracao" ColumnName="Usuario_IDAlteracao" />
+          <ScalarProperty Name="Data_Estocado" ColumnName="Data_Estocado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -92,7 +93,6 @@
     <EntitySetMapping Name="Medicamento">
       <EntityTypeMapping TypeName="sysagropecModel.Medicamento">
         <MappingFragment StoreEntitySet="Medicamento">
-          <ScalarProperty Name="Estocado" ColumnName="Estocado" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Nome" ColumnName="Nome" />
           <ScalarProperty Name="Descricao" ColumnName="Descricao" />
@@ -102,6 +102,7 @@
           <ScalarProperty Name="Lote_ID" ColumnName="Lote_ID" />
           <ScalarProperty Name="Usuario_IDCadastro" ColumnName="Usuario_IDCadastro" />
           <ScalarProperty Name="Usuario_IDAlteracao" ColumnName="Usuario_IDAlteracao" />
+          <ScalarProperty Name="Estocado" ColumnName="Estocado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -143,19 +144,23 @@
           <ScalarProperty Name="Dataalteracao" ColumnName="Dataalteracao" />
           <ScalarProperty Name="Usuario_IDCadastro" ColumnName="Usuario_IDCadastro" />
           <ScalarProperty Name="Usuario_IDAlteracao" ColumnName="Usuario_IDAlteracao" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Email2" ColumnName="Email2" />
+          <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+          <ScalarProperty Name="Telefone2" ColumnName="Telefone2" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Raca">
       <EntityTypeMapping TypeName="sysagropecModel.Raca">
         <MappingFragment StoreEntitySet="Raca">
-          <ScalarProperty Name="Excluido" ColumnName="Excluido" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Descricao" ColumnName="Descricao" />
           <ScalarProperty Name="Datacadastro" ColumnName="Datacadastro" />
           <ScalarProperty Name="Datalteracao" ColumnName="Datalteracao" />
           <ScalarProperty Name="Usuario_IDCcadastro" ColumnName="Usuario_IDCcadastro" />
           <ScalarProperty Name="Usuario_IDAlteracao" ColumnName="Usuario_IDAlteracao" />
+          <ScalarProperty Name="Excluido" ColumnName="Excluido" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -175,13 +180,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="Usuario_Propriedade" TypeName="sysagropecModel.Usuario_Propriedade" StoreEntitySet="Usuario_Propriedade">
-      <EndProperty Name="Propriedade">
-        <ScalarProperty Name="ID" ColumnName="Propriedade_id" />
-      </EndProperty>
-      <EndProperty Name="Usuario">
-        <ScalarProperty Name="ID" ColumnName="Usuario_id" />
-      </EndProperty>
-    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

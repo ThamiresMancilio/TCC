@@ -36,15 +36,61 @@ namespace SysAgropec.Models
         public string nomelivro { get; set; }
         public string nomeraca { get; set; }
 
+        public string descriSexo { get; set; }
+
         public List<AnimalViewModel> animaisList;
 
-        public List<AnimalViewModel> CarregaAnimal(string desc = "")
+        public List<AnimalViewModel> CarregaAnimal(int sexoP,string regIP = "", string regFP = "", string tatuagemP = "")
         {
 
-            sysagropecConnection db = new sysagropecConnection();
+            sysagropecEntities db = new sysagropecEntities();
 
-            List<Animal> animais = db.Animal.ToList();
+            List<Animal> animais;
 
+            if(sexoP >= 0)
+            {
+                animais = db.Animal.Where(x => x.Sexo ==sexoP).ToList();
+            }
+            else
+            {
+                animais = db.Animal.ToList();
+            }
+
+            
+            if(!regIP.Equals("") || !regFP.Equals("") || !tatuagemP.Equals(""))
+            {
+
+                for (int i =0; i<animais.Count; i++)
+                {
+                    if (!regIP.Equals(""))
+                    {
+                        if(Convert.ToInt64(animais[i].Registro) < Convert.ToInt64(regIP))
+                        {
+                            animais.RemoveAt(i);
+                        }
+                    }
+
+                    if (!regFP.Equals(""))
+                    {
+                        if (Convert.ToInt64(animais[i].Registro) > Convert.ToInt64(regFP))
+                        {
+                            animais.RemoveAt(i);
+                        }
+                    }
+
+                    if (!tatuagemP.Equals(""))
+                    {
+                        if (animais[i].Tatuagem != tatuagemP)
+                        {
+                            animais.RemoveAt(i);
+                        }
+                    }
+
+
+                }
+                
+            }
+            
             AnimalViewModel a = new AnimalViewModel();
 
             List<AnimalViewModel> animalVMList = animais.Select(
@@ -75,8 +121,9 @@ namespace SysAgropec.Models
                     Usuario_IDAlteracao = x.Usuario_IDAlteracao,
                     Usuario_IDCadastro = x.Usuario_IDCadastro,
                     nomelivro = x.Livro.Descricao,
-                    nomeraca = x.Raca.Descricao
-
+                    nomeraca = x.Raca.Descricao,
+                    descriSexo = x.Sexo == 1 ? "F" : "M"
+                    
                 }
 
                 ).ToList();
@@ -85,12 +132,54 @@ namespace SysAgropec.Models
             return animalVMList;
         }
 
+       
+
+        public List<AnimalViewModel> RelatorioAnimais(DateTime dataCadI, DateTime dataCadF)
+        {
+            sysagropecEntities db = new sysagropecEntities();
+
+            List<Animal> animaisrel = db.Animal.Where(x => x.Datacadastro >= dataCadI &&
+            x.Datacadastro <= dataCadF
+            ).OrderBy(x => x.Sexo).ThenBy(x => x.Raca_ID).ToList();
+
+            //List<Animal> animaisrel = db.Animal.OrderBy(x => x.Sexo).ThenBy(x => x.Raca_ID).ToList();
+
+
+
+            AnimalViewModel a = new AnimalViewModel();
+
+            List<AnimalViewModel> animalVMList = animaisrel.Select(
+                x => new AnimalViewModel
+                {
+                    ID = x.ID,
+                    Descricao = x.Descricao,
+                    Registro = x.Registro,
+                    nomelivro = x.Livro.Descricao,
+                    nomeraca = x.Raca.Descricao,
+                    Datanascimento = x.Datanascimento,
+                    Tatuagem = x.Tatuagem, 
+                    Numerobrinco = x.Numerobrinco,
+                    Raca_ID = x.Raca_ID,
+                    descriSexo = x.Sexo ==0 ? "M" : "F",
+                    Datacadastro = x.Datacadastro
+                    
+
+                }
+
+                ).ToList();
+
+
+            return animalVMList;
+
+
+        }
+
         public List<AnimalViewModel> CarregaMatrizes()
         {
 
-            sysagropecConnection db = new sysagropecConnection();
+            sysagropecEntities db = new sysagropecEntities();
 
-            List<Animal> animais = db.Animal.ToList();
+            List<Animal> animais = db.Animal.Where(x => x.Sexo ==1).ToList();
 
             AnimalViewModel a = new AnimalViewModel();
 
@@ -118,7 +207,7 @@ namespace SysAgropec.Models
                 try
                 {
 
-                    sysagropecConnection db = new sysagropecConnection();
+                    sysagropecEntities db = new sysagropecEntities();
 
                     Animal animalOLD = db.Animal.SingleOrDefault(l => l.ID == animal.ID);
 
@@ -161,7 +250,7 @@ namespace SysAgropec.Models
         public Animal BuscaAnimal(int ID)
         {
 
-            sysagropecConnection db = new sysagropecConnection();
+            sysagropecEntities db = new sysagropecEntities();
 
             Animal a = db.Animal.SingleOrDefault(x => x.ID == ID);
 
@@ -183,7 +272,7 @@ namespace SysAgropec.Models
                 try
                 {
 
-                    sysagropecConnection db = new sysagropecConnection();
+                    sysagropecEntities db = new sysagropecEntities();
 
                     Animal animal = db.Animal.SingleOrDefault(l => l.ID == idAnimal);
 

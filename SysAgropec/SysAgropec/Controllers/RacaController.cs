@@ -128,19 +128,11 @@ namespace SysAgropec.Controllers
         {
             if(Session["loginuser"]!=null){
                 string descricao = Request.Form["descricao"];
-
-                if (!descricao.Equals(""))
-                {
-
+                
                     RacaViewModel r = new RacaViewModel();
 
-
                     return View("List", r.CarregaRaca(descricao));
-                }
-
-
-                return View("List");
-
+                
             } else
             {
                 return RedirectToAction("Logar", new RouteValueDictionary(

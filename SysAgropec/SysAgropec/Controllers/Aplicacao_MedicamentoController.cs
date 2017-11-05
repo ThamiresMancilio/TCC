@@ -43,7 +43,7 @@ namespace SysAgropec.Controllers
 
                 AplicacaoMedicamentoViewModel a = new AplicacaoMedicamentoViewModel();
                 
-                return View(a.CarregaAplicacoes());
+                return View(a.CarregaAplicacoes(null,null));
             }
             else
             {
@@ -55,6 +55,41 @@ namespace SysAgropec.Controllers
                 }));
             }
             
+        }
+
+        [HttpPost]
+        public ActionResult ListWithParameters()
+        {
+            if (Session["loginuser"] != null)
+            {
+                AplicacaoMedicamentoViewModel p = new AplicacaoMedicamentoViewModel();
+
+                if (Request.Form["datIni"] != "" && Request.Form["datFin"] !="")
+                {
+
+                    DateTime dataInicial = Convert.ToDateTime(Request.Form["datIni"]);
+                    DateTime dataFinal = Convert.ToDateTime(Request.Form["datFin"]);
+
+                    return View("List", p.CarregaAplicacoes(dataInicial, dataFinal));
+
+                }
+                else
+                {
+                    return View("List", p.CarregaAplicacoes(null, null));
+
+                }
+
+
+            }
+            else
+            {
+                return RedirectToAction("Logar", new RouteValueDictionary(
+                new
+                {
+                    controller = "Login",
+                    action = "Logar"
+                }));
+            }
         }
 
         public ActionResult Insert(AplicacaoMedicamentoViewModel a)
