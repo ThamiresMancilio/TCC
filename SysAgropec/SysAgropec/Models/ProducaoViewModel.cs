@@ -67,7 +67,7 @@ namespace SysAgropec.Models
 
             List<Producao> prod = db.Producao.Where(x => x.Datarealizada >= dataProdI &&
             x.Datarealizada <= dataProdF
-            ).OrderBy(x => x.Animail_ID).ToList();
+            ).OrderBy(x => x.Animail_ID).ThenBy(x=> x.Datarealizada).ToList();
 
             //List<Producao> prod = db.Producao.OrderBy(x => x.Animail_ID).ThenBy(x => x.Datarealizada).ToList();
 

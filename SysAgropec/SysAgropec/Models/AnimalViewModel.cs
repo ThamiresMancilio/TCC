@@ -140,7 +140,7 @@ namespace SysAgropec.Models
 
             List<Animal> animaisrel = db.Animal.Where(x => x.Datacadastro >= dataCadI &&
             x.Datacadastro <= dataCadF
-            ).OrderBy(x => x.Sexo).ThenBy(x => x.Raca_ID).ToList();
+            ).OrderBy(x => x.Sexo).ThenBy(x => x.Raca.Descricao).ToList();
 
             //List<Animal> animaisrel = db.Animal.OrderBy(x => x.Sexo).ThenBy(x => x.Raca_ID).ToList();
 

@@ -115,6 +115,7 @@ namespace SysAgropec.Class
                 var prodOLD = 0;
 
                 double totalProduzido = 0;
+                double totalGeral = 0;
                 int contador = 0;
                 foreach (var pr in prods)
                 {
@@ -128,6 +129,7 @@ namespace SysAgropec.Class
                             var cell1 = getNewCell("Total produzido: " + totalProduzido, titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER);
                             cell1.Colspan = 5;
                             table.AddCell(cell1);
+                            totalGeral = totalGeral + totalProduzido;
 
                         }
 
@@ -151,13 +153,19 @@ namespace SysAgropec.Class
                         var cell1 = getNewCell("Total produzido: " + totalProduzido, titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER);
                         cell1.Colspan = 5;
                         table.AddCell(cell1);
+
+                        totalGeral = totalGeral + totalProduzido;
                     }
 
                 }
 
-                var cell2 = getNewCell("Filtros de Pesquisa " + Filtros, titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER);
+                var cell2 = getNewCell("Total Geral:  " + totalGeral, titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER);
                 cell2.Colspan = 5;
                 table.AddCell(cell2);
+
+                var cell3 = getNewCell("Filtros de Pesquisa " + Filtros, titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER);
+                cell3.Colspan = 5;
+                table.AddCell(cell3);
                 
             }
             
