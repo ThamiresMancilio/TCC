@@ -159,10 +159,8 @@ namespace SysAgropec.Class
                 cell2.Colspan = 5;
                 table.AddCell(cell2);
                 
-
             }
-
-
+            
             doc.Add(table);
         }
 

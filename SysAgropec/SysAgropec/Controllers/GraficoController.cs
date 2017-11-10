@@ -9,9 +9,15 @@ namespace SysAgropec.Controllers
     public class GraficoController : Controller
     {
         // GET: Grafico
-        public ActionResult Index()
+        public ActionResult Show()
         {
             return View();
         }
+
+        public ActionResult ProducaoAnual()
+        {
+            return View();
+        }
+
     }
 }

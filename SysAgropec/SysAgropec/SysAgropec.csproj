@@ -69,6 +69,10 @@
       <HintPath>..\packages\MySql.Data.Entity.6.9.9\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -143,9 +147,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.ApplicationInsights">
       <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
     </Reference>
@@ -279,6 +280,8 @@
       <DependentUpon>Sysagropec.edmx</DependentUpon>
       <LastGenOutput>Sysagropec.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\common-scripts.js" />
     <Content Include="Scripts\Dados\Animal.js" />
     <Content Include="Scripts\Dados\Aplicacao.js" />
@@ -460,6 +463,7 @@
     <Content Include="Views\Relatorio\ProducaoTOP.cshtml" />
     <Content Include="Views\Relatorio\Animais.cshtml" />
     <Content Include="Views\Relatorio\Estoque.cshtml" />
+    <Content Include="Views\Grafico\ProducaoAnual.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="tmp_images\" />

@@ -23,6 +23,8 @@ namespace SysAgropec.Models
 
         public double totalQuantidade { get; set; }
 
+        public double[] producoes { get; set; }
+
         public int AdicionaProducao(ProducaoViewModel producao)
         {
 
@@ -90,6 +92,27 @@ namespace SysAgropec.Models
 
 
         }
+
+        public double[] DadosGrafico(int anoI, int anoF, int codFazenda) {
+
+            sysagropecEntities db = new sysagropecEntities();
+
+            producoes = new double[12];
+
+            
+            for (int i =0; i<12; i++)
+            {
+              producoes[i] = db.Producao.Where(x => x.Animal.Propriedade_ID == codFazenda
+                && x.Datarealizada.Year == anoI && x.Datarealizada.Month == i+1
+                    ).Sum(x => x.Quantidade);
+                
+            }
+            
+            return producoes;
+        }
+
+
+
         public List<ProducaoViewModel> CarregaProducoes(DateTime? datIni, DateTime? datFin)
         {
 

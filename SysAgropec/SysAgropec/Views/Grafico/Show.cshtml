@@ -1,17 +1,74 @@
 ﻿@{
-    Layout = null;
+
+    ViewBag.Title = "Gráfico de Produção Anual";
+    Layout = "~/Views/Shared/Layout.cshtml";
 }
+<script type="text/javascript" src="~/Scripts/Chart.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+@*<script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Styles/bootstrap.min.css" rel="stylesheet" />*@
+<style>
+    #chart-content{
+        
+        height:400px;
+        border: 1px solid #ddd;
+        padding:1px;
+        border-radius:4px;
 
-<!DOCTYPE html>
+    }
+    #line-content {
+        height: 400px;
+        border: 1px solid #ddd;
+        padding: 1px;
+        border-radius: 4px;
+    }
+</style>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
+<div id="line-content" style="width:75%;">
+    <canvas id="line_chart"></canvas>
     
-    </div>
-</body>
-</html>
+</div>
+
+<script>
+    
+    @{
+
+        var prod = new SysAgropec.Models.ProducaoViewModel();
+
+        prod.DadosGrafico(Convert.ToInt16(Request.Form["anoI"]), Convert.ToInt16(Request.Form["anoF"]), Convert.ToInt16(Session["idfazenda"]));
+        
+    }
+      
+    var ctx2 = $("#line_chart");
+
+    var config = new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
+                "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+            datasets: [{
+                label: "@Session["fazenda"]",
+                backgroundColor: ["rgba(242,166,54,.5)", "rgba(145,65,72,.5)", "rgba(74,25,92,.5)"],
+                borderColor: ["rgb(242,166,54)", "rgb(145,65,72)", "rgb(74,25,92)"],
+                data: [
+                    @prod.producoes[0].ToString().Replace(",","."),@prod.producoes[1].ToString().Replace(",", "."),@prod.producoes[2].ToString().Replace(",", "."),@prod.producoes[3].ToString().Replace(",", "."),@prod.producoes[4].ToString().Replace(",", "."),
+                @prod.producoes[5].ToString().Replace(",", "."),@prod.producoes[6].ToString().Replace(",", "."),@prod.producoes[7].ToString().Replace(",", "."),@prod.producoes[8].ToString().Replace(",", "."),@prod.producoes[9].ToString().Replace(",", "."),
+                @prod.producoes[10].ToString().Replace(",", "."),@prod.producoes[11].ToString().Replace(",", ".")
+
+                ],
+                fill: false,
+            }
+            ]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Gráfico de Produção Anual'
+            }
+        }
+    });
+
+</script>
+<br /><br />
+Total produzido no ano @Request.Form["anoI"]: @prod.producoes.Sum() (L)
