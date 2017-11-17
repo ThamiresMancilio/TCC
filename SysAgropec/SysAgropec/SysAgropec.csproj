@@ -267,6 +267,7 @@
     <Content Include="assets\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Images\vaca.jpg" />
+    <Content Include="Images\vaca.png" />
     <Content Include="Images\vacaicone.png" />
     <Content Include="img\loading-sm.gif" />
     <Content Include="img\loading.gif" />
