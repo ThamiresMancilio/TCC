@@ -25,7 +25,7 @@ namespace SysAgropec.Models
         public virtual Medicamento Medicamento { get; set; }
         public virtual Usuario Usuario { get; set; }
         public virtual Usuario Usuario1 { get; set; }
-
+ 
         public int AdicionaAplicacao(AplicacaoMedicamentoViewModel ap)
         {
 
@@ -61,6 +61,30 @@ namespace SysAgropec.Models
 
 
         }
+        public List<AplicacaoMedicamentoViewModel> getAplicacosAnimal()
+        {
+            sysagropecEntities db = new sysagropecEntities();
+
+            List<Aplicacao_Medicamento> aplicacoesA = db.Aplicacao_Medicamento.OrderBy(x => x.Animal_ID).ThenBy(x => x.Dataplicacao).ToList();
+
+            List<AplicacaoMedicamentoViewModel> aplicacoes = aplicacoesA.Select(
+
+                x => new AplicacaoMedicamentoViewModel
+                {
+                    ID = x.ID,
+                    Animal_ID = x.Animal_ID,
+                    nomeMedicamento = x.Medicamento.Descricao,
+                    Medicamento_ID = x.Medicamento_ID,
+                    Dataplicacao = x.Dataplicacao,
+                    Quantidade = x.Quantidade
+                }
+
+                ).ToList();
+
+            return aplicacoes;
+
+        } 
+         
 
 
         public List<AplicacaoMedicamentoViewModel> CarregaAplicacoes(DateTime? datIni, DateTime? datFin)

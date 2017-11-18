@@ -263,9 +263,34 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\animate.css\animate.min.css" />
+    <Content Include="assets\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="assets\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="assets\bootstrap\css\bootstrap.min.css" />
+    <Content Include="assets\bootstrap\js\bootstrap.min.js" />
+    <Content Include="assets\dropdown\css\style.css" />
+    <Content Include="assets\dropdown\js\script.min.js" />
     <Content Include="assets\font-awesome\css\font-awesome.css" />
     <Content Include="assets\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\images\mbr-favicon.png" />
+    <Content Include="assets\images\vac-825x720.png" />
+    <Content Include="assets\images\vaca-2000x1125.jpg" />
+    <Content Include="assets\jarallax\jarallax.min.js" />
+    <Content Include="assets\mobirise\css\mbr-additional.css" />
+    <Content Include="assets\popper\popper.min.js" />
+    <Content Include="assets\smooth-scroll\smooth-scroll.js" />
+    <Content Include="assets\tether\tether.min.css" />
+    <Content Include="assets\tether\tether.min.js" />
+    <Content Include="assets\theme\css\style.css" />
+    <Content Include="assets\theme\js\script.js" />
+    <Content Include="assets\touch-swipe\jquery.touch-swipe.min.js" />
+    <Content Include="assets\viewport-checker\jquery.viewportchecker.js" />
+    <Content Include="assets\web\assets\jquery\jquery.min.js" />
+    <Content Include="assets\web\assets\mobirise-icons-bold\mobirise-icons-bold.css" />
+    <Content Include="assets\web\assets\mobirise-icons-bold\mobirise-icons-bold.svg" />
+    <Content Include="assets\web\assets\mobirise-icons\mobirise-icons.css" />
+    <Content Include="assets\web\assets\mobirise-icons\mobirise-icons.svg" />
     <Content Include="Images\vaca.jpg" />
     <Content Include="Images\vaca.png" />
     <Content Include="Images\vacaicone.png" />
@@ -392,6 +417,13 @@
     <Content Include="Models\Sysagropec.edmx.diagram">
       <DependentUpon>Sysagropec.edmx</DependentUpon>
     </Content>
+    <Content Include="assets\images\hashes.json" />
+    <Content Include="assets\web\assets\mobirise-icons-bold\mobirise-icons-bold.eot" />
+    <Content Include="assets\web\assets\mobirise-icons-bold\mobirise-icons-bold.ttf" />
+    <Content Include="assets\web\assets\mobirise-icons-bold\mobirise-icons-bold.woff" />
+    <Content Include="assets\web\assets\mobirise-icons\mobirise-icons.eot" />
+    <Content Include="assets\web\assets\mobirise-icons\mobirise-icons.ttf" />
+    <Content Include="assets\web\assets\mobirise-icons\mobirise-icons.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -465,6 +497,7 @@
     <Content Include="Views\Relatorio\Animais.cshtml" />
     <Content Include="Views\Relatorio\Estoque.cshtml" />
     <Content Include="Views\Grafico\ProducaoAnual.cshtml" />
+    <Content Include="Views\Home\Inicio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="tmp_images\" />

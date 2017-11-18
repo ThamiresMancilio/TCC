@@ -64,11 +64,11 @@
             responsive: true,
             title: {
                 display: true,
-                text: 'Gráfico de Produção Anual - Resultado em Litros(L)'
+                text: 'Gráfico de Produção Anual - Resultado em Litros(KG)'
             }
         }
     });
 
 </script>
 <br /><br />
-Total produzido no ano @Request.Form["anoI"]: @prod.producoes.Sum() (L)
+Total produzido no ano @Request.Form["anoI"]: @prod.producoes.Sum() (KG)

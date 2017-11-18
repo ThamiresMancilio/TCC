@@ -34,5 +34,11 @@ namespace SysAgropec.Controllers
                 }));
             }
         }
+
+        public ActionResult Inicio()
+        {
+            return View();
+        }
+
     }
 }

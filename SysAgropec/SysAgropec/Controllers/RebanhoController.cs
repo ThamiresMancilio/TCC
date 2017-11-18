@@ -50,6 +50,10 @@ namespace SysAgropec.Controllers
 
                 AnimalViewModel a = new AnimalViewModel();
 
+                AplicacaoMedicamentoViewModel m = new AplicacaoMedicamentoViewModel();
+                
+                ViewData["fichas"] = m.getAplicacosAnimal();
+                
                 return View(a.CarregaAnimal(-1, "", "",""));
 
             } else

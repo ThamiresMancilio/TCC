@@ -103,7 +103,7 @@ namespace SysAgropec.Class
             else
             {
                 table.AddCell(getNewCell("Data de Produção", titulo, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER, preto, fundo));
-                table.AddCell(getNewCell("Qtd (L)", titulo, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER, preto, fundo));
+                table.AddCell(getNewCell("Qtd (KG)", titulo, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER, preto, fundo));
                 table.AddCell(getNewCell("Observação", titulo, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER, preto, fundo));
                 table.AddCell(getNewCell("", titulo, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER, preto, fundo));
                 table.AddCell(getNewCell("", titulo, Element.ALIGN_LEFT, 5, PdfPCell.BOTTOM_BORDER, preto, fundo));
@@ -126,7 +126,7 @@ namespace SysAgropec.Class
                     {
                         if (totalProduzido > 0)
                         {
-                            var cell1 = getNewCell("Total produzido: " + totalProduzido, titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER);
+                            var cell1 = getNewCell("Total produzido: " + totalProduzido + " KG", titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER);
                             cell1.Colspan = 5;
                             table.AddCell(cell1);
                             totalGeral = totalGeral + totalProduzido;
@@ -150,7 +150,7 @@ namespace SysAgropec.Class
 
                     if (contador == quantidadeRegistros)
                     {
-                        var cell1 = getNewCell("Total produzido: " + totalProduzido, titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER);
+                        var cell1 = getNewCell("Total produzido: " + totalProduzido + " KG", titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER);
                         cell1.Colspan = 5;
                         table.AddCell(cell1);
 
@@ -159,7 +159,7 @@ namespace SysAgropec.Class
 
                 }
 
-                var cell2 = getNewCell("Total Geral:  " + totalGeral, titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER);
+                var cell2 = getNewCell("Total Geral:  " + totalGeral + " KG", titulo, Element.ALIGN_LEFT, 10, PdfPCell.BOTTOM_BORDER);
                 cell2.Colspan = 5;
                 table.AddCell(cell2);
 

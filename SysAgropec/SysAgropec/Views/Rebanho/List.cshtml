@@ -64,7 +64,9 @@
                     <td>@animal.Tatuagem</td>
                     <td>@animal.nomeraca</td>
                     <td>
+                        
                         <button class="btn btn-success btn-xs" title="Visualizar dados" data-toggle="modal" data-target="#myModal_@animal.ID"><i class="fa fa-eye"></i></button>
+                        <button class="btn btn-success btn-xs" title="Visualizar Ficha do Animal" data-toggle="modal" data-target="#myModal_@animal.Registro"><i class="fa fa-align-center"></i></button>
                         <a href="#" class="btn btn-primary btn-xs" onclick="Alterar(@animal.ID)" title="Alterar Registro"><i class="fa fa-pencil"></i></a>
                         <a href="#" class="btn btn-danger btn-xs" onclick="ConfirmaExclusao(@animal.ID, '@animal.Descricao')" title="Excluir Registro"><i class="fa fa-trash-o "></i></a>
                     </td>
@@ -90,6 +92,44 @@
 
                         </div>
                     </div>
+
+
+                    <div class="modal fade" id="myModal_@animal.Registro" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Ficha do Animal: @animal.Descricao</h4>
+                                </div>
+                                <div class="modal-body">
+                                    @foreach (var ficha in ViewData["fichas"] as List<SysAgropec.Models.AplicacaoMedicamentoViewModel>)
+                                    {
+                                        if (ficha.Animal_ID == animal.ID)
+                                        {
+
+                                            <p><b>Medicamento: @ficha.nomeMedicamento</b> </p>
+                                            <p><b>Data de Aplicação: @ficha.Dataplicacao.ToString("dd/MM/yyyy")</b> </p>
+                                            <p><b>Qtd Aplicada: @ficha.Quantidade</b> </p>
+                                            
+                                            <p><b>--------------------------------------------------------------------</b></p>
+
+                                        }
+
+                                    }
+                                </div>
+
+
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </tr>}
             
             }
