@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Logar";
+    Layout = "~/Views/Shared/LayoutClean.cshtml";
+
+}
+
+
+<div id="form-container">
+    <div class="panel" id="form-box">
+
+        @using (Html.BeginForm("Valida", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+        {
+
+            <h2 class="text-center" style="color:white;"> Área de login</h2>
+
+                <div class="form-group">
+                    <label class="sr-only" for="login">Usuário</label>
+                    <div class="input-group">
+
+                        <input type="text" name="usuario" placeholder="Seu login de usuário" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="sr-only" for="senha">Senha</label>
+                    <div class="input-group">
+
+                        <input type="password" name="senha" placeholder="Digite sua senha" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success" value="Entrar">
+
+                </div>
+
+                if (ViewData["msg"] != null)
+                {
+                    <label style="color:white;font-size:14px;">@ViewData["msg"].ToString()</label>
+                }
+
+        }
+
+
+    </div>
+</div>

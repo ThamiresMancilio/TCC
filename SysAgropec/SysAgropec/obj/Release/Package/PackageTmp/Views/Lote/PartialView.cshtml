@@ -1,0 +1,58 @@
+﻿@model SysAgropec.Models.Lote
+
+<div>
+
+    <form id="myForm" class="form-inline">
+
+        @Html.HiddenFor(m => m.ID)
+
+        <label class="control-label">Nº:</label>
+        @Html.TextBoxFor(model => model.Numerolote, new { @class = "form-control", required = "required" })
+
+        <label class="control-label">Data fabricação:</label>
+        @Html.TextBoxFor(model => model.Datafabricacao.Date, new { @class = "form-control", type= "date", @Value = Model.Datafabricacao.ToString("yyyy-MM-dd"), required = "required" })
+
+        <br />
+
+        <label class="control-label">Data validade:</label>
+        @Html.TextBoxFor(model => model.Datavalidade.Date, new { @class = "form-control", type = "date", @Value = Model.Datafabricacao.ToString("yyyy-MM-dd"), required = "required" })
+
+        <label class="control-label">Observação:</label>
+        @Html.TextBoxFor(model => model.Observacao, new { @class = "form-control" })
+
+        <br />
+        <a href="#" id="btnSubmit" class="btn btn-primary">Salvar </a>
+
+    </form>
+
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        $("#btnSubmit").click(function () {
+
+            var myformdata = $("#myForm").serialize();
+
+            $.ajax({
+
+                type: "POST",
+                url: "Update",
+                data: myformdata,
+                success: function () {
+
+                    $("#myModalEditLote").modal("hide");
+                    window.location.href = "/Lote/List";
+
+                }
+
+            })
+        })
+
+    })
+
+
+</script>
+

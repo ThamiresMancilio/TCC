@@ -1,0 +1,173 @@
+﻿@model SysAgropec.Models.AplicacaoMedicamentoViewModel
+
+@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+    ViewBag.Title = "Aplicação de Medicação";
+}
+
+@Styles.Render("~/bundles/paging")
+
+@Scripts.Render("~/bundles/jquery-mask")
+
+@Scripts.Render("~/bundles/Aplicacao")
+
+
+<h3><i class="fa fa-angle-right"></i> Lançamento de Aplicações de Medicamentos</h3>
+<div class="row mt">
+    <div class="col-lg-12">
+        <div class="form-panel">
+            <h4 class="mb"><i class="fa fa-angle-right"></i> Preencha os campos para efetuar o cadastro.</h4>
+            @using (Html.BeginForm("Insert", "Aplicacao_Medicamento", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-inline" }))
+            {   <fieldset class="form-group">
+            <legend>Dados da Produção</legend>
+            <div class="form-group">
+                <label class="control-label">Data aplicação:</label>
+                @Html.TextBoxFor(model => model.Dataplicacao, new { @class = "form-control", required = "required", type = "date" })
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword2">Quantidade:</label>
+                @Html.TextBoxFor(model => model.Quantidade, new { @class = "form-control", required = "required", type = "number" })
+
+            </div>
+
+                    @Html.HiddenFor(model => model.Medicamento_ID)
+                    <div class="form-group">
+                        <label for="exampleInputPassword2">Medicamento:</label>
+
+                        <input type="text" id="nomeMedicamento" class="form-control" required />
+
+                        <a href="#" class="btn btn-primary" onclick="carregaMedicamentos()"><i class="fa fa-search"></i></a>
+                    </div>
+
+
+            @Html.HiddenFor(model => model.Animal_ID)
+            <div class="form-group">
+                <label for="exampleInputPassword2">Animal:</label>
+
+                <input type="text" id="nomeAnimal" class="form-control" required />
+
+                <a href="#" class="btn btn-primary" onclick="carregaAnimais()"><i class="fa fa-search"></i></a>
+            </div>
+
+
+            <div class="form-group">
+                <label for="exampleInputEmail2">Observação:</label>
+                @Html.TextAreaFor(model => model.Observacao, new
+           {
+               @class = "form-control",
+               rows = "3",
+               style = "width: 100%"
+           })
+
+            </div>
+        </fieldset>
+
+        <input type="hidden" id="lactacao" />
+
+            <div class="modal fade" id="myModalAnimal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Pesquisa animal</h4>
+                        </div>
+                        <div class="modal-body" id="myModalBodyLivro">
+                            <table id="easyPaginate" class="table table-bordered table-striped table-condensed">
+                                <thead>
+
+
+                                <th>Selecione o animal</th>
+
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in ViewData["animais"] as List<SysAgropec.Models.AnimalViewModel>)
+                                    {
+
+                                        <tr>
+                                            <td>
+                                                <div class="radio">
+                                                    <label id="@item.ID">
+                                                        <input type="radio" name="optionsRadiosA" id="optionsRadiosA" value="@item.ID">
+                                                        @item.Descricao - @item.Registro
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    }
+
+                                </tbody>
+                            </table>
+
+                            <a href="#" onclick="fechaJanelaAnimal();" class="btn btn-primary">Adicionar Animal </a>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModalMedicamento" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Pesquisa Medicamento</h4>
+                            </div>
+                            <div class="modal-body" id="myModalBodyLivro">
+                                <table id="easyPaginate" class="table table-bordered table-striped table-condensed">
+                                    <thead>
+
+
+                                    <th>Selecione o medicamento a ser aplicado</th>
+
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var med in ViewData["estoque"] as List<SysAgropec.Models.Estoque_MedicamentoViewModel>)
+                                        {
+
+                                            <tr>
+                                                <td>
+                                                    <div class="radio">
+                                                        <label id="@med.Medicamento_ID">
+                                                            <input type="radio" name="optionsRadiosM" id="optionsRadiosM" value="@med.Medicamento_ID">
+                                                            @med.nomeMedicamento
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        }
+
+                                    </tbody>
+                                </table>
+
+                                <a href="#" onclick="fechaJanelaMedicamentos();" class="btn btn-primary">Adicionar Medicamento </a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <br><br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Incluir</button>
+                </div>
+
+
+            }
+        </div><!-- /form-panel -->
+    </div>
+</div>
+
+
+

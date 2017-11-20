@@ -273,9 +273,11 @@
     <Content Include="assets\font-awesome\css\font-awesome.css" />
     <Content Include="assets\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\images\background5.jpg" />
     <Content Include="assets\images\mbr-favicon.png" />
     <Content Include="assets\images\vac-825x720.png" />
     <Content Include="assets\images\vaca-2000x1125.jpg" />
+    <Content Include="assets\images\vaca-white-825x720.png" />
     <Content Include="assets\jarallax\jarallax.min.js" />
     <Content Include="assets\mobirise\css\mbr-additional.css" />
     <Content Include="assets\popper\popper.min.js" />
@@ -291,6 +293,7 @@
     <Content Include="assets\web\assets\mobirise-icons-bold\mobirise-icons-bold.svg" />
     <Content Include="assets\web\assets\mobirise-icons\mobirise-icons.css" />
     <Content Include="assets\web\assets\mobirise-icons\mobirise-icons.svg" />
+    <Content Include="Images\vaca-white.png" />
     <Content Include="Images\vaca.jpg" />
     <Content Include="Images\vaca.png" />
     <Content Include="Images\vacaicone.png" />
@@ -424,6 +427,7 @@
     <Content Include="assets\web\assets\mobirise-icons\mobirise-icons.eot" />
     <Content Include="assets\web\assets\mobirise-icons\mobirise-icons.ttf" />
     <Content Include="assets\web\assets\mobirise-icons\mobirise-icons.woff" />
+    <None Include="Properties\PublishProfiles\sysagropec - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

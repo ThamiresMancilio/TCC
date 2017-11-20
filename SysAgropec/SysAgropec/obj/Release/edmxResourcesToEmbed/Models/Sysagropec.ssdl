@@ -1,0 +1,616 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="sysagropecModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Animal">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descricao" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Registro" Type="varchar" MaxLength="45" />
+    <Property Name="Tatuagem" Type="varchar" MaxLength="45" />
+    <Property Name="Numerobrinco" Type="int" />
+    <Property Name="Datanascimento" Type="date" />
+    <Property Name="Morto" Type="tinyint" />
+    <Property Name="Observacao" Type="text" />
+    <Property Name="Datacadastro" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="Datalteracao" Type="datetime" Precision="0" />
+    <Property Name="Registropai" Type="varchar" MaxLength="45" />
+    <Property Name="Tatuagempai" Type="varchar" MaxLength="45" />
+    <Property Name="Descricaopai" Type="varchar" MaxLength="45" />
+    <Property Name="Registromae" Type="varchar" MaxLength="45" />
+    <Property Name="Tatuagemae" Type="varchar" MaxLength="45" />
+    <Property Name="Descricaomae" Type="varchar" MaxLength="45" />
+    <Property Name="Sexo" Type="int" />
+    <Property Name="Lactacao" Type="tinyint" />
+    <Property Name="Dias_lactacao" Type="int" />
+    <Property Name="Datalactacao" Type="datetime" Precision="0" />
+    <Property Name="Livro_ID" Type="int" Nullable="false" />
+    <Property Name="Raca_ID" Type="int" Nullable="false" />
+    <Property Name="Propriedade_ID" Type="int" Nullable="false" />
+    <Property Name="Usuario_IDCadastro" Type="int" Nullable="false" />
+    <Property Name="Usuario_IDAlteracao" Type="int" />
+  </EntityType>
+  <EntityType Name="Aplicacao_Medicamento">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Dataplicacao" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="Quantidade" Type="int" />
+    <Property Name="Observacao" Type="text" />
+    <Property Name="Datacadastro" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="Datalteracao" Type="datetime" Precision="0" />
+    <Property Name="Animal_ID" Type="int" Nullable="false" />
+    <Property Name="Medicamento_ID" Type="int" Nullable="false" />
+    <Property Name="Usuario_IDCadastro" Type="int" Nullable="false" />
+    <Property Name="Usuario_IDAlteracao" Type="int" />
+  </EntityType>
+  <EntityType Name="Estoque_Medicamento">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Quantidademinima" Type="int" />
+    <Property Name="Quantidademaxima" Type="int" />
+    <Property Name="Quantidadeatual" Type="int" />
+    <Property Name="Medicamento_ID" Type="int" Nullable="false" />
+    <Property Name="Usuario_IDAlteracao" Type="int" />
+    <Property Name="Data_Estocado" Type="datetime" Precision="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Livro">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descricao" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="Datacadastro" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="Datalteracao" Type="datetime" Precision="0" />
+    <Property Name="Excluido" Type="tinyint" />
+    <Property Name="Usuario_IDCadastro" Type="int" Nullable="false" />
+    <Property Name="Usuario_IDAlteracao" Type="int" />
+  </EntityType>
+  <EntityType Name="Lote">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Numerolote" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="Datafabricacao" Type="date" Nullable="false" />
+    <Property Name="Datavalidade" Type="date" Nullable="false" />
+    <Property Name="Observacao" Type="text" />
+    <Property Name="Datacadastro" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="Dataalteracao" Type="datetime" Precision="0" />
+    <Property Name="Propriedade_ID" Type="int" Nullable="false" />
+    <Property Name="Usuario_IDCadastro" Type="int" Nullable="false" />
+    <Property Name="Usuario_IDAlteracao" Type="int" />
+  </EntityType>
+  <EntityType Name="Medicamento">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="Descricao" Type="varchar" MaxLength="200" />
+    <Property Name="Carencialeite" Type="int" />
+    <Property Name="Datacadastro" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="Datalteracao" Type="datetime" Precision="0" />
+    <Property Name="Lote_ID" Type="int" Nullable="false" />
+    <Property Name="Usuario_IDCadastro" Type="int" Nullable="false" />
+    <Property Name="Usuario_IDAlteracao" Type="int" />
+    <Property Name="Estocado" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="Producao">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Datarealizada" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="Quantidade" Type="double" Nullable="false" />
+    <Property Name="Datacadastro" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="Datalteracao" Type="datetime" Precision="0" />
+    <Property Name="Excluido" Type="tinyint" />
+    <Property Name="Observacao" Type="text" />
+    <Property Name="Animail_ID" Type="int" Nullable="false" />
+    <Property Name="Usuario_IDProducao" Type="int" Nullable="false" />
+    <Property Name="Usuario_IDCadastro" Type="int" Nullable="false" />
+    <Property Name="Usuario_IDAlteracao" Type="int" />
+  </EntityType>
+  <EntityType Name="Propriedade">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cnpj" Type="varchar" MaxLength="14" Nullable="false" />
+    <Property Name="Razaosocial" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Nomefantasia" Type="varchar" MaxLength="255" />
+    <Property Name="Inscricaomunicipal" Type="varchar" MaxLength="255" />
+    <Property Name="Inscricaoestadual" Type="varchar" MaxLength="255" />
+    <Property Name="Cep" Type="varchar" MaxLength="45" />
+    <Property Name="Logradouro" Type="varchar" MaxLength="255" />
+    <Property Name="Numero" Type="varchar" MaxLength="45" />
+    <Property Name="Complemento" Type="varchar" MaxLength="255" />
+    <Property Name="Bairro" Type="varchar" MaxLength="255" />
+    <Property Name="Cidade" Type="varchar" MaxLength="255" />
+    <Property Name="Estado" Type="varchar" MaxLength="45" />
+    <Property Name="Logo" Type="varchar" MaxLength="255" />
+    <Property Name="Datacadastro" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="Dataalteracao" Type="datetime" Precision="0" />
+    <Property Name="Usuario_IDCadastro" Type="int" Nullable="false" />
+    <Property Name="Usuario_IDAlteracao" Type="int" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="Email2" Type="varchar" MaxLength="100" />
+    <Property Name="Telefone" Type="varchar" MaxLength="50" />
+    <Property Name="Telefone2" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Raca">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descricao" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Datacadastro" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="Datalteracao" Type="datetime" Precision="0" />
+    <Property Name="Usuario_IDCcadastro" Type="int" Nullable="false" />
+    <Property Name="Usuario_IDAlteracao" Type="int" />
+    <Property Name="Excluido" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="varchar" MaxLength="155" Nullable="false" />
+    <Property Name="Sobrenome" Type="varchar" MaxLength="255" />
+    <Property Name="Login" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="Senha" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="Admin" Type="tinyint" Nullable="false" />
+    <Property Name="Datacadastro" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="Datalteracao" Type="datetime" Precision="0" />
+    <Property Name="Dataultimoacesso" Type="datetime" Precision="0" />
+    <Property Name="Excluido" Type="tinyint" />
+  </EntityType>
+  <Association Name="fk_animais_livro1">
+    <End Role="Livro" Type="Self.Livro" Multiplicity="1" />
+    <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Livro">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Animal">
+        <PropertyRef Name="Livro_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_animais_propriedades1">
+    <End Role="Propriedade" Type="Self.Propriedade" Multiplicity="1" />
+    <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Propriedade">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Animal">
+        <PropertyRef Name="Propriedade_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_animais_racas1">
+    <End Role="Raca" Type="Self.Raca" Multiplicity="1" />
+    <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Raca">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Animal">
+        <PropertyRef Name="Raca_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_animais_usuarios1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Animal">
+        <PropertyRef Name="Usuario_IDCadastro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_animais_usuarios2">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Animal">
+        <PropertyRef Name="Usuario_IDAlteracao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_aplicacao_medicamentos_animais1">
+    <End Role="Animal" Type="Self.Animal" Multiplicity="1" />
+    <End Role="Aplicacao_Medicamento" Type="Self.Aplicacao_Medicamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Animal">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Aplicacao_Medicamento">
+        <PropertyRef Name="Animal_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_aplicacao_medicamentos_medicamento1">
+    <End Role="Medicamento" Type="Self.Medicamento" Multiplicity="1" />
+    <End Role="Aplicacao_Medicamento" Type="Self.Aplicacao_Medicamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medicamento">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Aplicacao_Medicamento">
+        <PropertyRef Name="Medicamento_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_aplicacao_medicamentos_usuarios1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Aplicacao_Medicamento" Type="Self.Aplicacao_Medicamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Aplicacao_Medicamento">
+        <PropertyRef Name="Usuario_IDCadastro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_aplicacao_medicamentos_usuarios2">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Aplicacao_Medicamento" Type="Self.Aplicacao_Medicamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Aplicacao_Medicamento">
+        <PropertyRef Name="Usuario_IDAlteracao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_estoque_medicamentos_medicamento1">
+    <End Role="Medicamento" Type="Self.Medicamento" Multiplicity="1" />
+    <End Role="Estoque_Medicamento" Type="Self.Estoque_Medicamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medicamento">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Estoque_Medicamento">
+        <PropertyRef Name="Medicamento_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_estoque_medicamentos_usuarios1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Estoque_Medicamento" Type="Self.Estoque_Medicamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Estoque_Medicamento">
+        <PropertyRef Name="Usuario_IDAlteracao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_livro_usuarios1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Livro" Type="Self.Livro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Livro">
+        <PropertyRef Name="Usuario_IDCadastro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_livro_usuarios2">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Livro" Type="Self.Livro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Livro">
+        <PropertyRef Name="Usuario_IDAlteracao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_lote_medicamentos_propriedades1">
+    <End Role="Propriedade" Type="Self.Propriedade" Multiplicity="1" />
+    <End Role="Lote" Type="Self.Lote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Propriedade">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Lote">
+        <PropertyRef Name="Propriedade_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_lote_medicamentos_usuarios1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Lote" Type="Self.Lote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Lote">
+        <PropertyRef Name="Usuario_IDCadastro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_lote_medicamentos_usuarios2">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Lote" Type="Self.Lote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Lote">
+        <PropertyRef Name="Usuario_IDAlteracao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_medicamento_lote_medicamentos1">
+    <End Role="Lote" Type="Self.Lote" Multiplicity="1" />
+    <End Role="Medicamento" Type="Self.Medicamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lote">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Medicamento">
+        <PropertyRef Name="Lote_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_medicamento_usuarios1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Medicamento" Type="Self.Medicamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Medicamento">
+        <PropertyRef Name="Usuario_IDCadastro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_medicamento_usuarios2">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Medicamento" Type="Self.Medicamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Medicamento">
+        <PropertyRef Name="Usuario_IDAlteracao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_producoes_animais">
+    <End Role="Animal" Type="Self.Animal" Multiplicity="1" />
+    <End Role="Producao" Type="Self.Producao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Animal">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Producao">
+        <PropertyRef Name="Animail_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_producoes_usuarios1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Producao" Type="Self.Producao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Producao">
+        <PropertyRef Name="Usuario_IDProducao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_producoes_usuarios2">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Producao" Type="Self.Producao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Producao">
+        <PropertyRef Name="Usuario_IDCadastro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_producoes_usuarios3">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Producao" Type="Self.Producao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Producao">
+        <PropertyRef Name="Usuario_IDAlteracao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_propriedades_usuarios1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Propriedade" Type="Self.Propriedade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Propriedade">
+        <PropertyRef Name="Usuario_IDCadastro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_propriedades_usuarios2">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Propriedade" Type="Self.Propriedade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Propriedade">
+        <PropertyRef Name="Usuario_IDAlteracao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_racas_usuarios1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Raca" Type="Self.Raca" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Raca">
+        <PropertyRef Name="Usuario_IDCcadastro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_racas_usuarios2">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Raca" Type="Self.Raca" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Raca">
+        <PropertyRef Name="Usuario_IDAlteracao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="sysagropecModelStoreContainer">
+    <EntitySet Name="Animal" EntityType="Self.Animal" Schema="sysagropec" store:Type="Tables" />
+    <EntitySet Name="Aplicacao_Medicamento" EntityType="Self.Aplicacao_Medicamento" Schema="sysagropec" store:Type="Tables" />
+    <EntitySet Name="Estoque_Medicamento" EntityType="Self.Estoque_Medicamento" Schema="sysagropec" store:Type="Tables" />
+    <EntitySet Name="Livro" EntityType="Self.Livro" Schema="sysagropec" store:Type="Tables" />
+    <EntitySet Name="Lote" EntityType="Self.Lote" Schema="sysagropec" store:Type="Tables" />
+    <EntitySet Name="Medicamento" EntityType="Self.Medicamento" Schema="sysagropec" store:Type="Tables" />
+    <EntitySet Name="Producao" EntityType="Self.Producao" Schema="sysagropec" store:Type="Tables" />
+    <EntitySet Name="Propriedade" EntityType="Self.Propriedade" Schema="sysagropec" store:Type="Tables" />
+    <EntitySet Name="Raca" EntityType="Self.Raca" Schema="sysagropec" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="sysagropec" store:Type="Tables" />
+    <AssociationSet Name="fk_animais_livro1" Association="Self.fk_animais_livro1">
+      <End Role="Livro" EntitySet="Livro" />
+      <End Role="Animal" EntitySet="Animal" />
+    </AssociationSet>
+    <AssociationSet Name="fk_animais_propriedades1" Association="Self.fk_animais_propriedades1">
+      <End Role="Propriedade" EntitySet="Propriedade" />
+      <End Role="Animal" EntitySet="Animal" />
+    </AssociationSet>
+    <AssociationSet Name="fk_animais_racas1" Association="Self.fk_animais_racas1">
+      <End Role="Raca" EntitySet="Raca" />
+      <End Role="Animal" EntitySet="Animal" />
+    </AssociationSet>
+    <AssociationSet Name="fk_animais_usuarios1" Association="Self.fk_animais_usuarios1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Animal" EntitySet="Animal" />
+    </AssociationSet>
+    <AssociationSet Name="fk_animais_usuarios2" Association="Self.fk_animais_usuarios2">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Animal" EntitySet="Animal" />
+    </AssociationSet>
+    <AssociationSet Name="fk_aplicacao_medicamentos_animais1" Association="Self.fk_aplicacao_medicamentos_animais1">
+      <End Role="Animal" EntitySet="Animal" />
+      <End Role="Aplicacao_Medicamento" EntitySet="Aplicacao_Medicamento" />
+    </AssociationSet>
+    <AssociationSet Name="fk_aplicacao_medicamentos_medicamento1" Association="Self.fk_aplicacao_medicamentos_medicamento1">
+      <End Role="Medicamento" EntitySet="Medicamento" />
+      <End Role="Aplicacao_Medicamento" EntitySet="Aplicacao_Medicamento" />
+    </AssociationSet>
+    <AssociationSet Name="fk_aplicacao_medicamentos_usuarios1" Association="Self.fk_aplicacao_medicamentos_usuarios1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Aplicacao_Medicamento" EntitySet="Aplicacao_Medicamento" />
+    </AssociationSet>
+    <AssociationSet Name="fk_aplicacao_medicamentos_usuarios2" Association="Self.fk_aplicacao_medicamentos_usuarios2">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Aplicacao_Medicamento" EntitySet="Aplicacao_Medicamento" />
+    </AssociationSet>
+    <AssociationSet Name="fk_estoque_medicamentos_medicamento1" Association="Self.fk_estoque_medicamentos_medicamento1">
+      <End Role="Medicamento" EntitySet="Medicamento" />
+      <End Role="Estoque_Medicamento" EntitySet="Estoque_Medicamento" />
+    </AssociationSet>
+    <AssociationSet Name="fk_estoque_medicamentos_usuarios1" Association="Self.fk_estoque_medicamentos_usuarios1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Estoque_Medicamento" EntitySet="Estoque_Medicamento" />
+    </AssociationSet>
+    <AssociationSet Name="fk_livro_usuarios1" Association="Self.fk_livro_usuarios1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Livro" EntitySet="Livro" />
+    </AssociationSet>
+    <AssociationSet Name="fk_livro_usuarios2" Association="Self.fk_livro_usuarios2">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Livro" EntitySet="Livro" />
+    </AssociationSet>
+    <AssociationSet Name="fk_lote_medicamentos_propriedades1" Association="Self.fk_lote_medicamentos_propriedades1">
+      <End Role="Propriedade" EntitySet="Propriedade" />
+      <End Role="Lote" EntitySet="Lote" />
+    </AssociationSet>
+    <AssociationSet Name="fk_lote_medicamentos_usuarios1" Association="Self.fk_lote_medicamentos_usuarios1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Lote" EntitySet="Lote" />
+    </AssociationSet>
+    <AssociationSet Name="fk_lote_medicamentos_usuarios2" Association="Self.fk_lote_medicamentos_usuarios2">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Lote" EntitySet="Lote" />
+    </AssociationSet>
+    <AssociationSet Name="fk_medicamento_lote_medicamentos1" Association="Self.fk_medicamento_lote_medicamentos1">
+      <End Role="Lote" EntitySet="Lote" />
+      <End Role="Medicamento" EntitySet="Medicamento" />
+    </AssociationSet>
+    <AssociationSet Name="fk_medicamento_usuarios1" Association="Self.fk_medicamento_usuarios1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Medicamento" EntitySet="Medicamento" />
+    </AssociationSet>
+    <AssociationSet Name="fk_medicamento_usuarios2" Association="Self.fk_medicamento_usuarios2">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Medicamento" EntitySet="Medicamento" />
+    </AssociationSet>
+    <AssociationSet Name="fk_producoes_animais" Association="Self.fk_producoes_animais">
+      <End Role="Animal" EntitySet="Animal" />
+      <End Role="Producao" EntitySet="Producao" />
+    </AssociationSet>
+    <AssociationSet Name="fk_producoes_usuarios1" Association="Self.fk_producoes_usuarios1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Producao" EntitySet="Producao" />
+    </AssociationSet>
+    <AssociationSet Name="fk_producoes_usuarios2" Association="Self.fk_producoes_usuarios2">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Producao" EntitySet="Producao" />
+    </AssociationSet>
+    <AssociationSet Name="fk_producoes_usuarios3" Association="Self.fk_producoes_usuarios3">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Producao" EntitySet="Producao" />
+    </AssociationSet>
+    <AssociationSet Name="fk_propriedades_usuarios1" Association="Self.fk_propriedades_usuarios1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Propriedade" EntitySet="Propriedade" />
+    </AssociationSet>
+    <AssociationSet Name="fk_propriedades_usuarios2" Association="Self.fk_propriedades_usuarios2">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Propriedade" EntitySet="Propriedade" />
+    </AssociationSet>
+    <AssociationSet Name="fk_racas_usuarios1" Association="Self.fk_racas_usuarios1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Raca" EntitySet="Raca" />
+    </AssociationSet>
+    <AssociationSet Name="fk_racas_usuarios2" Association="Self.fk_racas_usuarios2">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Raca" EntitySet="Raca" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

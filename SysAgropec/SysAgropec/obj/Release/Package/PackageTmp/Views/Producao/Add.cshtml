@@ -1,0 +1,118 @@
+﻿@model SysAgropec.Models.ProducaoViewModel
+
+@{
+    ViewBag.Title = "Produção diária";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+
+@Styles.Render("~/bundles/paging")
+
+@Scripts.Render("~/bundles/jquery-mask")
+
+@Scripts.Render("~/bundles/Producao")
+
+
+<h3><i class="fa fa-angle-right"></i> Lançamento de Produções Diárias em KG</h3>
+<div class="row mt">
+    <div class="col-lg-12">
+        <div class="form-panel">
+            <h4 class="mb"><i class="fa fa-angle-right"></i> Preencha os campos para efetuar o cadastro.</h4>
+            @using (Html.BeginForm("Insert", "Producao", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-inline" }))
+            {   <fieldset class="form-group">
+            <legend>Dados da Produção</legend>
+            <div class="form-group">
+                <label class="control-label">Data realizada:</label>
+                @Html.TextBoxFor(model => model.Datarealizada, new { @class = "form-control", required = "required", type="date" })
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword2">Quantidade (KG):</label>
+                @Html.TextBoxFor(model => model.Quantidade, new { @class = "form-control", required="required", placeholder="5,45" })
+
+            </div>
+            @Html.HiddenFor(model=> model.Animail_ID)
+            <div class="form-group">
+                <label for="exampleInputPassword2">Vaca:</label>
+                
+                <input type="text" id="nomeAnimal" class="form-control" required />
+                
+                <a href="#" class="btn btn-primary" onclick="carregaAnimais()"><i class="fa fa-search"></i></a>
+            </div>
+
+            
+            <div class="form-group">
+                <label for="exampleInputEmail2">Observação:</label>
+                @Html.TextAreaFor(model => model.Observacao, new
+                   {
+                       @class = "form-control",
+                       rows = "3",
+                       style = "width: 100%"
+                   })
+
+            </div>
+        </fieldset>
+                
+                <input type="hidden" id="lactacao" />
+                <input type="hidden" id="datalactacao" />
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModalEditLivro" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Pesquisa animal</h4>
+                            </div>
+                            <div class="modal-body" id="myModalBodyLivro">
+                                    <table id="easyPaginate" class="table table-bordered table-striped table-condensed">
+                                        <thead>
+
+
+                                        <th>Selecione a vaca para produção</th>
+
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var item in ViewData["animais"] as List<SysAgropec.Models.AnimalViewModel>)
+                                            {
+
+                                                <tr>
+                                                    <td>
+                                                        <div class="radio">
+                                                            <label id="@item.ID">
+                                                                <input type="radio" name="optionsRadios" id="optionsRadios" value="@item.ID">
+                                                                @item.Descricao - @item.Registro
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                            }
+
+                                        </tbody>
+                                    </table>
+
+                                    <a href="#" onclick="fechaJanela();" class="btn btn-primary">Adicionar Animal </a>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <br><br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Incluir</button>
+                </div>
+
+
+            }
+        </div><!-- /form-panel -->
+    </div>
+</div>
+
+
+

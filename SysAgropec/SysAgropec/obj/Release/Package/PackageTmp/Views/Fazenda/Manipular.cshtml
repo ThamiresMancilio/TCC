@@ -1,0 +1,36 @@
+﻿
+
+@{
+    ViewBag.Title = "Escolha uma fazenda";
+    Layout = "~/Views/Shared/LayoutClean.cshtml";
+}
+
+<div id="form-container">
+    <div class="panel" id="form-box">
+        @using (Html.BeginForm("Index", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+        {
+            <h2 class="text-center" id="titulo"> Escolha uma das fazendas para administrar</h2>
+
+
+            <div class="form-group">
+                <select class="form-control" name="fazenda">
+
+                    @foreach (var fazenda in ViewData["fazendas"] as List <SysAgropec.Models.FazendaViewModel>)
+                        {
+
+                        <option value="@fazenda.ID">@fazenda.Razaosocial</option>
+
+
+                        }
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Entrar">
+
+            </div>
+        }
+    </div>
+
+</div>

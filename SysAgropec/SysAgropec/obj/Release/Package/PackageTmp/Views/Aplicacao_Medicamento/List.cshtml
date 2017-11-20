@@ -1,0 +1,161 @@
+﻿@model IEnumerable<SysAgropec.Models.AplicacaoMedicamentoViewModel>
+@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@Styles.Render("~/bundles/paging")
+
+@Scripts.Render("~/bundles/Aplicacao")
+
+<h3><i class="fa fa-angle-right"></i> Consultar Aplicações</h3>
+<div class="row mt">
+    <div class="col-lg-12">
+        <div class="form-panel">
+            <h4 class="mb"><i class="fa fa-angle-right"></i> Filtros</h4>
+            @using (Html.BeginForm("ListWithParameters", "Aplicacao_Medicamento", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-inline" }))
+            {
+
+                <fieldset class="form-group">
+                    <legend>Filtros de pesquisa</legend>
+                    <div class="form-group">
+                        <label for="descri">Data de aplicação:</label>
+                        <input type="date" class="form-control" id="datIni" name="datIni" style="width: 165px;">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descri">à:</label>
+                        <input type="date" class="form-control" id="datFin" name="datFin" style="width: 165px;">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Consultar</button>
+                    </div>
+                    <br /><br />
+                </fieldset>
+            }
+
+        </div><!-- /form-panel -->
+
+        <table id="easyPaginate" class="table table-bordered table-striped table-condensed">
+            <thead>
+            <th>Data aplicada</th>
+            <th>Medicação</th>
+            <th>Animal</th>
+            <th>Obs</th>
+            <th>Ações</th>
+
+            </thead>
+            <tbody>
+                @if (Model != null)
+            {
+                foreach (var aplicacao in Model)
+                {
+                        <tr class="line" id="row_@aplicacao.ID">
+                            <td>@aplicacao.Dataplicacao.ToString("dd/MM/yyyy")</td>
+                            <td>@aplicacao.nomeMedicamento</td>
+                            <td>@aplicacao.animalDescri</td>
+                            <th>@aplicacao.Observacao</th>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-xs" onclick="Alterar(@aplicacao.ID)" title="Alterar Registro"><i class="fa fa-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-xs" onclick="ConfirmaExclusao(@aplicacao.ID, '@aplicacao.animalDescri','@aplicacao.nomeMedicamento')" title="Excluir Registro"><i class="fa fa-trash-o "></i></a>
+                                
+                            </td>
+
+                        </tr>}
+            }
+            else
+            {
+                    <tr class="line">
+                        <td colspan="2">
+                            Nenhum registro localizado.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <input type="hidden" id="idMedicamento" />
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Alerta de Exclusão</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="msg"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <a href="#" onclick="DeleteMedicamento()" class="btn btn-primary">Excluir</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal2" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Mensagem</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Registro excluído com sucesso.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModalEditMedicamento" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Alterando</h4>
+                    </div>
+                    <div class="modal-body" id="myModalBodyMedicamento">
+
+
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalMsgEstoque" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Mensagem</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="medicamentoMsg"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

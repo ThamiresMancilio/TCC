@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2e0d15ff1f0745e4a9d5ec64b4820b29" Name="Diagram1" ZoomLevel="89">
+        <EntityTypeShape EntityType="sysagropecModel.Animal" Width="1.5" PointX="5.25" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sysagropecModel.Aplicacao_Medicamento" Width="1.5" PointX="7.5" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="sysagropecModel.Estoque_Medicamento" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="sysagropecModel.Livro" Width="1.5" PointX="3" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="sysagropecModel.Lote" Width="1.5" PointX="8.25" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="sysagropecModel.Medicamento" Width="1.5" PointX="13.5" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="sysagropecModel.Producao" Width="1.5" PointX="10.5" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sysagropecModel.Propriedade" Width="1.5" PointX="3" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="sysagropecModel.Raca" Width="1.5" PointX="3" PointY="30.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sysagropecModel.Usuario" Width="1.5" PointX="0.75" PointY="14.5" IsExpanded="true" />
+        <AssociationConnector Association="sysagropecModel.fk_animais_livro1" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_animais_propriedades1" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_animais_racas1" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_animais_usuarios1" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_animais_usuarios2" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_aplicacao_medicamentos_animais1" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_producoes_animais" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_aplicacao_medicamentos_medicamento1" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_aplicacao_medicamentos_usuarios1" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_aplicacao_medicamentos_usuarios2" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_estoque_medicamentos_medicamento1" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_estoque_medicamentos_usuarios1" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_livro_usuarios1" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_livro_usuarios2" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_lote_medicamentos_propriedades1" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_lote_medicamentos_usuarios1" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_lote_medicamentos_usuarios2" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_medicamento_lote_medicamentos1" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_medicamento_usuarios1" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_medicamento_usuarios2" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_producoes_usuarios1" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_producoes_usuarios2" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_producoes_usuarios3" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_propriedades_usuarios1" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_propriedades_usuarios2" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_racas_usuarios1" ManuallyRouted="false" />
+        <AssociationConnector Association="sysagropecModel.fk_racas_usuarios2" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

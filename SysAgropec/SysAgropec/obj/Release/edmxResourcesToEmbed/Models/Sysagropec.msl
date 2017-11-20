@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="sysagropecModelStoreContainer" CdmEntityContainer="sysagropecEntities">
+    <EntitySetMapping Name="Animal">
+      <EntityTypeMapping TypeName="sysagropecModel.Animal">
+        <MappingFragment StoreEntitySet="Animal">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="Registro" ColumnName="Registro" />
+          <ScalarProperty Name="Tatuagem" ColumnName="Tatuagem" />
+          <ScalarProperty Name="Numerobrinco" ColumnName="Numerobrinco" />
+          <ScalarProperty Name="Datanascimento" ColumnName="Datanascimento" />
+          <ScalarProperty Name="Morto" ColumnName="Morto" />
+          <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+          <ScalarProperty Name="Datacadastro" ColumnName="Datacadastro" />
+          <ScalarProperty Name="Datalteracao" ColumnName="Datalteracao" />
+          <ScalarProperty Name="Registropai" ColumnName="Registropai" />
+          <ScalarProperty Name="Tatuagempai" ColumnName="Tatuagempai" />
+          <ScalarProperty Name="Descricaopai" ColumnName="Descricaopai" />
+          <ScalarProperty Name="Registromae" ColumnName="Registromae" />
+          <ScalarProperty Name="Tatuagemae" ColumnName="Tatuagemae" />
+          <ScalarProperty Name="Descricaomae" ColumnName="Descricaomae" />
+          <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+          <ScalarProperty Name="Lactacao" ColumnName="Lactacao" />
+          <ScalarProperty Name="Dias_lactacao" ColumnName="Dias_lactacao" />
+          <ScalarProperty Name="Datalactacao" ColumnName="Datalactacao" />
+          <ScalarProperty Name="Livro_ID" ColumnName="Livro_ID" />
+          <ScalarProperty Name="Raca_ID" ColumnName="Raca_ID" />
+          <ScalarProperty Name="Propriedade_ID" ColumnName="Propriedade_ID" />
+          <ScalarProperty Name="Usuario_IDCadastro" ColumnName="Usuario_IDCadastro" />
+          <ScalarProperty Name="Usuario_IDAlteracao" ColumnName="Usuario_IDAlteracao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Aplicacao_Medicamento">
+      <EntityTypeMapping TypeName="sysagropecModel.Aplicacao_Medicamento">
+        <MappingFragment StoreEntitySet="Aplicacao_Medicamento">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Dataplicacao" ColumnName="Dataplicacao" />
+          <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+          <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+          <ScalarProperty Name="Datacadastro" ColumnName="Datacadastro" />
+          <ScalarProperty Name="Datalteracao" ColumnName="Datalteracao" />
+          <ScalarProperty Name="Animal_ID" ColumnName="Animal_ID" />
+          <ScalarProperty Name="Medicamento_ID" ColumnName="Medicamento_ID" />
+          <ScalarProperty Name="Usuario_IDCadastro" ColumnName="Usuario_IDCadastro" />
+          <ScalarProperty Name="Usuario_IDAlteracao" ColumnName="Usuario_IDAlteracao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estoque_Medicamento">
+      <EntityTypeMapping TypeName="sysagropecModel.Estoque_Medicamento">
+        <MappingFragment StoreEntitySet="Estoque_Medicamento">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Quantidademinima" ColumnName="Quantidademinima" />
+          <ScalarProperty Name="Quantidademaxima" ColumnName="Quantidademaxima" />
+          <ScalarProperty Name="Quantidadeatual" ColumnName="Quantidadeatual" />
+          <ScalarProperty Name="Medicamento_ID" ColumnName="Medicamento_ID" />
+          <ScalarProperty Name="Usuario_IDAlteracao" ColumnName="Usuario_IDAlteracao" />
+          <ScalarProperty Name="Data_Estocado" ColumnName="Data_Estocado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Livro">
+      <EntityTypeMapping TypeName="sysagropecModel.Livro">
+        <MappingFragment StoreEntitySet="Livro">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="Datacadastro" ColumnName="Datacadastro" />
+          <ScalarProperty Name="Datalteracao" ColumnName="Datalteracao" />
+          <ScalarProperty Name="Excluido" ColumnName="Excluido" />
+          <ScalarProperty Name="Usuario_IDCadastro" ColumnName="Usuario_IDCadastro" />
+          <ScalarProperty Name="Usuario_IDAlteracao" ColumnName="Usuario_IDAlteracao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lote">
+      <EntityTypeMapping TypeName="sysagropecModel.Lote">
+        <MappingFragment StoreEntitySet="Lote">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Numerolote" ColumnName="Numerolote" />
+          <ScalarProperty Name="Datafabricacao" ColumnName="Datafabricacao" />
+          <ScalarProperty Name="Datavalidade" ColumnName="Datavalidade" />
+          <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+          <ScalarProperty Name="Datacadastro" ColumnName="Datacadastro" />
+          <ScalarProperty Name="Dataalteracao" ColumnName="Dataalteracao" />
+          <ScalarProperty Name="Propriedade_ID" ColumnName="Propriedade_ID" />
+          <ScalarProperty Name="Usuario_IDCadastro" ColumnName="Usuario_IDCadastro" />
+          <ScalarProperty Name="Usuario_IDAlteracao" ColumnName="Usuario_IDAlteracao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Medicamento">
+      <EntityTypeMapping TypeName="sysagropecModel.Medicamento">
+        <MappingFragment StoreEntitySet="Medicamento">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="Carencialeite" ColumnName="Carencialeite" />
+          <ScalarProperty Name="Datacadastro" ColumnName="Datacadastro" />
+          <ScalarProperty Name="Datalteracao" ColumnName="Datalteracao" />
+          <ScalarProperty Name="Lote_ID" ColumnName="Lote_ID" />
+          <ScalarProperty Name="Usuario_IDCadastro" ColumnName="Usuario_IDCadastro" />
+          <ScalarProperty Name="Usuario_IDAlteracao" ColumnName="Usuario_IDAlteracao" />
+          <ScalarProperty Name="Estocado" ColumnName="Estocado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Producao">
+      <EntityTypeMapping TypeName="sysagropecModel.Producao">
+        <MappingFragment StoreEntitySet="Producao">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Datarealizada" ColumnName="Datarealizada" />
+          <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+          <ScalarProperty Name="Datacadastro" ColumnName="Datacadastro" />
+          <ScalarProperty Name="Datalteracao" ColumnName="Datalteracao" />
+          <ScalarProperty Name="Excluido" ColumnName="Excluido" />
+          <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+          <ScalarProperty Name="Animail_ID" ColumnName="Animail_ID" />
+          <ScalarProperty Name="Usuario_IDProducao" ColumnName="Usuario_IDProducao" />
+          <ScalarProperty Name="Usuario_IDCadastro" ColumnName="Usuario_IDCadastro" />
+          <ScalarProperty Name="Usuario_IDAlteracao" ColumnName="Usuario_IDAlteracao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Propriedade">
+      <EntityTypeMapping TypeName="sysagropecModel.Propriedade">
+        <MappingFragment StoreEntitySet="Propriedade">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Cnpj" ColumnName="Cnpj" />
+          <ScalarProperty Name="Razaosocial" ColumnName="Razaosocial" />
+          <ScalarProperty Name="Nomefantasia" ColumnName="Nomefantasia" />
+          <ScalarProperty Name="Inscricaomunicipal" ColumnName="Inscricaomunicipal" />
+          <ScalarProperty Name="Inscricaoestadual" ColumnName="Inscricaoestadual" />
+          <ScalarProperty Name="Cep" ColumnName="Cep" />
+          <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
+          <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+          <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+          <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="Datacadastro" ColumnName="Datacadastro" />
+          <ScalarProperty Name="Dataalteracao" ColumnName="Dataalteracao" />
+          <ScalarProperty Name="Usuario_IDCadastro" ColumnName="Usuario_IDCadastro" />
+          <ScalarProperty Name="Usuario_IDAlteracao" ColumnName="Usuario_IDAlteracao" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Email2" ColumnName="Email2" />
+          <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+          <ScalarProperty Name="Telefone2" ColumnName="Telefone2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Raca">
+      <EntityTypeMapping TypeName="sysagropecModel.Raca">
+        <MappingFragment StoreEntitySet="Raca">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="Datacadastro" ColumnName="Datacadastro" />
+          <ScalarProperty Name="Datalteracao" ColumnName="Datalteracao" />
+          <ScalarProperty Name="Usuario_IDCcadastro" ColumnName="Usuario_IDCcadastro" />
+          <ScalarProperty Name="Usuario_IDAlteracao" ColumnName="Usuario_IDAlteracao" />
+          <ScalarProperty Name="Excluido" ColumnName="Excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="sysagropecModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Sobrenome" ColumnName="Sobrenome" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Senha" ColumnName="Senha" />
+          <ScalarProperty Name="Admin" ColumnName="Admin" />
+          <ScalarProperty Name="Datacadastro" ColumnName="Datacadastro" />
+          <ScalarProperty Name="Datalteracao" ColumnName="Datalteracao" />
+          <ScalarProperty Name="Dataultimoacesso" ColumnName="Dataultimoacesso" />
+          <ScalarProperty Name="Excluido" ColumnName="Excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

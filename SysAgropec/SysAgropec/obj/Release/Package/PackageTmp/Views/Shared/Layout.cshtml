@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/bundles/bootstrap2")
+
+    
+</head>
+
+
+<body>
+
+    <section id="container">
+        <header class="header black-bg">
+            <div class="sidebar-toggle-box">
+                <div class="fa fa-bars tooltips" style="color: white;" data-placement="right" data-original-title="Esconder / Mostrar menu"></div>
+            </div>
+            <div class="top-menu">
+                <ul class="nav pull-right top-menus" style="margin-top: 12px;float: right;">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: white;background-color:rgb(0,166,90);margin-right:35px; width:125px;">
+                            <i class="fa fa-user fa-fw"></i> @Session["loginuser"]<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user" style="color: white;background-color: rgb(0,166,90);">
+                            <li>
+                                <a href="@Url.Action("Manipular","Fazenda")" style="color: white;background-color: rgb(0,166,90);"><i class="fa fa-user fa-fw"></i> Meus Dados</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="@Url.Action("Manipular","Fazenda")" style="color: white;background-color: rgb(0,166,90);"><i class="fa fa-sign-out fa-fw"></i> Trocar de Fazenda</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="@Url.Action("Logout","Login")" style="color: white;background-color: rgb(0,166,90);"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+     </header>
+   
+        <aside>
+            <div id="sidebar" class="nav-collapse ">
+                <!-- sidebar menu start-->
+                <ul class="sidebar-menu" id="nav-accordion">
+
+                    <p class="centered">@Html.ActionLink(" ","Index","Home")<img src="~/Images/vaca.png" class="img-circle" width="60"></p>
+                    <h5 class="centered">SysAgropec</h5>
+
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-dashboard"></i>
+                            <span>Fazendas</span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("Consultar", "List", "Fazenda")</li>
+                            <li>@Html.ActionLink("Novo Registro", "Add", "Fazenda")</li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-desktop"></i>
+                            <span>Rebanho</span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("Consultar", "List", "Rebanho")</li>
+                            <li>@Html.ActionLink("Novo Registro", "Add", "Rebanho")</li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-desktop"></i>
+                            <span>Livros</span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("Consultar", "List", "Livro")</li>
+                            <li>@Html.ActionLink("Novo Registro", "Add", "Livro")</li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-cogs"></i>
+                            <span>Raças</span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("Consultar", "List", "Raca")</li>
+                            <li>@Html.ActionLink("Novo Registro", "Add", "Raca")</li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-book"></i>
+                            <span>Lote</span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("Consultar", "List", "Lote")</li>
+                            <li>@Html.ActionLink("Novo Registro", "Add", "Lote")</li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-tasks"></i>
+                            <span>Medicamentos</span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("Consultar", "List", "Medicamento")</li>
+                            <li>@Html.ActionLink("Novo Registro", "Add", "Medicamento")</li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-th"></i>
+                            <span>Estoque</span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("Consultar", "Stock", "Estoque")</li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-th"></i>
+                            <span>Aplicação medicamentos</span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("Consultar", "List", "Aplicacao_Medicamento")</li>
+                            <li>@Html.ActionLink("Novo Registro", "Add", "Aplicacao_Medicamento")</li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-th"></i>
+                            <span>Produção leiteira</span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("Consultar", "List", "Producao")</li>
+                            <li>@Html.ActionLink("Novo Registro", "Add", "Producao")</li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-th"></i>
+                            <span>Gráficos</span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("Produção Anual", "ProducaoAnual", "Grafico")</li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-th"></i>
+                            <span>Relatórios</span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("Animais por raça", "Animais", "Relatorio")</li>
+                            <li>@Html.ActionLink("Estoque de Medicamentos", "Estoque", "Relatorio")</li>
+                            <li>@Html.ActionLink("TOP Produção", "ProducaoTOP", "Relatorio")</li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- sidebar menu end-->
+            </div>
+        </aside>
+        <section id="main-content">
+            <section class="wrapper site-min-height">
+                @RenderBody()
+        </section><!-- /MAIN CONTENT -->
+            <footer class="site-footer">
+                <div class="text-center">
+                    Fazenda: @Session["fazenda"] | Usuário: @Session["loginuser"] | Último acesso em: @Session["ultimoAcesso"]
+                    <a href="#" class="go-top">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+            </footer>
+    </section>
+
+    <script src="~/Scripts/jquery.js"></script>
+    <!--<script src="assets/js/jquery-1.8.3.min.js"></script>-->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="~/Scripts/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="~/Scripts/jquery.scrollTo.min.js"></script>
+    <script src="~/Scripts/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.sparkline.js"></script>
+
+
+    <!--common script for all pages-->
+    <script src="~/Scripts/common-scripts.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/gritter/js/jquery.gritter.js"></script>
+    <script type="text/javascript" src="~/Scripts/gritter-conf.js"></script>
+    
+    @Scripts.Render("~/bundles/jquery-paginator")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#easyPaginate').paging({ limit: 4 });
+        });
+
+
+        $(function () {
+            $('select.styled').customSelect();
+        });
+    </script>
+    
+</body>
+</html>
