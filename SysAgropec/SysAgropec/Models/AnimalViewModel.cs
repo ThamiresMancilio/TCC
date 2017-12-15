@@ -40,7 +40,7 @@ namespace SysAgropec.Models
 
         public List<AnimalViewModel> animaisList;
 
-        public List<AnimalViewModel> CarregaAnimal(int sexoP,string regIP = "", string regFP = "", string tatuagemP = "")
+        public List<AnimalViewModel> CarregaAnimal(int codFazenda, int sexoP,string regIP = "", string regFP = "", string tatuagemP = "")
         {
 
             sysagropecEntities db = new sysagropecEntities();
@@ -49,11 +49,11 @@ namespace SysAgropec.Models
 
             if(sexoP >= 0)
             {
-                animais = db.Animal.Where(x => x.Sexo ==sexoP).ToList();
+                animais = db.Animal.Where(x => x.Sexo ==sexoP && x.Propriedade_ID ==codFazenda).ToList();
             }
             else
             {
-                animais = db.Animal.ToList();
+                animais = db.Animal.Where(x=> x.Propriedade_ID == codFazenda).ToList();
             }
 
             
@@ -134,12 +134,12 @@ namespace SysAgropec.Models
 
        
 
-        public List<AnimalViewModel> RelatorioAnimais(DateTime dataCadI, DateTime dataCadF)
+        public List<AnimalViewModel> RelatorioAnimais(int codFazenda,DateTime dataCadI, DateTime dataCadF)
         {
             sysagropecEntities db = new sysagropecEntities();
 
             List<Animal> animaisrel = db.Animal.Where(x => x.Datacadastro >= dataCadI &&
-            x.Datacadastro <= dataCadF
+            x.Datacadastro <= dataCadF && x.Propriedade_ID == codFazenda
             ).OrderBy(x => x.Sexo).ThenBy(x => x.Raca.Descricao).ToList();
 
             //List<Animal> animaisrel = db.Animal.OrderBy(x => x.Sexo).ThenBy(x => x.Raca_ID).ToList();
@@ -174,12 +174,37 @@ namespace SysAgropec.Models
 
         }
 
-        public List<AnimalViewModel> CarregaMatrizes()
+        //utilizado para a produção leiteira
+        public List<AnimalViewModel> CarregaMatrizes(int codFazenda)
         {
 
             sysagropecEntities db = new sysagropecEntities();
 
-            List<Animal> animais = db.Animal.Where(x => x.Sexo ==1).ToList();
+            List<Animal> animais = db.Animal.Where(x => x.Sexo ==1 && (x.Morto ==0 || x.Morto ==null) &&  x.Propriedade_ID == codFazenda).ToList();
+
+            AnimalViewModel a = new AnimalViewModel();
+
+            List<AnimalViewModel> animalVMList = animais.Select(
+                x => new AnimalViewModel
+                {
+                    ID = x.ID,
+                    Descricao = x.Descricao,
+                    Registro = x.Registro
+                }
+
+                ).ToList();
+
+
+            return animalVMList;
+        }
+
+        //utilizado para a aplicação de medicamentos
+        public List<AnimalViewModel> CarregaGado(int codFazenda)
+        {
+
+            sysagropecEntities db = new sysagropecEntities();
+
+            List<Animal> animais = db.Animal.Where(x => (x.Morto == 0 || x.Morto ==null) && x.Propriedade_ID == codFazenda).ToList();
 
             AnimalViewModel a = new AnimalViewModel();
 

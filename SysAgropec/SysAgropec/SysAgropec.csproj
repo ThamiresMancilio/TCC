@@ -183,6 +183,7 @@
     <Compile Include="Class\Raca.cs" />
     <Compile Include="Class\Relatorio.cs" />
     <Compile Include="Class\RelatorioHelper.cs" />
+    <Compile Include="Class\Sexo.cs" />
     <Compile Include="Class\Upload_Image.cs" />
     <Compile Include="Class\Usuario.cs" />
     <Compile Include="Controllers\Aplicacao_MedicamentoController.cs" />
@@ -260,6 +261,7 @@
       <DependentUpon>Sysagropec.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UsuarioViewModel.cs" />
+    <Compile Include="Models\Usuario_Propriedade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -293,6 +295,7 @@
     <Content Include="assets\web\assets\mobirise-icons-bold\mobirise-icons-bold.svg" />
     <Content Include="assets\web\assets\mobirise-icons\mobirise-icons.css" />
     <Content Include="assets\web\assets\mobirise-icons\mobirise-icons.svg" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Images\vaca-white.png" />
     <Content Include="Images\vaca.jpg" />
     <Content Include="Images\vaca.png" />
@@ -427,6 +430,11 @@
     <Content Include="assets\web\assets\mobirise-icons\mobirise-icons.eot" />
     <Content Include="assets\web\assets\mobirise-icons\mobirise-icons.ttf" />
     <Content Include="assets\web\assets\mobirise-icons\mobirise-icons.woff" />
+    <Content Include="fonts\.DS_Store" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\sysagropec - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -447,7 +455,9 @@
     <Content Include="Styles\style-responsive.css" />
     <Content Include="Styles\style.css" />
     <Content Include="upload_images\jersey-logo.jpg" />
+    <Content Include="upload_images\jersey-logorel.jpg" />
     <Content Include="upload_images\logo-fazenda.jpg" />
+    <Content Include="upload_images\logo-fazendarel.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -502,6 +512,9 @@
     <Content Include="Views\Relatorio\Estoque.cshtml" />
     <Content Include="Views\Grafico\ProducaoAnual.cshtml" />
     <Content Include="Views\Home\Inicio.cshtml" />
+    <Content Include="Views\Usuario\PartialView.cshtml" />
+    <Content Include="Views\Usuario\My_User.cshtml" />
+    <Content Include="Views\Usuario\My_User_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="tmp_images\" />

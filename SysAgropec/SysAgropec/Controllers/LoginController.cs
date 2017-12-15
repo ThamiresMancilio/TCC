@@ -47,6 +47,12 @@ namespace SysAgropec.Controllers
                 if (u.ValidaUsuario(name, password) != null)
                 {
 
+                    Usuario_Propriedade userpro = new Usuario_Propriedade();
+
+                    List<Usuario_Propriedade> userprolist =  userpro.getUserPropriedadeByID(u.ID);
+
+                    if(userprolist.Count > 0 || u.Admin == 1) { 
+
                     Session["iduser"] = u.ID;
                     Session["loginuser"] = u.Login;
                     Session["nome"] = u.Nome;
@@ -62,6 +68,14 @@ namespace SysAgropec.Controllers
                                 controller = "Fazenda",
                                 action = "Manipular"
                             }));
+
+                    }
+                    else
+                    {
+                        ViewData["msg"] = "Você não possui fazendas para manipular, contate o administrador do sistema";
+
+                        return View("Logar");
+                    }
 
                 }
                 else

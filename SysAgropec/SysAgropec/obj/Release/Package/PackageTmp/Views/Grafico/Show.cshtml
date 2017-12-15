@@ -6,16 +6,15 @@
 <script type="text/javascript" src="~/Scripts/Chart.min.js"></script>
 <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
 @*<script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
-<link href="~/Styles/bootstrap.min.css" rel="stylesheet" />*@
+    <link href="~/Styles/bootstrap.min.css" rel="stylesheet" />*@
 <style>
-    #chart-content{
-        
-        height:400px;
+    #chart-content {
+        height: 400px;
         border: 1px solid #ddd;
-        padding:1px;
-        border-radius:4px;
-
+        padding: 1px;
+        border-radius: 4px;
     }
+
     #line-content {
         height: 400px;
         border: 1px solid #ddd;
@@ -24,21 +23,26 @@
     }
 </style>
 
-<div id="line-content" style="width:75%;">
-    <canvas id="line_chart"></canvas>
-    
-</div>
+<h3><i class="fa fa-angle-right"></i> Gráfico de Produção Anual</h3>
+<div class="row mt">
+    <div class="col-lg-12">
 
-<script>
-    
+        <div id="line-content" style="width:75%;">
+            <canvas id="line_chart"></canvas>
+
+        </div>
+    </div>
+</div>
+        <script>
+
     @{
 
         var prod = new SysAgropec.Models.ProducaoViewModel();
 
-        prod.DadosGrafico(Convert.ToInt16(Request.Form["anoI"]), Convert.ToInt16(Request.Form["anoF"]), Convert.ToInt16(Session["idfazenda"]));
-        
+        prod.DadosGrafico(Convert.ToInt16(Request.Form["anoI"]), Convert.ToInt16(Session["idfazenda"]));
+
     }
-      
+
     var ctx2 = $("#line_chart");
 
     var config = new Chart(ctx2, {
@@ -64,11 +68,11 @@
             responsive: true,
             title: {
                 display: true,
-                text: 'Gráfico de Produção Anual - Resultado em Litros(KG)'
+                text: 'Gráfico de Produção Anual - Resultado em Quilos(KG)'
             }
         }
     });
 
-</script>
-<br /><br />
-Total produzido no ano @Request.Form["anoI"]: @prod.producoes.Sum() (KG)
+        </script>
+        <br /><br />
+        Total produzido no ano @Request.Form["anoI"]: @prod.producoes.Sum() (KG)

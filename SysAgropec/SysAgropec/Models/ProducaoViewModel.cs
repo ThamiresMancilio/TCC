@@ -23,7 +23,7 @@ namespace SysAgropec.Models
 
         public double totalQuantidade { get; set; }
 
-        public double[] producoes { get; set; }
+        public double?[] producoes { get; set; }
 
         public int AdicionaProducao(ProducaoViewModel producao)
         {
@@ -60,7 +60,36 @@ namespace SysAgropec.Models
 
 
         }
-        
+
+        public void ExcluiProducao(int idProducao)
+        {
+
+            if (idProducao > 0)
+            {
+
+                try
+                {
+
+                    sysagropecEntities db = new sysagropecEntities();
+
+                    Producao prod = db.Producao.SingleOrDefault(l => l.ID == idProducao);
+
+                    if (prod != null)
+                    {
+                        prod.Excluido = 1;
+                        db.SaveChanges();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+
+
+            }
+        }
         public List<ProducaoViewModel> RelatorioAnimais(DateTime dataProdI, DateTime dataProdF)
         {
             sysagropecEntities db = new sysagropecEntities();
@@ -93,18 +122,18 @@ namespace SysAgropec.Models
 
         }
 
-        public double[] DadosGrafico(int anoI, int anoF, int codFazenda) {
+        public double?[] DadosGrafico(int anoI, int codFazenda) {
 
             sysagropecEntities db = new sysagropecEntities();
 
-            producoes = new double[12];
+            producoes = new double?[12];
 
             
             for (int i =0; i<12; i++)
             {
               producoes[i] = db.Producao.Where(x => x.Animal.Propriedade_ID == codFazenda
                 && x.Datarealizada.Year == anoI && x.Datarealizada.Month == i+1
-                    ).Sum(x => x.Quantidade);
+                    ).Select(x => x.Quantidade).DefaultIfEmpty(0).Sum();
                 
             }
             
@@ -123,7 +152,7 @@ namespace SysAgropec.Models
             if (datFin != null && datIni != null)
             {
 
-               producoes = db.Producao.Where(x => x.Datarealizada <= datIni && x.Datarealizada >= datFin).ToList();
+               producoes = db.Producao.Where(x => x.Datarealizada >= datIni && x.Datarealizada <= datFin).ToList();
             }
             else
             {
@@ -143,8 +172,6 @@ namespace SysAgropec.Models
                     Observacao = x.Observacao,
                     nomeAnimal = x.Animal.Descricao
                     
-
-
                 }
 
                 ).ToList();

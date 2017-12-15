@@ -13,13 +13,38 @@ namespace SysAgropec.Controllers
     public class ProducaoController : Controller
     {
 
+        public JsonResult Delete(int idProducao)
+        {
+            if (Session["loginuser"] != null)
+            {
+                bool result = false;
+
+                if (idProducao > 0)
+                {
+
+                    ProducaoViewModel l = new ProducaoViewModel();
+
+                   
+                    l.ExcluiProducao(idProducao);
+
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                }
+                return null;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
         public ActionResult Add()
         {
             if (Session["loginuser"] != null)
             {
                 AnimalViewModel a = new AnimalViewModel();
 
-                ViewData["animais"] = a.CarregaMatrizes();
+                ViewData["animais"] = a.CarregaMatrizes(Convert.ToInt16(Session["idfazenda"]));
 
                 return View();
 

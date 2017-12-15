@@ -17,8 +17,9 @@ namespace SysAgropec.Controllers
         private Relatorio getRelatorio(int tipo)
         {
             var rpt = new Relatorio();
+            //ver aqui depois
             rpt.BasePath = Server.MapPath("/");
-
+            
             rpt.PageTitle = titulo;
             rpt.PageTitle = titulo;
             rpt.ImprimirCabecalhoPadrao = true;

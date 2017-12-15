@@ -44,7 +44,11 @@ namespace SysAgropec.Class
 
                 AnimalViewModel a = new AnimalViewModel();
 
-                var animais = a.RelatorioAnimais(datIni, datFin);
+                HttpContext httpContext = HttpContext.Current;
+
+                int idfazenda =Convert.ToInt16( httpContext.ApplicationInstance.Session["idfazenda"].ToString());
+
+                var animais = a.RelatorioAnimais(idfazenda, datIni, datFin);
 
                 var animalOLD = 0;
 

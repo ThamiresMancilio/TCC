@@ -1,0 +1,70 @@
+﻿<div>
+
+    <form id="myForm" class="form-inline">
+
+
+        <fieldset class="form-group">
+            <legend>Fazendas Participantes</legend>
+
+            @foreach (var fazenda in ViewData["fazendasedit"] as List<SysAgropec.Models.FazendaViewModel>)
+            {
+                @*@foreach (var usuariosfazenda in ViewData["fazendasusuarios"] as List<SysAgropec.Models.Usuario_Propriedade>)
+                {*@
+
+                    if (usuariosfazenda.Propriedade_ID == fazenda.ID)
+                    {
+                        <label class="checkbox-inline">
+                            <input type="checkbox" checked="checked" id="row_@fazenda.ID" value="@fazenda.ID"> @fazenda.Razaosocial
+                        </label>
+                        <hr>
+                    }
+                    else
+                    {
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="row_@fazenda.ID" value="@fazenda.ID"> @fazenda.Razaosocial
+                        </label>
+                        <hr>
+                    }
+                    
+
+                @*}*@
+            }
+        </fieldset>
+        <br /><br />
+        <input type="hidden" value="@ViewData["iduser"].ToString()" name="iduser" id="iduser" />
+        <a href="#" id="btnSubmit" class="btn btn-primary">Salvar </a>
+
+    </form>
+
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        $("#btnSubmit").click(function () {
+
+            var myformdata = $("#myForm").serialize();
+
+            $.ajax({
+
+                type: "POST",
+                url: "Update",
+                data: myformdata,
+                success: function () {
+
+                    $("#myModalEditUsuario").modal("hide");
+                    window.location.href = "/Usuario/List";
+
+                }
+
+            })
+        })
+
+    })
+
+
+</script>
+
+

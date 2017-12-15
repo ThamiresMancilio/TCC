@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<SysAgropec.Models.ProducaoViewModel>
 @{
     Layout = "~/Views/Shared/Layout.cshtml";
+    ViewBag.Title = "Consultar Produção diária";
 }
 
 @Styles.Render("~/bundles/paging")
@@ -56,7 +57,6 @@
                             
 
                             <td>
-                                <a href="#" class="btn btn-primary btn-xs" onclick="Alterar(@prod.ID)" title="Alterar Registro"><i class="fa fa-pencil"></i></a>
                                 <a href="#" class="btn btn-danger btn-xs" onclick="ConfirmaExclusao(@prod.ID, '@prod.nomeAnimal')" title="Excluir Registro"><i class="fa fa-trash-o "></i></a>
                              
                             </td>
@@ -73,7 +73,7 @@
                 }
             </tbody>
         </table>
-        <input type="hidden" id="idMedicamento" />
+        <input type="hidden" id="idProducao" />
 
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">
@@ -90,7 +90,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                        <a href="#" onclick="DeleteMedicamento()" class="btn btn-primary">Excluir</a>
+                        <a href="#" onclick="DeleteProducao()" class="btn btn-primary">Excluir</a>
                     </div>
                 </div>
 
@@ -107,47 +107,6 @@
                     </div>
                     <div class="modal-body">
                         <p>Registro excluído com sucesso.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
-        <!-- Modal -->
-        <div class="modal fade" id="myModalEditMedicamento" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Alterando</h4>
-                    </div>
-                    <div class="modal-body" id="myModalBodyMedicamento">
-
-
-                    </div>
-                    <div class="modal-footer">
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
-        <!-- Modal -->
-        <div class="modal fade" id="modalMsgEstoque" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Mensagem</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p id="medicamentoMsg"></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>

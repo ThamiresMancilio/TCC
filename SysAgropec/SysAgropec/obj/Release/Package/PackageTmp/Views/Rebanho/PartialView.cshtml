@@ -5,109 +5,121 @@
     <form id="myForm" class="form-inline">
         @Html.HiddenFor(m => m.ID)
 
-        <div class="form-group">
-            <label class="control-label">Nome/Apelido:</label>
-            @Html.TextBoxFor(model => model.Numerobrinco, new { @class = "form-control", required = "required" })
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword2">Registro:</label>
-            @Html.TextBoxFor(model => model.Registro, new { @class = "form-control" })
-
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail2">Tatuagem:</label>
-            @Html.TextBoxFor(model => model.Tatuagem, new { @class = "form-control" })
-
-        </div>s
-        <div class="form-group">
-            <label for="exampleInputPassword2">Nº brinco:</label>
-            @Html.TextBoxFor(model => model.Numerobrinco, new { @class = "form-control" })
-
-        </div>
-        <br /><br />
-        <div class="form-group">
-            <label for="exampleInputEmail2">Data de Nascimento:</label>
-            @Html.TextBoxFor(model => model.Datanascimento, new { @class = "form-control", type = "date", required="required" })
-
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword2">Sexo: </label>
-            <select class="form-control" name="sexo">
-                <option value="0">Macho</option>
-                <option value="1">Fêmea</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword2">Livro: </label>
-            @Html.DropDownListFor(model => model.Livro_ID, ViewBag.LivroList as SelectList, "Escolha uma opção", new { @class = "form-control", required = "required" })
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword2">Raça: </label>
-            @Html.DropDownListFor(model => model.Raca_ID, ViewBag.RacaList as SelectList, "Escolha uma opção", new { @class = "form-control", required = "required" })
-
-        </div>
-        <div class="form-group">
-            <label class="checkbox-inline">
-                <input type="checkbox" id="morto" name="morto"> Morto
-            </label>
-        </div>
-        <div class="form-group">
-            <label class="checkbox-inline">
-
-                <input type="checkbox" id="lactacao" name="lactacao"> Lactação
-            </label>
-        </div>
-        <br /><br />
-        <div class="form-group">
-            <label for="exampleInputEmail2">Observação:</label>
-            @Html.TextAreaFor(model => model.Observacao, new
-                   {
-                       @class = "form-control",
-                       rows = "3",
-                       style = "width: 100%"
-                   })
-
-        </div>
-        </fieldset>
-        <br /><br />
-        <fieldset class="form-group">
-            <legend>Dados Paternos</legend>
             <div class="form-group">
-                <label for="exampleInputPassword2">Nome/Apelido pai: </label>
-                @Html.TextBoxFor(model => model.Descricaopai, new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword2">Registro pai: </label>
-                @Html.TextBoxFor(model => model.Registropai, new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword2">Tatuagem pai: </label>
-                @Html.TextBoxFor(model => model.Tatuagempai, new { @class = "form-control" })
+                <label class="control-label">Nome/Apelido:</label>
+                @Html.TextBoxFor(model => model.Descricao, new { @class = "form-control", required = "required" })
             </div>
 
-        </fieldset>
-        <br /><br />
-        <fieldset class="form-group">
-            <legend>Dados Maternos</legend>
             <div class="form-group">
-                <label for="exampleInputPassword2">Nome/Apelido mãe: </label>
-                @Html.TextBoxFor(model => model.Descricaomae, new { @class = "form-control" })
+                <label for="exampleInputPassword2">Registro:</label>
+                @Html.TextBoxFor(model => model.Registro, new { @class = "form-control" })
+
             </div>
+            <br /><br />
             <div class="form-group">
-                <label for="exampleInputPassword2">Registro mãe: </label>
-                @Html.TextBoxFor(model => model.Registromae, new { @class = "form-control" })
+                <label for="exampleInputEmail2">Tatuagem:</label>
+                @Html.TextBoxFor(model => model.Tatuagem, new { @class = "form-control" })
+
             </div>
+
             <div class="form-group">
-                <label for="exampleInputPassword2">Tatuagem mãe: </label>
-                @Html.TextBoxFor(model => model.Tatuagemae, new { @class = "form-control" })
+                <label for="exampleInputPassword2">Nº brinco:</label>
+                @Html.TextBoxFor(model => model.Numerobrinco, new { @class = "form-control" })
+
             </div>
-        </fieldset>
-        <br><br>
+
+            <br /><br />
+            <div class="form-group">
+                <label for="exampleInputEmail2">Data de Nascimento:</label>
+                @Html.TextBoxFor(model => model.Datanascimento, new { @class = "form-control", type = "date", required = "required" })
+
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword2">Sexo: </label>
+            
+                    @Html.DropDownListFor(model => model.Sexo, ViewBag.SexoLista as SelectList, "Escolha uma opção", new { @class = "form-control", required = "required" })
+                </div>
+            </div>
+
+            <br /><br />
+            <div class="form-group">
+                <label for="exampleInputPassword2">Livro: </label>
+                @Html.DropDownListFor(model => model.Livro_ID, ViewBag.LivroList as SelectList, "Escolha uma opção", new { @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword2">Raça: </label>
+                @Html.DropDownListFor(model => model.Raca_ID, ViewBag.RacaList as SelectList, "Escolha uma opção", new { @class = "form-control", required = "required" })
+
+            </div>
+
+            <div class="form-group">
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="morto" name="Morto"> Morto
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label class="checkbox-inline">
+
+                    <input type="checkbox" id="lactacao" name="Lactacao"> Lactação
+                </label>
+            </div>
+
+            <br /><br />
+            <div class="form-group">
+                <label for="exampleInputEmail2">Observação:</label>
+                @Html.TextAreaFor(model => model.Observacao, new
+       {
+           @class = "form-control",
+           rows = "3",
+           style = "width: 100%"
+       })
+
+            </div>
+            <br /><br />
+
+            <fieldset class="form-group">
+                <legend>Dados Paternos</legend>
+                <div class="form-group">
+                    <label for="exampleInputPassword2">Nome/Apelido pai: </label>
+                    @Html.TextBoxFor(model => model.Descricaopai, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword2">Registro pai: </label>
+                    @Html.TextBoxFor(model => model.Registropai, new { @class = "form-control" })
+                </div>
+                <br /><br />
+                <div class="form-group">
+                    <label for="exampleInputPassword2">Tatuagem pai: </label>
+                    @Html.TextBoxFor(model => model.Tatuagempai, new { @class = "form-control" })
+                </div>
+
+            </fieldset>
+            <br /><br />
+            <fieldset class="form-group">
+                <legend>Dados Maternos</legend>
+                <div class="form-group">
+                    <label for="exampleInputPassword2">Nome/Apelido mãe: </label>
+                    @Html.TextBoxFor(model => model.Descricaomae, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword2">Registro mãe: </label>
+                    @Html.TextBoxFor(model => model.Registromae, new { @class = "form-control" })
+                </div>
+                <br /><br />
+                <div class="form-group">
+                    <label for="exampleInputPassword2">Tatuagem mãe: </label>
+                    @Html.TextBoxFor(model => model.Tatuagemae, new { @class = "form-control" })
+                </div>
+            </fieldset>
+            <br><br>
 
 
-        <a href="#" id="btnSubmit" class="btn btn-primary">Salvar </a>
+            <a href="#" id="btnSubmit" class="btn btn-primary">Salvar </a>
 
-    </form>
+</form>
 
 </div>
 
@@ -127,7 +139,7 @@
                 data: myformdata,
                 success: function () {
 
-                    $("#myModalEditMedicamento").modal("hide");
+                    $("#myModalEditAnimal").modal("hide");
                     window.location.href = "/Animal/List";
 
                 }

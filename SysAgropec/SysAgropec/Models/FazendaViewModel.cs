@@ -89,6 +89,50 @@ namespace SysAgropec.Models
             return f;
         }
 
+        public List<FazendaViewModel> CarregaFazendasUsuariosParticipantes(List<Usuario_Propriedade> userpro)
+        {
+
+            sysagropecEntities db = new sysagropecEntities();
+
+            List<Propriedade> fazendas = db.Propriedade.ToList();
+
+            AnimalViewModel a = new AnimalViewModel();
+
+            List<FazendaViewModel> f = fazendas.Select(
+                x => new FazendaViewModel
+                {
+                    ID = x.ID,
+                    Razaosocial = x.Razaosocial
+
+
+                }
+
+                ).ToList();
+
+            List<FazendaViewModel> lista = new List<FazendaViewModel>(); 
+
+            for(int i = 0; i< userpro.Count; i++)
+            {
+
+                for(int j =0; j< f.Count; j++)
+                {
+                    if (userpro[i].Propriedade_ID == f[j].ID)
+                    {
+                        FazendaViewModel faz = new FazendaViewModel();
+
+                        faz.ID = f[j].ID;
+                        faz.Razaosocial = f[j].Razaosocial;
+
+                        lista.Add(faz);
+                    }
+                }
+                
+            }
+
+
+            return lista;
+        }
+
         public int AdicionaFazenda(FazendaViewModel fazenda)
         {
 

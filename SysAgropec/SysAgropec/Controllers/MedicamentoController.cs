@@ -100,7 +100,7 @@ namespace SysAgropec.Controllers
                     eM.Quantidadeatual = e.Quantidadeatual;
                     eM.Quantidademinima = e.Quantidademinima;
                     eM.Quantidademaxima = e.Quantidademaxima;
-                    eM.Data_Estocado = DateTime.Now;
+                    eM.Data_Estocado = DateTime.Now.Date;
 
                     db.Estoque_Medicamento.Add(eM);
                     db.SaveChanges();

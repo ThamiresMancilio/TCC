@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
-  <parameter name="sysagropecEntities-Web.config Connection String" description="sysagropecEntities A Cadeia de Conexão usada em web.config pelo aplicativo para acessar o banco de dados." defaultValue="metadata=res://*/Models.Sysagropec.csdl|res://*/Models.Sysagropec.ssdl|res://*/Models.Sysagropec.msl;provider=MySql.Data.MySqlClient;provider connection string=&quot;server=localhost;user id=root;password=thamires;persistsecurityinfo=True;database=sysagropec&quot;" tags="SqlConnectionString">
+  <parameter name="dbConnectionLocal-Web.config Connection String" description="dbConnectionLocal A Cadeia de Conexão usada em web.config pelo aplicativo para acessar o banco de dados." defaultValue="server=localhost;user id=root;password=thamires;persistsecurityinfo=True;database=sysagropec" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Acer\\Documents\\SysAgropec\\SysAgropec\\SysAgropec\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='dbConnectionLocal']/@connectionString" />
+  </parameter>
+  <parameter name="dbConnectionAzure-Web.config Connection String" description="dbConnectionAzure A Cadeia de Conexão usada em web.config pelo aplicativo para acessar o banco de dados." defaultValue="server=br-cdbr-azure-south-b.cloudapp.net;user id=b3068f84447c05;password=c8357716;persistsecurityinfo=True;database=sysagropec" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Acer\\Documents\\SysAgropec\\SysAgropec\\SysAgropec\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='dbConnectionAzure']/@connectionString" />
+  </parameter>
+  <parameter name="sysagropecEntities-Web.config Connection String" description="sysagropecEntities A Cadeia de Conexão usada em web.config pelo aplicativo para acessar o banco de dados." defaultValue="metadata=res://*/Models.Sysagropec.csdl|res://*/Models.Sysagropec.ssdl|res://*/Models.Sysagropec.msl;provider=MySql.Data.MySqlClient;provider connection string=&quot;server=br-cdbr-azure-south-b.cloudapp.net;user id=b3068f84447c05;password=c8357716;persistsecurityinfo=True;database=sysagropec&quot;" tags="SqlConnectionString">
     <parameterEntry kind="XmlFile" scope="C:\\Users\\Acer\\Documents\\SysAgropec\\SysAgropec\\SysAgropec\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='sysagropecEntities']/@connectionString" />
   </parameter>
 </parameters>

@@ -161,6 +161,14 @@ namespace SysAgropec.Class
         private void ImprimeRodape(PdfWriter writer, Document doc)
         {
             #region Dados do Rodapé
+
+            HttpContext httpContext = HttpContext.Current;
+
+            string login = httpContext.ApplicationInstance.Session["loginuser"].ToString();
+            string fazenda = httpContext.ApplicationInstance.Session["fazenda"].ToString();
+            string email = httpContext.ApplicationInstance.Session["email"].ToString();
+            string logo = httpContext.ApplicationInstance.Session["logofazenda"].ToString();
+
             if (ImprimirRodapePadrao)
             {
                 BaseColor preto = new BaseColor(0, 0, 0);
@@ -173,8 +181,11 @@ namespace SysAgropec.Class
                 table.SetWidths(sizes);
 
                 #region Coluna Logo
-                Image foot = Image.GetInstance(BasePath + @"\upload_images\logo-fazendarel.jpg");
-                foot.ScalePercent(60);
+                Image foot = Image.GetInstance(BasePath + @"\upload_images\" + logo);
+
+                //foot.ScalePercent(60);
+                foot.ScaleAbsoluteHeight(50);
+                foot.ScaleAbsoluteWidth(70);
 
                 PdfPCell cell = new PdfPCell(foot);
                 cell.HorizontalAlignment = Element.ALIGN_LEFT;
@@ -184,14 +195,7 @@ namespace SysAgropec.Class
                 cell.PaddingTop = 10f;
                 table.AddCell(cell);
 
-
-                HttpContext httpContext = HttpContext.Current;
                 
-                string login = httpContext.ApplicationInstance.Session["loginuser"].ToString();
-                string fazenda = httpContext.ApplicationInstance.Session["fazenda"].ToString();
-                string email = httpContext.ApplicationInstance.Session["email"].ToString();
-
-
                 PdfPTable micros = new PdfPTable(1);
                 cell = new PdfPCell(new Phrase("Fazenda: " + fazenda, negrito));
                 cell.Border = 0;
@@ -240,6 +244,13 @@ namespace SysAgropec.Class
             #region Dados do Cabeçalho
             if (ImprimirCabecalhoPadrao)
             {
+                HttpContext httpContext = HttpContext.Current;
+
+                string login = httpContext.ApplicationInstance.Session["loginuser"].ToString();
+                string fazenda = httpContext.ApplicationInstance.Session["fazenda"].ToString();
+                string email = httpContext.ApplicationInstance.Session["email"].ToString();
+                string logo = httpContext.ApplicationInstance.Session["logofazenda"].ToString();
+
                 BaseColor preto = new BaseColor(0, 0, 0);
                 Font font = FontFactory.GetFont("Verdana", 8, Font.NORMAL, preto);
                 Font titulo = FontFactory.GetFont("Verdana", 12, Font.BOLD, preto);
@@ -257,9 +268,11 @@ namespace SysAgropec.Class
                 }
                 else
                 {
-                    foot = Image.GetInstance(BasePath + @"\upload_images\logo-fazendarel.jpg");
+                    foot = Image.GetInstance(BasePath + @"\upload_images\" + logo);
                 }
-                foot.ScalePercent(60);
+                //foot.ScalePercent(60);
+                foot.ScaleAbsoluteHeight(50);
+                foot.ScaleAbsoluteWidth(70);
 
                 PdfPCell cell = new PdfPCell(foot);
                 cell.HorizontalAlignment = Element.ALIGN_CENTER;

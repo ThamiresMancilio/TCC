@@ -1,63 +1,110 @@
 ﻿
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "Consultar usuário";
+    Layout = "~/Views/Shared/Layout.cshtml";
 }
+@Styles.Render("~/bundles/paging")
 
+@Scripts.Render("~/bundles/Usuario")
 <h3><i class="fa fa-angle-right"></i> Consultar usuário</h3>
 <div class="row mt">
     <div class="col-lg-12">
-        <div class="form-panel">
-            <h4 class="mb"><i class="fa fa-angle-right"></i> Filtros</h4>
-            <form class="form-inline" role="form">
-                <fieldset class="form-group">
-                    <legend>Filtros de pesquisa</legend>
-                    <div class="form-group">
-                        <label for="exampleInputPassword2">Nome:</label>
-                        <input type="text" class="form-control" id="nome" name="nome" style="width: 165px;">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleInputEmail2">Data de Cadastro:</label>
-                        <input type="date" class="form-control" id="datacadastro1" name="datacadastro1" style="width: 165px;">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail2">até:</label>
-                        <input type="date" class="form-control" id="datacadastro2" name="datacadastro2" style="width: 165px;">
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Consultar</button>
-                    </div>
-                    <br /><br />
-                </fieldset>
-            </form>
-
-        </div><!-- /form-panel -->
-
         <table id="easyPaginate" class="table table-bordered table-striped table-condensed">
             <thead>
 
             <th>Usuário</th>
             <th>Nome</th>
             <th>Sobrenome</th>
-            <th>Último acesso:</th>
-            <th>Cadastrado em:</th>
-
+            <th>Cadastrado em</th>
+            <th>Ações</th>
             </thead>
             <tbody>
-                <tr class="line">
-                    <td></td>
-                    <td> </td>
-                    <td></td>
-                    <td></td>
+            @if (Model != null)
+            {
+                foreach (var user in Model)
+                {
+                <tr class="line" id="row_@user.ID">
+                    <td>@user.Login</td>
+                    <td>@user.Nome </td>
+                    <td>@user.Sobrenome</td>
+                    <td>@user.Datacadastro.ToString("dd/MM/yyyy")</td>
                     <td>
-                        <button class="btn btn-success btn-xs" title="Visualizar dados"><i class="fa fa-check"></i></button>
-                        <button class="btn btn-primary btn-xs" title="Alterar Registro"><i class="fa fa-pencil"></i></button>
-                        <button class="btn btn-danger btn-xs" title="Excluir Registro"><i class="fa fa-trash-o "></i></button>
+                        <a href="#" class="btn btn-primary btn-xs" onclick="AlterarFazendasParticipantes(@user.ID)" title="Visualizar Fazendas Participantes"><i class="fa fa-check"></i></a>
+
+                        <a href="#" class="btn btn-danger btn-xs" onclick="ConfirmaExclusao(@user.ID, '@user.Nome')" title="Excluir Usuário"><i class="fa fa-trash-o"></i></a>
                     </td>
-                </tr>
+                </tr>}
+                }
+                else
+                {
+                    <tr class="line">
+                        <td colspan="5">
+                            Nenhum registro localizado.
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
+        <input type="hidden" id="idUsuario" />
 
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Alerta de Exclusão</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="msg"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <a href="#" onclick="DeleteUsuario()" class="btn btn-primary">Excluir</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal2" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Mensagem</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Registro excluído com sucesso.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModalEditUsuario" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Alterando</h4>
+                    </div>
+                    <div class="modal-body" id="myModalBodyUsuario">
+
+
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>

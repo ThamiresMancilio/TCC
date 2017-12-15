@@ -1,0 +1,50 @@
+﻿<div>
+
+    <form id="myForm" class="form-inline">
+
+
+        <fieldset class="form-group">
+            <legend>Fazendas Participantes</legend>
+            
+            @foreach (var userfazenda in ViewData["fazendasusuarios"] as List<SysAgropec.Models.Usuario_Propriedade>)
+            { 
+                  foreach (var fazenda in ViewData["fazendasedit"] as List<SysAgropec.Models.FazendaViewModel>)
+                  {
+                      if (userfazenda.Propriedade_ID == fazenda.ID)
+                      {
+                        <label class="checkbox-inline">
+                          @fazenda.Razaosocial
+                        </label>
+                        <hr>
+                      }
+                }
+            }             
+           
+        </fieldset>
+        <br /><br />
+        <input type="hidden" value="@ViewData["iduser"].ToString()" name="iduser" id="iduser" />
+        @*<a href="#" id="btnSubmit" class="btn btn-primary">OK </a>*@
+        <button type="button" class="btn btn-danger" id="btnSubmit" data-dismiss="modal">OK</button>
+    </form>
+
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        
+        $("#btnSubmit").click(function () {
+
+            $("#myModalEditUsuario").modal("hide");
+            window.location.href = "/Usuario/List";
+
+        
+        })
+
+    })
+
+
+</script>
+
+

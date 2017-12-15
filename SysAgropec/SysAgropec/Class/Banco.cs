@@ -10,7 +10,6 @@ namespace SysAgropec.Class
     public class Banco
     {
 
-
         public Banco()
         {
         }
@@ -20,14 +19,14 @@ namespace SysAgropec.Class
         public static string getConexao()
         {
 
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                return ConfigurationManager.ConnectionStrings["sysagropecConnection"].ConnectionString;
-            }
-            else
-            {
-                return ConfigurationManager.ConnectionStrings["sysagropecConnectionAzure"].ConnectionString;
-            }
+            //if (System.Diagnostics.Debugger.IsAttached)
+            //{
+            //    return ConfigurationManager.ConnectionStrings["dbConnectionLocal"].ConnectionString;
+            //}
+            //else
+            //{
+                return ConfigurationManager.ConnectionStrings["dbConnectionAzure"].ConnectionString;
+            //}
         }
     }
 }

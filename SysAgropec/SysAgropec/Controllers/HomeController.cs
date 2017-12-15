@@ -22,6 +22,7 @@ namespace SysAgropec.Controllers
 
                 Session["fazenda"] = p.Razaosocial;
                 Session["email"] = p.Email;
+                Session["logofazenda"] = p.Logo;
 
                 return View();
             }else

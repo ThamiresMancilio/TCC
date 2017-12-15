@@ -73,7 +73,7 @@ namespace SysAgropec.Models
                 {
                     ID = x.ID,
                     Animal_ID = x.Animal_ID,
-                    nomeMedicamento = x.Medicamento.Descricao,
+                    nomeMedicamento = x.Medicamento.Nome,
                     Medicamento_ID = x.Medicamento_ID,
                     Dataplicacao = x.Dataplicacao,
                     Quantidade = x.Quantidade
@@ -122,6 +122,37 @@ namespace SysAgropec.Models
 
 
             return aplicacaoVMList;
+        }
+
+        public void ExcluiAplicacao(int idAplicacao)
+        {
+
+            if (idAplicacao > 0)
+            {
+
+                try
+                {
+
+                    sysagropecEntities db = new sysagropecEntities();
+
+                    Aplicacao_Medicamento ap = db.Aplicacao_Medicamento.SingleOrDefault(l => l.ID == idAplicacao);
+
+                    if (ap != null)
+                    {
+                        db.Aplicacao_Medicamento.Remove(ap);
+
+                        db.SaveChanges();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+
+
+            }
         }
     }
 }

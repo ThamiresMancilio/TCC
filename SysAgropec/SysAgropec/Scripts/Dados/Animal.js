@@ -40,15 +40,3 @@ var Alterar = function (id) {
 
 }
 
-//function onSexoChange() {
-//    var x = document.getElementById("Sexo").value;
-
-//    if (x == 0) {
-
-//        document.getElementById("lactacao").disable = true;
-
-//    } else {
-//        document.getElementById("lactacao").disable = false;
-
-//    }
-//}

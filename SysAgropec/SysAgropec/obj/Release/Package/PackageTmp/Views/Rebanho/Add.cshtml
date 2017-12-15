@@ -1,9 +1,24 @@
 ﻿@model SysAgropec.Models.AnimalViewModel
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "Adicionar Animal";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 @Scripts.Render("~/bundles/Animal")
+<script type="text/javascript">
+
+    function onSexoChange() {
+        var x = document.getElementById("Sexo").value;
+        
+        if (x == 0) {
+
+            document.getElementById("Lactacao").disable = true;
+
+        } else {
+            document.getElementById("Lactacao").disable = false;
+
+        }
+    }
+</script>
 <h3><i class="fa fa-angle-right"></i> Cadastro de Animal</h3>
 <div class="row mt">
     <div class="col-lg-12">
@@ -40,11 +55,9 @@
 
                     <div class="form-group">
                         <label for="exampleInputPassword2">Sexo: </label>
-                        <select class="form-control" name="Sexo" id="Sexo">
-                            <option value="0">Macho</option>
-                            <option value="1">Fêmea</option>
-                        </select>
+                        @Html.DropDownListFor(model => model.Sexo, ViewBag.SexoLista as SelectList, new { @class = "form-control", required = "required",  onchange = "onSexoChange()" })
                     </div>
+
                     <div class="form-group">
                         <label for="exampleInputPassword2">Livro: </label>
                         @Html.DropDownListFor(model => model.Livro_ID, ViewBag.LivroLista as SelectList, "Escolha uma opção", new { @class = "form-control", required = "required" })
@@ -57,10 +70,12 @@
                     <div class="form-group">
                         <label class="checkbox-inline">
                             
-                            <input type="checkbox" id="Morto" name="Morto"> Morto
+                            <input type="checkbox" id="Morto" name="Morto">Morto
                         </label>
                     </div>
-                    <div class="form-group">
+
+                
+                <div class="form-group">
                         <label class="checkbox-inline">
                            
                             <input type="checkbox" id="Lactacao" name="Lactacao"> Lactação

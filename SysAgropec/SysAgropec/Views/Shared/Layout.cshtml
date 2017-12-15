@@ -30,7 +30,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-user" style="color: white;background-color: rgb(0,166,90);">
                             <li>
-                                <a href="@Url.Action("Manipular","Fazenda")" style="color: white;background-color: rgb(0,166,90);"><i class="fa fa-user fa-fw"></i> Meus Dados</a>
+                                <a href="@Url.Action("My_User","Usuario")" style="color: white;background-color: rgb(0,166,90);"><i class="fa fa-user fa-fw"></i> Meus Dados</a>
                             </li>
                             <li class="divider"></li>
                             <li>
@@ -163,6 +163,16 @@
                             <li>@Html.ActionLink("TOP Produção", "ProducaoTOP", "Relatorio")</li>
                         </ul>
                     </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-th"></i>
+                            <span>Usuários</span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("Adicionar", "Add", "Usuario")</li>
+                            <li>@Html.ActionLink("Listar", "List", "Usuario")</li>
+                        </ul>
+                    </li>
                 </ul>
                 <!-- sidebar menu end-->
             </div>
@@ -171,7 +181,7 @@
             <section class="wrapper site-min-height">
                 @RenderBody()
         </section><!-- /MAIN CONTENT -->
-            <footer class="site-footer">
+            <footer class="site-footer" style="background-color:rgb(66,74,93)">
                 <div class="text-center">
                     Fazenda: @Session["fazenda"] | Usuário: @Session["loginuser"] | Último acesso em: @Session["ultimoAcesso"]
                     <a href="#" class="go-top">
@@ -203,9 +213,9 @@
         });
 
 
-        $(function () {
-            $('select.styled').customSelect();
-        });
+        //$(function () {
+        //    $('select.styled').customSelect();
+        //});
     </script>
     
 </body>

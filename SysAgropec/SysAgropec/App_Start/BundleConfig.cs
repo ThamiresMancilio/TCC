@@ -41,6 +41,7 @@ namespace SysAgropec
                 "~/Scripts/jquery-1.10.2.min.js",
                 "~/Scripts/bootstrap.min.js",
                 "~/Scripts/pt-BR.js"
+                
 
                 ));
 

@@ -91,3 +91,22 @@ $(document).ready(function () {
 
 //});
 
+
+
+//$(".file").fileinput({
+//    showUpload: false,
+//    showCaption: false,
+//    browseClass: "btn btn-primary btn-lg",
+//    previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+//    maxFilesNum: 1,
+//    "fileActionSettings": { "showDrag": false },
+//    overwriteInitial: false,
+//    allowedFileExtensions: ['jpg', 'png', 'gif']
+//    /*initialPreviewAsData: true,
+//    initialPreview: [
+//        "http://lorempixel.com/1920/1080/transport/1",
+//    ],
+//    initialPreviewConfig: [
+//        {caption: "transport-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1},
+//    ],*/
+//});

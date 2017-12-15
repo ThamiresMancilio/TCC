@@ -46,3 +46,32 @@ function fechaJanelaMedicamentos() {
 
 }
 
+var ConfirmaExclusao = function (id, animal) {
+
+
+    $("#idAplicacao").val(id);
+    document.getElementById('msg').innerHTML = "Deseja realmente excluir a aplicação para o animal " + animal + " ? ";
+    $("#myModal").modal('show');
+
+}
+
+var DeleteAplicacao = function () {
+
+    var idAplicacao = $("#idAplicacao").val();
+
+    $.ajax({
+
+        type: "POST",
+        url: "Delete",
+        data: { idAplicacao: idAplicacao },
+        success: function (result) {
+
+            $("#myModal").modal('hide');
+            $("#myModal2").modal('show');
+            $("#row_" + idAplicacao).remove();
+
+        }
+    })
+
+}
+

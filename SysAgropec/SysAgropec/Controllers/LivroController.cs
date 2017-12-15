@@ -47,9 +47,9 @@ namespace SysAgropec.Controllers
             }
         }
 
-        public ActionResult Update(Models.Livro l)
+        public ActionResult Update(Livro l)
         {
-            if (Session["loginuser"] !=null)
+            if (Session["loginuser"] != null)
             {
                 LivroViewModel livro = new LivroViewModel();
 
@@ -60,14 +60,14 @@ namespace SysAgropec.Controllers
 
                 return RedirectToAction("List");
             }else
-            {
-                return RedirectToAction("Logar", new RouteValueDictionary(
-                new
                 {
-                    controller = "Login",
-                    action = "Logar"
-                }));
-            }
+                    return RedirectToAction("Logar", new RouteValueDictionary(
+                    new
+                    {
+                        controller = "Login",
+                        action = "Logar"
+                    }));
+                }
         }
 
 
@@ -83,7 +83,7 @@ namespace SysAgropec.Controllers
                 l.Datalteracao = null;
                 l.Descricao = Request.Form["descricao"];
                 l.Excluido = 0;
-                l.Usuario_IDCadastro = Convert.ToInt16(Session["loginuser"]);
+                l.Usuario_IDCadastro = Convert.ToInt16(Session["iduser"]);
                 l.Usuario_IDAlteracao = null;
                 l.AdicionaLivro(l);
 

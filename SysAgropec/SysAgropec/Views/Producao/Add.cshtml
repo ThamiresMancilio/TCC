@@ -1,7 +1,7 @@
 ﻿@model SysAgropec.Models.ProducaoViewModel
 
 @{
-    ViewBag.Title = "Produção diária";
+    ViewBag.Title = "Adicionar Produção diária";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
@@ -107,7 +107,10 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Incluir</button>
                 </div>
-
+                if (ViewData["msg"] != null)
+                {
+                    <label style="color:white;font-size:14px;">@ViewData["msg"].ToString()</label>
+                }
 
             }
         </div><!-- /form-panel -->

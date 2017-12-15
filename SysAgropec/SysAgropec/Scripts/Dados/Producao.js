@@ -1,7 +1,4 @@
-﻿$(document).ready(function () {
-    $('#Quantidade').mask('000.000.000.000.000,00');
-});
-
+﻿
 function carregaAnimais() {
     
     $("#myModalEditLivro").modal("show");
@@ -26,3 +23,31 @@ function fechaJanela() {
 
 }
 
+var ConfirmaExclusao = function (id, animal) {
+
+
+    $("#idProducao").val(id);
+    document.getElementById('msg').innerHTML = "Deseja realmente excluir a produção para o animal " + animal + " ? ";
+    $("#myModal").modal('show');
+
+}
+
+var DeleteProducao = function () {
+
+    var idProducao = $("#idProducao").val();
+
+    $.ajax({
+
+        type: "POST",
+        url: "Delete",
+        data: { idProducao: idProducao },
+        success: function (result) {
+
+            $("#myModal").modal('hide');
+            $("#myModal2").modal('show');
+            $("#row_" + idProducao).remove();
+
+        }
+    })
+
+}

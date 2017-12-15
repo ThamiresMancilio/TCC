@@ -15,7 +15,7 @@
         <br />
 
         <label class="control-label">Data validade:</label>
-        @Html.TextBoxFor(model => model.Datavalidade.Date, new { @class = "form-control", type = "date", @Value = Model.Datafabricacao.ToString("yyyy-MM-dd"), required = "required" })
+        @Html.TextBoxFor(model => model.Datavalidade.Date, new { @class = "form-control", type = "date", @Value = Model.Datavalidade.ToString("yyyy-MM-dd"), required = "required" })
 
         <label class="control-label">Observação:</label>
         @Html.TextBoxFor(model => model.Observacao, new { @class = "form-control" })

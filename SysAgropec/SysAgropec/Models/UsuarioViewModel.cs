@@ -42,7 +42,7 @@ namespace SysAgropec.Models
 
         }
 
-        public int AdicionaUsuario(UsuarioViewModel usuario)
+        public int AdicionaUsuario()
         {
 
             try
@@ -52,15 +52,17 @@ namespace SysAgropec.Models
 
                 Usuario m = new Usuario();
 
-                
 
-                m.Datacadastro = usuario.Datacadastro;
-                m.Datalteracao = usuario.Datalteracao;
-                m.Dataultimoacesso = usuario.Dataultimoacesso;
-                m.Login = usuario.Login;
-                m.Senha = usuario.Senha;
-                m.Sobrenome = usuario.Sobrenome;
-                m.Excluido = m.Excluido;
+
+                m.Datacadastro = Datacadastro;
+                m.Datalteracao = Datalteracao;
+                m.Dataultimoacesso = Dataultimoacesso;
+                m.Login = Login;
+                m.Senha = Senha;
+                m.Sobrenome =Sobrenome;
+                m.Excluido = Excluido;
+                m.Admin = Admin;
+                m.Nome = Nome;
 
                 db.Usuario.Add(m);
                 db.SaveChanges();
@@ -108,10 +110,30 @@ namespace SysAgropec.Models
             }
         }
 
-        public void AtualizaUsuario(Usuario usuario)
+        public List<Usuario> CarregaUsuario(int iduser)
         {
 
-            if (usuario.ID > 0)
+            sysagropecEntities db = new sysagropecEntities();
+            
+            List<Usuario> usuarios = new List<Usuario>();
+
+            if(iduser > 0)
+            {
+                usuarios = db.Usuario.Where(l => l.Excluido == 0 && l.ID ==iduser).ToList();
+            }
+            else{
+                usuarios = db.Usuario.Where(l => l.Excluido == 0).ToList();
+            }
+
+            
+            
+            return usuarios;
+        }
+
+        public void ExcluiUsuario(int idUsuario)
+        {
+
+            if (idUsuario > 0)
             {
 
                 try
@@ -119,17 +141,46 @@ namespace SysAgropec.Models
 
                     sysagropecEntities db = new sysagropecEntities();
 
-                    Usuario usuarioOLD = db.Usuario.SingleOrDefault(u => u.ID == usuario.ID);
+                    Usuario usuario = db.Usuario.SingleOrDefault(l => l.ID == idUsuario);
 
-                    usuarioOLD.Datalteracao = usuario.Datalteracao;
-                    usuarioOLD.Dataultimoacesso = usuario.Dataultimoacesso;
-                    usuarioOLD.Admin = usuario.Admin;
-                    usuarioOLD.Login = usuario.Login;
-                    usuarioOLD.Nome = usuario.Nome;
-                    usuarioOLD.Senha = usuario.Senha;
-                    usuarioOLD.Sobrenome = usuario.Sobrenome;
+                    if (usuario != null)
+                    {
+                        usuario.Excluido = 1;
+                        db.SaveChanges();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
 
 
+            }
+        }
+
+        public void AtualizaUsuario()
+        {
+
+            if (ID > 0)
+            {
+
+                try
+                {
+
+                    sysagropecEntities db = new sysagropecEntities();
+
+                    Usuario usuarioOLD = db.Usuario.SingleOrDefault(u => u.ID == ID);
+
+                    usuarioOLD.Datalteracao = Datalteracao;
+                    usuarioOLD.Dataultimoacesso = Dataultimoacesso;
+                    usuarioOLD.Admin = Admin;
+                    usuarioOLD.Login = Login;
+                    usuarioOLD.Nome = Nome;
+                    usuarioOLD.Senha = Senha;
+                    usuarioOLD.Sobrenome = Sobrenome;
+                    
                     db.SaveChanges();
 
 

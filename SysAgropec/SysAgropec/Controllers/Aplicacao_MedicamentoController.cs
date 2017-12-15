@@ -10,14 +10,39 @@ namespace SysAgropec.Controllers
 {
     public class Aplicacao_MedicamentoController : Controller
     {
-        
+
+        public JsonResult Delete(int idAplicacao)
+        {
+            if (Session["loginuser"] != null)
+            {
+                bool result = false;
+
+                if (idAplicacao > 0)
+                {
+
+                    AplicacaoMedicamentoViewModel l = new AplicacaoMedicamentoViewModel();
+
+
+                    l.ExcluiAplicacao(idAplicacao);
+
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                }
+                return null;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
         public ActionResult Add()
         {
             if (Session["loginuser"] != null)
             {
                 AnimalViewModel a = new AnimalViewModel();
 
-                ViewData["animais"] = a.CarregaMatrizes();
+                ViewData["animais"] = a.CarregaGado(Convert.ToInt16(Session["idfazenda"]));
 
                 Estoque_MedicamentoViewModel e = new Estoque_MedicamentoViewModel();
 
