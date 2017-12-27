@@ -21,5 +21,3 @@ Execução no visual studio:
 2 - Execute o script de banco de dados que consta na pasta raíz do projeto (sysagropec.sql)
 
 3 - Abra a solução (arquivo .sln), encontrado na pasta SysAgropec.
-
-Sistema disponível em: http://app.sysagropec.com.br/
